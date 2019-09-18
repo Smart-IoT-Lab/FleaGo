@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "38167736741",
+    "firebase_url": "https://fleago-8b03c.firebaseio.com",
+    "project_id": "fleago-8b03c",
+    "storage_bucket": "fleago-8b03c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:38167736741:android:81c721223380974fe0f84c",
+        "android_client_info": {
+          "package_name": "com.example.fleago"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "38167736741-q187v2padco3l253vr69hlkm31a0qcip.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKg-KeKOU5ZPLeRtWbDCB6YL-z4s9mah4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "38167736741-q187v2padco3l253vr69hlkm31a0qcip.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
