@@ -11,6 +11,7 @@
         android:layout_height="match_parent"
         android:gravity="bottom"
 
+        sothree:umanoDragView="@+id/handle"
         sothree:umanoPanelHeight="200dp"
         sothree:umanoShadowHeight="0dp"
         sothree:umanoParallaxOffset="100dp">
@@ -46,10 +47,11 @@
 
             <!--- 손잡이 -->
             <Button
-                android:id="@+id/btn_handle"
+                android:id="@+id/handle"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:clickable="true"    />
+
 
             <ListView
                 android:id="@+id/marketList"

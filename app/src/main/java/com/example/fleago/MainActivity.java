@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,11 +41,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         /******************* Sliding up List View *******************/
+
         ListView lv = (ListView) findViewById(R.id.marketList);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Intent intent1=new Intent(getApplicationContext(), Market.class);
+
                 Intent intent1=new Intent(MainActivity.this, Main2Activity.class);
                 intent1.putExtra("name", list.get(position).getName());
                 intent1.putExtra("district", list.get(position).getDistrict());
@@ -81,7 +84,8 @@ public class MainActivity extends AppCompatActivity {
                 mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
             }
         });
-        /******************* Sliding up List View *******************/
+
+        /******************* Sliding up List View END *******************/
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference myRef = database.getReference("Market");
