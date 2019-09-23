@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.daimajia.swipe.SwipeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    app:clickToClose="true">
+
+    <LinearLayout
+        android:tag="Bottom1"
+        android:background="#66ddff00"
+        android:id="@+id/bottom_wrapper"
+        android:layout_width="80dp"
+        android:weightSum="1"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/magnifier"
+            android:src="@drawable/magnifier"
+            android:gravity="center"
+            android:clickable="true"
+            android:background="@drawable/dark_gray"
+            android:padding="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/item_selector"
+        android:padding="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_data"
+            android:padding="10dp"
+            android:background="@drawable/white"
+            android:tag="Hover"
+            android:text="TEST 중입니다."
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/position"
+            android:padding="10dp"
+            android:text="position"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+</com.daimajia.swipe.SwipeLayout>
