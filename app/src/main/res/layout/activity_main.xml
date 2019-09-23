@@ -57,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:clickable="true"    />
-
+            
             <ListView
                 android:id="@+id/marketList"
                 android:layout_width="match_parent"
