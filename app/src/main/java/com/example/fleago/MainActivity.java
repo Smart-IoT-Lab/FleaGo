@@ -13,12 +13,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-<<<<<<< HEAD
 import com.daimajia.swipe.adapters.ArraySwipeAdapter;
 import com.daimajia.swipe.util.Attributes;
-=======
-
->>>>>>> c7a772a0c93ea43ad87dacf6fb88d29a803538e7
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
