@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daimajia.swipe.adapters.ArraySwipeAdapter;
 import com.daimajia.swipe.util.Attributes;
@@ -30,9 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
     private SlidingUpPanelLayout mLayout;
     private ListViewAdapter mAdapter;
-
+    private ArrayList list;
     TextView tv ;
-    ArrayList<Market> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +40,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // TEST
-        ((Button)findViewById(R.id.button)).setOnClickListener(new View.OnClickListener() {
+        ((Button) findViewById(R.id.button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((Button)findViewById(R.id.button)).setText("하이");
+                ((Button) findViewById(R.id.button)).setText("하이");
             }
         });
 
         /******************* Sliding up List View *******************/
+
+        //어따놔야할까~!?!?!
+
+
         final ListView lv = (ListView) findViewById(R.id.marketList);
         // 클릭 시 스와이프 > 돋보기 등장. TODO 돋보기 버튼 클릭시 인텐트 변하도록 수정 필요
 //        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -65,26 +69,18 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //       });
 
-        mAdapter = new ListViewAdapter(this);
+        mAdapter = new ListViewAdapter(this, list);
         lv.setAdapter(mAdapter);
         mAdapter.setMode(Attributes.Mode.Single);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             // 클릭 시 돋보기 스와이프 되는 view
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ((com.daimajia.swipe.SwipeLayout)(lv.getChildAt(position - lv.getFirstVisiblePosition()))).open(true);
+                Toast.makeText(view.getContext(), "lv..setOnItemClick", Toast.LENGTH_SHORT).show();
+                ((com.daimajia.swipe.SwipeLayout) (lv.getChildAt(position - lv.getFirstVisiblePosition()))).open(true);
             }
         });
 
-        final ArraySwipeAdapter arrayAdapter = (new ArraySwipeAdapter(
-                this,
-                R.layout.item_view,
-                list) {
-            @Override
-            public int getSwipeLayoutResourceId(int position) {
-                return 0;
-            }
-        });
 
 //        final ArrayAdapter<Market> arrayAdapter = new ArrayAdapter<Market>(
 //                this,
@@ -112,49 +108,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
             }
+
         });
 
         /******************* Sliding up List View END *******************/
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference myRef = database.getReference("Market");
-        myRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                list.add(dataSnapshot.getValue(Market.class));
-                arrayAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                list.remove(dataSnapshot.getValue(Market.class));
-                arrayAdapter.notifyDataSetChanged();
-            }
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-
-//        setmarketlist(myRef);
     }
 
-    @Override
-    public void onBackPressed() {
-        if (mLayout != null &&
-                (mLayout.getPanelState() == SlidingUpPanelLayout.PanelState.EXPANDED || mLayout.getPanelState() == SlidingUpPanelLayout.PanelState.ANCHORED)) {
-            mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
-        } else {
-            super.onBackPressed();
-        }
-    }
 
 //    void setmarketlist(final DatabaseReference ref) {
 //        tv = findViewById(R.id.tv);
