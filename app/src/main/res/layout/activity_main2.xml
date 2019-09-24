@@ -50,5 +50,12 @@
         android:orientation="vertical">
 
     </LinearLayout>
+    <Button
+        android:id="@+id/btn_intent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AR View"
+        tools:context=".Main2Activity" />
+
 
 </LinearLayout>
