@@ -35,11 +35,6 @@
                 android:focusableInTouchMode="true"
                 android:textSize="16sp" />
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Button" />
         </FrameLayout>
 
         <!-- SLIDING LAYOUT -->
@@ -55,7 +50,7 @@
             <Button
                 android:id="@+id/btn_handle"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="20dp"
                 android:clickable="true"    />
 
             <ListView

@@ -6,25 +6,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 
 import com.example.fleago.Main2Activity;
 import com.example.fleago.Market;
 import com.example.fleago.R;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.util.ArrayList;
 
@@ -47,9 +36,8 @@ public class ListViewAdapter extends BaseSwipeAdapter {
     public View generateView(final int position, ViewGroup parent) {
         // 리스트의 아이템 표현하는데 item_view.xml 사용
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_view, null);
-        SwipeLayout swipeLayout = view.findViewById(getSwipeLayoutResourceId(position));
 
-
+//       SwipeLayout swipeLayout = view.findViewById(getSwipeLayoutResourceId(position));
         // 더블클릭
 //        swipeLayout.setOnDoubleClickListener(new SwipeLayout.DoubleClickListener() {
 //            @Override
@@ -60,7 +48,10 @@ public class ListViewAdapter extends BaseSwipeAdapter {
 
         // 상세정보(돋보기) 클릭 시
         view.findViewById(R.id.magnifier).setOnClickListener(new View.OnClickListener() {
-            public void setIntent(View view){
+            @Override
+            public void onClick(View view) {
+                // Toast.makeText(mContext, "click magnifier", Toast.LENGTH_SHORT).show();
+
                 Intent intent1=new Intent(view.getContext(), Main2Activity.class);
                 intent1.putExtra("name", list.get(position).getName());
                 intent1.putExtra("district", list.get(position).getDistrict());
@@ -70,11 +61,6 @@ public class ListViewAdapter extends BaseSwipeAdapter {
                 intent1.putExtra("page_url", list.get(position).getPage_url());
                 mContext.startActivity(intent1);
             }
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(mContext, "click magnifier", Toast.LENGTH_SHORT).show();
-                setIntent(view);
-            }
         });
 
         return view;
@@ -82,16 +68,11 @@ public class ListViewAdapter extends BaseSwipeAdapter {
 
     @Override
     public void fillValues(int position, View convertView) {
-        // 그 item 에다가 데이터 채우기
+        // 그 position의 item 에다가 데이터 채우기
         TextView t = (TextView)convertView.findViewById(R.id.position);
         t.setText((position + 1) + ".");
 
-//        setmarketlist(myRef);
-//        Log.d("list",list.toString());
-        if(!(list.isEmpty()))
-            ((TextView) convertView.findViewById(R.id.text_data)).setText(list.get(position).getName());
-        else
-            ((TextView) convertView.findViewById(R.id.text_data)).setText("데이터 없음");
+        ((TextView) convertView.findViewById(R.id.text_data)).setText(list.get(position).getName());
     }
 
 
@@ -100,12 +81,12 @@ public class ListViewAdapter extends BaseSwipeAdapter {
 
     @Override
     public int getCount() {
-        return 50;
+        return list.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return list.get(position);
     }
 
     @Override
