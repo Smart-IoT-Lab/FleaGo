@@ -1,4 +1,4 @@
-package com.example.fleago.GPS_AR.helper;
+package com.example.fleago.helper;
 
 import android.location.Location;
 

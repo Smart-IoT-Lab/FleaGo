@@ -16,8 +16,8 @@ import android.graphics.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.fleago.GPS_AR.helper.LocationHelper;
-import com.example.fleago.GPS_AR.model.ARPoint;
+import com.example.fleago.helper.LocationHelper;
+import com.example.fleago.model.ARPoint;
 
 /**
  * Created by ntdat on 1/13/17.
@@ -31,14 +31,14 @@ public class AROverlayView extends View {
     private List<ARPoint> arPoints;
 
 
-    public AROverlayView(Context context) {
+    public AROverlayView(Context context,final String name, final double latitude, final double longitude) {
         super(context);
 
         this.context = context;
 
         //Demo points
         arPoints = new ArrayList<ARPoint>() {{
-            add(new ARPoint("광교역", 37.302244, 127.044167, 0));
+            add(new ARPoint(name, latitude, longitude, 0));
         }};
     }
 

@@ -9,6 +9,8 @@ import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import android.view.View;
+import android.widget.Button;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ import java.util.List;
 
 public class Main2Activity extends AppCompatActivity {
     private Intent intent1;
+    Button btn_intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,17 @@ public class Main2Activity extends AppCompatActivity {
 
         textView5.setText(intent1.getStringExtra("location"));
         textView4.setText(intent1.getStringExtra("page_url"));
+
+        btn_intent = findViewById(R.id.btn_intent); /*페이지 전환버튼*/
+        btn_intent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),ARActivity.class);
+                startActivity(intent);//액티비티 띄우기
+            }
+        });
+
+
 
 
     }

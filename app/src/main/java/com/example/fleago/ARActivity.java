@@ -54,6 +54,8 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
     boolean isNetworkEnabled;
     boolean locationServiceAvailable;
     private float declination;
+    private double intentLatitude=37.301597;
+    private double intentLongitude=127.044993;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +67,7 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
         surfaceView = findViewById(R.id.surface_view);
         tvCurrentLocation = findViewById(R.id.tv_current_location);
         tvBearing = findViewById(R.id.tv_bearing);
-        arOverlayView = new AROverlayView(this);
+        arOverlayView = new AROverlayView(this, "광교역", intentLatitude, intentLongitude);
     }
 
     @Override
@@ -75,7 +77,7 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
         requestLocationPermission();
         registerSensors();
         initAROverlayView();
-        onLocationChanged(location);
+        //onLocationChanged(location);
     }
 
     @Override
