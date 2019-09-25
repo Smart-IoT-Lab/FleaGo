@@ -49,25 +49,26 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 /******************* Sliding up List View *******************/
+                mLayout = findViewById(R.id.sliding_layout);
 
                 final ListView lv = (ListView) findViewById(R.id.marketList);
-
                 Log.d("TEST market list size", "value : " + list.size());
 
                 mAdapter = new ListViewAdapter(MainActivity.this, list);
                 lv.setAdapter(mAdapter);
                 mAdapter.setMode(Attributes.Mode.Single);
+
                 lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     // 클릭 시 돋보기 스와이프 되는 view
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         // Toast.makeText(view.getContext(), "lv..setOnItemClick", Toast.LENGTH_SHORT).show();
                         ((com.daimajia.swipe.SwipeLayout) (lv.getChildAt(position - lv.getFirstVisiblePosition()))).open(true);
+
+                        mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
                     }
                 });
 
-
-                mLayout = findViewById(R.id.sliding_layout);
                 // 바깥 눌렀을 때, 반응
                 mLayout.setFadeOnClickListener(new View.OnClickListener() {
                     @Override
