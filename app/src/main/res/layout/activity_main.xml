@@ -12,7 +12,7 @@
         android:gravity="bottom"
 
         sothree:umanoDragView="@+id/btn_handle"
-        sothree:umanoPanelHeight="200dp"
+        sothree:umanoPanelHeight="300dp"
         sothree:umanoShadowHeight="0dp"
         sothree:umanoParallaxOffset="100dp">
 
@@ -40,7 +40,7 @@
         <!-- SLIDING LAYOUT -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="450dp"
+            android:layout_height="550dp"
             android:background="#ffffff"
             android:orientation="vertical"
             android:focusable="false"
