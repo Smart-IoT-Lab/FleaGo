@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "38167736741-mcijjqaasboenb8k4oq6doqlrcu0eotu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fleago",
+            "certificate_hash": "1a78bc8e62bda3c06ad334ec6a36092d38d73026"
+          }
+        },
+        {
           "client_id": "38167736741-q187v2padco3l253vr69hlkm31a0qcip.apps.googleusercontent.com",
           "client_type": 3
         }
