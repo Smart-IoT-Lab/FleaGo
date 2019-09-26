@@ -12,7 +12,7 @@
         android:gravity="bottom"
 
         sothree:umanoDragView="@+id/btn_handle"
-        sothree:umanoPanelHeight="300dp"
+        sothree:umanoPanelHeight="350dp"
         sothree:umanoShadowHeight="0dp"
         sothree:umanoParallaxOffset="100dp">
 
@@ -49,8 +49,11 @@
             <!--- 손잡이 -->
             <Button
                 android:id="@+id/btn_handle"
+                android:background="#00ff0000"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="40dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
                 android:clickable="true"    />
 
             <ListView

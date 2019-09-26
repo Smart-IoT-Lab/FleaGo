@@ -10,7 +10,6 @@
 
     <LinearLayout
         android:tag="Bottom1"
-        android:background="#66ddff00"
         android:id="@+id/bottom_wrapper"
         android:layout_width="80dp"
         android:weightSum="1"
@@ -21,7 +20,7 @@
             android:src="@drawable/magnifier"
             android:gravity="center"
             android:clickable="true"
-            android:background="@drawable/dark_gray"
+            android:background="@color/seoul_default_light"
             android:padding="25dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -55,7 +54,6 @@
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
-                android:background="@drawable/white"
                 android:tag="Hover"
                 android:textSize="12dp"
                 android:textStyle="bold"
@@ -72,7 +70,6 @@
                     android:id="@+id/tv_eventType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/white"
                     android:textSize="10dp"
                     android:layout_margin = "3dp"
                     android:paddingLeft="10dp"
@@ -95,8 +92,7 @@
                     android:textSize="11dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/white" />
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/tv_distance"
@@ -106,8 +102,7 @@
                     android:textSize="11dp"
                     android:paddingRight="10dp"
                     android:gravity="right|center_vertical"
-                    android:layout_weight="1"
-                    android:background="@drawable/white" />
+                    android:layout_weight="1" />
             </LinearLayout>
 
 
