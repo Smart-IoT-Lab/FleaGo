@@ -1,7 +1,7 @@
 package com.example.fleago;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -44,10 +44,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
-                    if(list.add(d.getValue(Market.class))) {
-                        // 리스트에 market이 추가되었을 때,
-                        // Log.d("TEST firebase list add", "return true");
-                    }
+                    list.add(d.getValue(Market.class));
+//                    if(list.add(d.getValue(Market.class))) {
+//                        // 리스트에 market이 추가되었을 때,
+//                        // Log.d("TEST firebase list add", "return true");
+//                    }
                 }
 
                 /******************* Sliding up List View *******************/
