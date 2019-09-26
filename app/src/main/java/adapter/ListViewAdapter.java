@@ -16,8 +16,9 @@ import androidx.annotation.NonNull;
 
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 
-import com.example.fleago.Main2Activity;
 import com.example.fleago.Market;
+
+import com.example.fleago.Main2Activity;
 import com.example.fleago.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
