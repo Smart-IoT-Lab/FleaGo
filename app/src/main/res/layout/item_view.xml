@@ -69,6 +69,7 @@
                 android:layout_marginLeft="10dp">
 
                 <TextView
+                    android:id="@+id/tv_eventType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/white"
@@ -89,7 +90,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:id="@+id/position"
+                    android:id="@+id/tv_openingHour"
                     android:text="운영시간"
                     android:textSize="11dp"
                     android:gravity="center_vertical"
@@ -98,7 +99,7 @@
                     android:background="@drawable/white" />
 
                 <TextView
-                    android:id="@+id/distance"
+                    android:id="@+id/tv_distance"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="거리"

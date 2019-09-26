@@ -34,7 +34,6 @@ public class ListViewAdapter extends BaseSwipeAdapter {
 
     private Context mContext;
     private ArrayList<Market> list;
-    private ImageView image;
 
     //firebaseStorage 인스턴스 생성
     //하나의 Storage와 연동되어 있는 경우, getInstance()의 파라미터는 공백으로 두어도 됨
@@ -97,12 +96,26 @@ public class ListViewAdapter extends BaseSwipeAdapter {
     @Override
     public void fillValues(int position, View convertView) {
         // 그 position의 item 에다가 데이터 채우기
-        TextView t = (TextView)convertView.findViewById(R.id.position);
-        image = (ImageView)convertView.findViewById(R.id.marketImage);
-        t.setText((position + 1) + ".");
-        setImage();
+
+        ImageView image = (ImageView)convertView.findViewById(R.id.marketImage);
+        setImage(image);
 
         ((TextView) convertView.findViewById(R.id.text_data)).setText(list.get(position).getName());
+
+        // event_type 을 가져와서 String으로 만들기
+        ArrayList<String> events = list.get(position).getEvent_type();
+        String eventsToString = "";
+        for (String s : events) {
+            eventsToString = eventsToString.concat("#" + s + " ");
+        }
+        ((TextView) convertView.findViewById(R.id.tv_eventType)).setText(eventsToString);
+
+        // TODO 운영시간(OpeningHour). 현재 no data
+        // ((TextView) convertView.findViewById(R.id.tv_openingHour)).setText(list.get(position).getOpeningHour());
+
+        // TODO 거리 계산 후 출력
+        int distance = 0;
+        ((TextView) convertView.findViewById(R.id.tv_distance)).setText(distance + "m");
     }
 
 
@@ -122,7 +135,7 @@ public class ListViewAdapter extends BaseSwipeAdapter {
         return position;
     }
 
-    public void setImage() {
+    public void setImage(final ImageView image) {
         pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
