@@ -41,7 +41,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/default_full_list_height"
-            android:background="#ffffff"
+            android:background="@color/seoul_default_light"
             android:orientation="vertical"
             android:focusable="false"
             android:clickable="false">
@@ -54,7 +54,8 @@
                 android:layout_height="40dp"
                 android:layout_gravity="right"
                 android:layout_marginRight="10dp"
-                android:clickable="true"    />
+                android:clickable="true"    >
+            </Button>
 
             <ListView
                 android:id="@+id/marketList"
