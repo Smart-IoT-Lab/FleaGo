@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         requestLocationPermission();
 
-        ValueEventListener vel = new ValueEventListener() {
+        myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // 데이터 load
@@ -130,9 +130,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        };
-        myRef.addValueEventListener(vel);
-//        myRef2.addValueEventListner(vel);
+        });
 
     }
 
