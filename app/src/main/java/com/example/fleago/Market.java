@@ -23,6 +23,7 @@ public class Market {
         this.distance = distance;
     }
 
+
     public String getLocation() {
         return location;
     }

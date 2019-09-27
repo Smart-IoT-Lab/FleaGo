@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.sothree.slidinguppanel.SlidingUpPanelLayout android:id="@+id/sliding_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+
+    sothree:umanoDragView="@+id/btn_handle"
+    sothree:umanoPanelHeight="@dimen/xhdpi_small_list_height"
+    sothree:umanoShadowHeight="0dp"
+    sothree:umanoParallaxOffset="100dp"
+    layout_height=""
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sothree="http://schemas.android.com/apk/res-auto">
+
+    <!-- MAIN CONTENT (지도 들어갈 공간) -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:gravity="center"
+            android:text="xhdpi"
+            android:clickable="true"
+            android:focusable="false"
+            android:focusableInTouchMode="true"
+            android:textSize="16sp" />
+
+    </FrameLayout>
+
+    <!-- SLIDING LAYOUT -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/xhdpi_full_list_height"
+        android:background="#ffffff"
+        android:orientation="vertical"
+        android:focusable="false"
+        android:clickable="false">
+
+        <!--- 손잡이 -->
+        <Button
+            android:id="@+id/btn_handle"
+            android:background="#00ff0000"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            android:clickable="true"    />
+
+        <ListView
+            android:id="@+id/marketList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </ListView>
+    </LinearLayout>
+
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>
