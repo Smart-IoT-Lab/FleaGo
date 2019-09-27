@@ -88,7 +88,7 @@ public class Main2Activity extends AppCompatActivity {
 
         List<String> event_type=(List<String>)intent1.getSerializableExtra("event_type");
         linearlayout1.removeAllViews();
-        for(int i=0;i<event_type.size();i++){
+        for(int i = 0; i < event_type.size(); i++){
             TextView textView01 = new TextView(getApplicationContext());
             textView01.setText(event_type.get(i));  //배열리스트 이용
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
