@@ -33,8 +33,6 @@
                 android:clickable="true"
                 android:focusable="false"
                 android:focusableInTouchMode="true"
-                android:gravity="center"
-                android:text="MAP Content"
                 android:textSize="16sp" />
 
         </FrameLayout>

@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference myRef = database.getReference("Market");
+
         // 임시 test. 거리순 정렬 보려고 gps 칼럼이 있는 10월로 테스트
 //        final DatabaseReference myRef = database.getReference("10월");
 
@@ -65,8 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         requestLocationPermission();
 
-
-        myRef.addValueEventListener(new ValueEventListener() {
+        ValueEventListener vel = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // 데이터 load
@@ -130,7 +130,9 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        };
+        myRef.addValueEventListener(vel);
+//        myRef2.addValueEventListner(vel);
 
     }
 
