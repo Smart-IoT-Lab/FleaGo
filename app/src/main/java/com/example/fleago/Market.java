@@ -12,6 +12,7 @@ public class Market {
     ArrayList<String> event_type ;
 
 
+
     public String getLocation() {
         return location;
     }
