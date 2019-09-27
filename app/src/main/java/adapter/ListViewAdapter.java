@@ -23,9 +23,9 @@ import androidx.core.content.ContextCompat;
 
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 
-import com.example.fleago.Market;
 
 import com.example.fleago.Main2Activity;
+import com.example.fleago.Markets;
 import com.example.fleago.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,7 +43,7 @@ import static com.example.fleago.ARActivity.REQUEST_LOCATION_PERMISSIONS_CODE;
 public class ListViewAdapter extends BaseSwipeAdapter {
 
     private Context mContext;
-    private ArrayList<Market> list;
+    private ArrayList<Markets> list;
 
     //firebaseStorage 인스턴스 생성
     //하나의 Storage와 연동되어 있는 경우, getInstance()의 파라미터는 공백으로 두어도 됨
@@ -121,12 +121,23 @@ public class ListViewAdapter extends BaseSwipeAdapter {
                 // Toast.makeText(mContext, "click magnifier", Toast.LENGTH_SHORT).show();
 
                 Intent intent1 = new Intent(view.getContext(), Main2Activity.class);
-                intent1.putExtra("name", list.get(position).getName());
-                intent1.putExtra("district", list.get(position).getDistrict());
-                intent1.putExtra("event_type", list.get(position).getEvent_type());
-                intent1.putExtra("location", list.get(position).getLocation());
-                intent1.putExtra("introduction", list.get(position).getIntroduction());
-                intent1.putExtra("page_url", list.get(position).getPage_url());
+//                intent1.putExtra("name", list.get(position).getName());
+//                intent1.putExtra("district", list.get(position).getDistrict());
+//                intent1.putExtra("event_type", list.get(position).getEvent_type());
+//                intent1.putExtra("location", list.get(position).getLocation());
+//                intent1.putExtra("introduction", list.get(position).getIntroduction());
+//                intent1.putExtra("page_url", list.get(position).getPage_url());
+                  intent1.putExtra("day", list.get(position).getDay());
+                  intent1.putExtra("discription", list.get(position).getDiscription());
+                  intent1.putExtra("end_date", list.get(position).getEnd_date());
+                  intent1.putExtra("end_time", list.get(position).getEnd_time());
+                  intent1.putExtra("gps", list.get(position).getGps());
+                  intent1.putExtra("month", list.get(position).getMonth());
+                  intent1.putExtra("name", list.get(position).getName());
+                  intent1.putExtra("start_date", list.get(position).getStart_date());
+                  intent1.putExtra("start_location", list.get(position).getStart_location());
+                  intent1.putExtra("start_time", list.get(position).getStart_time());
+                  intent1.putExtra("week", list.get(position).getWeek());
                 mContext.startActivity(intent1);
             }
         });
@@ -146,15 +157,15 @@ public class ListViewAdapter extends BaseSwipeAdapter {
         ((TextView) convertView.findViewById(R.id.text_data)).setText(list.get(position).getName());
 
         // 카테고리 출력
-        ArrayList<String> events = list.get(position).getEvent_type();
-        String eventsToString = "";
-        for (String s : events) {
-            eventsToString = eventsToString.concat("#" + s + " ");
-        }
-        ((TextView) convertView.findViewById(R.id.tv_eventType)).setText(eventsToString);
+//        ArrayList<String> events = list.get(position).getEvent_type();
+//        String eventsToString = "";
+//        for (String s : events) {
+//            eventsToString = eventsToString.concat("#" + s + " ");
+//        }
+//        ((TextView) convertView.findViewById(R.id.tv_eventType)).setText(eventsToString);
 
         // TODO 운영시간(OpeningHour). 현재 no data
-        // ((TextView) convertView.findViewById(R.id.tv_openingHour)).setText(list.get(position).getOpeningHour());
+         ((TextView) convertView.findViewById(R.id.tv_openingHour)).setText(list.get(position).getStart_time());
 
         // 거리 출력
         tv_distance = convertView.findViewById(R.id.tv_distance);

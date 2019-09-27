@@ -56,6 +56,7 @@
 
         <LinearLayout
             android:id="@+id/linearlayout1"
+            android:text="event_type"
             android:layout_gravity="right"
             android:orientation="horizontal"
             android:layout_weight="1"
@@ -96,6 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="14dp"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="90dp"
@@ -108,6 +110,7 @@
                 android:paddingTop="7.7dp"
                 android:paddingBottom="8.3dp"
                 android:text="날짜"
+                android:id="@+id/textView6"
                 android:textColor="#7a7f85"
                 android:textSize="13sp" />
             <View
@@ -116,6 +119,7 @@
                 android:layout_centerInParent="true"
                 android:background="#7a7f85"/>
             <TextView
+                android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="90dp"
                 android:layout_marginTop="5dp"
@@ -240,7 +244,7 @@
                 android:paddingLeft="0dp"
                 android:paddingTop="7.7dp"
                 android:paddingBottom="8.3dp"
-                android:text="TextView"
+                android:text="url"
                 android:textColor="#7a7f85"
                 android:textSize="13sp"
                 tools:layout_conversion_absoluteHeight="34dp"
@@ -249,6 +253,16 @@
                 tools:layout_editor_absoluteY="378dp" />
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/shadow2"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="12.3dp"
+            android:background="#f6f6f6"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -265,6 +279,18 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="14dp"
             android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:paddingLeft="0dp"
+                android:paddingTop="7.7dp"
+                android:paddingBottom="8.3dp"
+                android:textColor="#7a7f85"
+                android:textSize="13sp"
+                />
 
             <ImageView
                 android:layout_height="wrap_content"
@@ -303,21 +329,13 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@drawable/shadow2"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="12.3dp"
-            android:background="#f6f6f6"/>
 
 
         <RelativeLayout
             android:id="@+id/map_view"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_width="400dp"
+            android:layout_height="200dp"
             android:layout_gravity="center">
 
             <Button
@@ -345,9 +363,9 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:onClick="onButton2Clicked"
-        android:text="AR" />
+        android:text="AR View"
+        tools:context=".Main2Activity" />
 
 </LinearLayout>
