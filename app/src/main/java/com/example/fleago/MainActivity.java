@@ -37,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference myRef = database.getReference("Market");
 
-
-
         list = new ArrayList<>();
         myRef.addValueEventListener(new ValueEventListener() {
             @Override

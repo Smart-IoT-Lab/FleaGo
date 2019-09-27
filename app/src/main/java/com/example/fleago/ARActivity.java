@@ -296,4 +296,5 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
     public void onProviderDisabled(String s) {
 
     }
+
 }
