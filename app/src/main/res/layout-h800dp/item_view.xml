@@ -55,7 +55,6 @@
 
                 <TextView
                     android:id="@+id/text_data"
-                    android:singleLine="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:tag="Hover"

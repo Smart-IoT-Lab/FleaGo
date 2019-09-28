@@ -2,9 +2,8 @@ package adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
+
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,19 +11,15 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 
-import com.example.fleago.Market;
 
 import com.example.fleago.Main2Activity;
+import com.example.fleago.Market;
+import com.example.fleago.Markets;
 import com.example.fleago.R;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
@@ -39,8 +34,8 @@ public class ListViewAdapter extends BaseSwipeAdapter implements Filterable {
 
     private Context mContext;
 
-    private ArrayList<Market> list;
-    private ArrayList<Market> list2;
+    private ArrayList<Markets> list;
+    private ArrayList<Markets> list2;
 
 
     //firebaseStorage 인스턴스 생성
@@ -56,11 +51,10 @@ public class ListViewAdapter extends BaseSwipeAdapter implements Filterable {
     FirebaseUser user = mAuth.getCurrentUser();
     private String urii;
 
-
     public ListViewAdapter(Context mContext, ArrayList list) {
         this.mContext = mContext;
         this.list = list;
-        list2 = new ArrayList<Market>();
+        list2 = new ArrayList<Markets>();
         list2.addAll(list);
     }
 
@@ -89,13 +83,24 @@ public class ListViewAdapter extends BaseSwipeAdapter implements Filterable {
             public void onClick(View view) {
                 // Toast.makeText(mContext, "click magnifier", Toast.LENGTH_SHORT).show();
 
-                Intent intent1=new Intent(view.getContext(), Main2Activity.class);
-                intent1.putExtra("name", list.get(position).getName());
-                intent1.putExtra("district", list.get(position).getDistrict());
-                intent1.putExtra("event_type", list.get(position).getEvent_type());
-                intent1.putExtra("location", list.get(position).getLocation());
-                intent1.putExtra("introduction", list.get(position).getIntroduction());
-                intent1.putExtra("page_url", list.get(position).getPage_url());
+                Intent intent1 = new Intent(view.getContext(), Main2Activity.class);
+//                intent1.putExtra("name", list.get(position).getName());
+//                intent1.putExtra("district", list.get(position).getDistrict());
+//                intent1.putExtra("event_type", list.get(position).getEvent_type());
+//                intent1.putExtra("location", list.get(position).getLocation());
+//                intent1.putExtra("introduction", list.get(position).getIntroduction());
+//                intent1.putExtra("page_url", list.get(position).getPage_url());
+                  intent1.putExtra("day", list.get(position).getDay());
+                  intent1.putExtra("discription", list.get(position).getDiscription());
+                  intent1.putExtra("end_date", list.get(position).getEnd_date());
+                  intent1.putExtra("end_time", list.get(position).getEnd_time());
+                  intent1.putExtra("gps", list.get(position).getGps());
+                  intent1.putExtra("month", list.get(position).getMonth());
+                  intent1.putExtra("name", list.get(position).getName());
+                  intent1.putExtra("start_date", list.get(position).getStart_date());
+                  intent1.putExtra("start_location", list.get(position).getStart_location());
+                  intent1.putExtra("start_time", list.get(position).getStart_time());
+                  intent1.putExtra("week", list.get(position).getWeek());
                 mContext.startActivity(intent1);
             }
         });
@@ -107,28 +112,45 @@ public class ListViewAdapter extends BaseSwipeAdapter implements Filterable {
     public void fillValues(int position, View convertView) {
         // 그 position의 item 에다가 데이터 채우기
 
-        ImageView image = (ImageView)convertView.findViewById(R.id.marketImage);
+        // 이미지 출력
+        ImageView image = (ImageView) convertView.findViewById(R.id.marketImage);
         setImage(image);
 
+        // 제목 출력
         ((TextView) convertView.findViewById(R.id.text_data)).setText(list.get(position).getName());
 
-        // event_type 을 가져와서 String으로 만들기
-        ArrayList<String> events = list.get(position).getEvent_type();
+        // 카테고리 출력
         String eventsToString = "";
-        for (String s : events) {
-            eventsToString = eventsToString.concat("#" + s + " ");
+        ArrayList<String> events = list.get(position).getEvent_type();
+        if (events == null || events.size() == 0) {
+            // exception: 카테고리 없음
+        } else {
+            for (String s : events) {
+                eventsToString = eventsToString.concat("#" + s + " ");
+            }
         }
         ((TextView) convertView.findViewById(R.id.tv_eventType)).setText(eventsToString);
 
-        // TODO 운영시간(OpeningHour). 현재 no data
-        // ((TextView) convertView.findViewById(R.id.tv_openingHour)).setText(list.get(position).getOpeningHour());
+        // 운영시간(OpeningHour) 출력
+        String start = list.get(position).getStart_time();
+        String end = list.get(position).getEnd_time();
+        if (list.get(position).hasTime()) {
+            ((TextView) convertView.findViewById(R.id.tv_openingHour)).setText(start + " ~ " + end);
 
-        // TODO 거리 계산 후 출력
-        int distance = 0;
-        ((TextView) convertView.findViewById(R.id.tv_distance)).setText(distance + "m");
+
+        } else {
+            ((TextView) convertView.findViewById(R.id.tv_openingHour)).setText("no data");
+        }
+
+        // 거리 출력
+        int distance = list.get(position).getDistance();
+        TextView tv_distance = convertView.findViewById(R.id.tv_distance);
+        if (distance == Integer.MAX_VALUE || distance < 0) {
+            tv_distance.setText("no data");
+        } else {
+            tv_distance.setText(String.format("%,d", distance) + "m");
+        }
     }
-
-
 
     @Override
     public int getCount() {
@@ -150,7 +172,7 @@ public class ListViewAdapter extends BaseSwipeAdapter implements Filterable {
             @Override
             public void onSuccess(Uri uri) {
                 urii = uri.toString();
-                Log.d("uri",urii);
+//                Log.d("uri", urii);
                 Picasso.with(
                         mContext).
                         load(urii).
@@ -172,12 +194,12 @@ public class ListViewAdapter extends BaseSwipeAdapter implements Filterable {
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
 
-            List<Market> filteredList = new ArrayList<>();
+            List<Markets> filteredList = new ArrayList<>();
 
             if (charSequence == null || charSequence.length() == 0) {
                 filteredList.addAll(list2);
             } else {
-                for (Market market: list2) {
+                for (Markets market: list2) {
                     if (market.getName().contains(charSequence.toString().toLowerCase())) {
                         filteredList.add(market);
                     }
@@ -193,10 +215,9 @@ public class ListViewAdapter extends BaseSwipeAdapter implements Filterable {
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
             list.clear();
-            list.addAll((Collection<? extends Market>) filterResults.values);
+            list.addAll((Collection<? extends Markets>) filterResults.values);
             notifyDataSetChanged();
         }
     };
-
 
 }

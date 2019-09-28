@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:gravity="bottom"
         sothree:umanoDragView="@+id/btn_handle"
-        sothree:umanoPanelHeight="@dimen/default_small_list_height"
+        sothree:umanoPanelHeight="@dimen/xhdpi_small_list_height"
         sothree:umanoShadowHeight="0dp"
         sothree:umanoParallaxOffset="100dp">
 
@@ -28,7 +28,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="?attr/actionBarSize"
                 android:gravity="center"
-                android:text="default"
+                android:text="h1280"
                 android:clickable="true"
                 android:focusable="false"
                 android:focusableInTouchMode="true"
@@ -39,7 +39,7 @@
         <!-- SLIDING LAYOUT -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/default_full_list_height"
+            android:layout_height="@dimen/xhdpi_full_list_height"
             android:background="@drawable/white"
             android:orientation="vertical"
             android:focusable="false"
@@ -50,7 +50,7 @@
                 android:id="@+id/btn_handle"
                 android:background="#00ff0000"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_gravity="right"
                 android:layout_marginRight="10dp"
                 android:clickable="true"    >
