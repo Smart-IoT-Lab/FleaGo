@@ -83,6 +83,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="5dp"
+                    android:layout_marginBottom="3dp"
                     android:fontFamily="@font/roboto_medium"
                     android:letterSpacing="0.03"
                     android:textSize="30dp"
@@ -101,14 +102,15 @@
                     android:id="@+id/linearlayout1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginRight="25dp"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
                     android:fontFamily="@font/roboto_regular"
                     android:orientation="horizontal"
                     android:text="event_type"
                     android:textColor="@color/seoul_default"
-                    android:textSize="13sp">
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    >
 
                 </LinearLayout>
 
@@ -126,7 +128,7 @@
                     android:text="일정"
                     android:textStyle="bold"
                     android:textColor="@color/seoul_default"
-                    android:textSize="11.7sp"
+                    android:textSize="15sp"
                     />
 
                 <LinearLayout
@@ -206,7 +208,7 @@
                     android:text="소개"
                     android:textStyle="bold"
                     android:textColor="@color/seoul_default"
-                    android:textSize="11.7sp"
+                    android:textSize="15sp"
                     />
 
                 <LinearLayout
@@ -255,7 +257,7 @@
                     android:paddingTop="13.3dp"
                     android:text="홈페이지"
                     android:textColor="@color/seoul_default"
-                    android:textSize="11.7sp"
+                    android:textSize="15sp"
                     android:textStyle="bold"
                     tools:layout_conversion_absoluteHeight="29dp"
                     tools:layout_conversion_absoluteWidth="46dp"
@@ -321,7 +323,7 @@
                     android:paddingTop="13.3dp"
                     android:text="위치"
                     android:textColor="@color/seoul_default"
-                    android:textSize="11.7sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -350,37 +352,43 @@
                         android:paddingLeft="0dp"
                         android:layout_marginLeft="0dp"
                         android:paddingTop="10dp"/>
+
                     <TextView
                         android:id="@+id/textView5"
+                        android:layout_width="260dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/roboto_regular"
-                        android:paddingBottom="8.3dp"
                         android:paddingLeft="0dp"
                         android:paddingTop="7.7dp"
+                        android:paddingBottom="8.3dp"
                         android:textColor="#7a7f85"
-                        android:textSize="13sp"
+                        android:textSize="13sp" />
+
+                    <ImageButton
+                        android:id="@+id/button3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        />
-
-                    <Button
-                        android:id="@+id/button3"
-                        android:layout_width="66dp"
-                        android:layout_height="32dp"
-                        android:layout_marginRight="5dp"
-                        android:background="@drawable/button"
+                        android:layout_marginTop="2dp"
+                        android:background="@color/imagebutton"
                         android:onClick="onButton3Clicked"
+                        android:paddingTop="10dp"
+                        android:paddingRight="6dp"
                         android:text="복사"
-                        android:textColor="#ffffff" />
+                        android:textColor="#ffffff"
+                        android:src="@drawable/ic_content_copy2"/>
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/button"
-                        android:layout_width="66dp"
-                        android:layout_height="32dp"
-                        android:background="@drawable/button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/imagebutton"
                         android:onClick="onButton1Clicked"
                         android:text="길찾기"
-                        android:textColor="#ffffff" />
+                        android:paddingLeft="6dp"
+                        android:paddingTop="10dp"
+                        android:textColor="#ffffff"
+                        android:src="@drawable/ic_directions1"/>
                 </LinearLayout>
 
                 <LinearLayout

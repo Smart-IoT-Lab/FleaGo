@@ -1,5 +1,6 @@
 package com.example.fleago;
 
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -19,6 +20,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -123,9 +125,9 @@ public class Main2Activity extends AppCompatActivity {
 
 
 
-        Button button = (Button) findViewById(R.id.button);
+        @SuppressLint("WrongViewCast") ImageButton button = (ImageButton) findViewById(R.id.button);
         com.google.android.material.floatingactionbutton.FloatingActionButton button2 = (com.google.android.material.floatingactionbutton.FloatingActionButton)findViewById(R.id.button2);
-        Button button3 = (Button)findViewById(R.id.button3);
+        ImageButton button3 = (ImageButton)findViewById(R.id.button3);
         textView5.setText(intent1.getStringExtra("start_location"));
         String location= textView5.getText().toString();
 
