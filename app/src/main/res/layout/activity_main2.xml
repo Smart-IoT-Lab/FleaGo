@@ -124,27 +124,8 @@
                         android:textColor="@color/seoul_default_light"
                         android:textSize="13sp" />
 
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="100dp"
-                        android:layout_centerInParent="true"
-                        android:background="@color/seoul_default_lightest" />
 
-                    <TextView
-                        android:id="@+id/textView11"
-                        android:layout_width="55dp"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="0dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/roboto_regular"
-                        android:letterSpacing="0.03"
-                        android:paddingLeft="16.7dp"
-                        android:paddingTop="7.7dp"
-                        android:paddingBottom="8.3dp"
-                        android:text="start_time"
-                        android:textColor="@color/seoul_default_light"
-                        android:textSize="13sp" />
+
 
                 </LinearLayout>
 
@@ -156,7 +137,7 @@
 
 
                     <TextView
-                        android:id="@+id/textView8"
+                        android:id="@+id/textView11"
                         android:layout_width="55dp"
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
@@ -171,27 +152,8 @@
                         android:textColor="@color/seoul_default_light"
                         android:textSize="13sp" />
 
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="100dp"
-                        android:layout_centerInParent="true"
-                        android:background="@color/seoul_default_lightest" />
 
-                    <TextView
-                        android:id="@+id/textView9"
-                        android:layout_width="55dp"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="0dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/roboto_regular"
-                        android:letterSpacing="0.03"
-                        android:paddingLeft="16.7dp"
-                        android:paddingTop="7.7dp"
-                        android:paddingBottom="8.3dp"
-                        android:text="end_time"
-                        android:textColor="@color/seoul_default_light"
-                        android:textSize="13sp" />
+
 
                 </LinearLayout>
 
