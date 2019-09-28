@@ -7,7 +7,7 @@ public class Markets {
     private String discription;
     private String end_time;
     private String end_date;
-    ArrayList<String> gps ;
+    ArrayList<Double> gps ;
     private String month;
     private String name;
     private String start_date;
@@ -27,8 +27,8 @@ public class Markets {
     public void setEnd_time(String end_time) { this.end_time = end_time; }
     public String getEnd_time() { return end_time; }
 
-    public ArrayList<String> getGps() { return gps; }
-    public void setGps(ArrayList<String> gps) { this.gps = gps; }
+    public ArrayList<Double> getGps() { return gps; }
+    public void setGps(ArrayList<Double> gps) { this.gps = gps; }
 
     public String getMonth() { return month; }
     public void setMonth(String month) { this.month = month; }
@@ -50,7 +50,7 @@ public class Markets {
 
     public Markets(){ }
 
-    public Markets(String day,String discription, String end_time, String end_date, ArrayList<String> gps, String month, String name, String start_date, String start_location, String start_time, int week){
+    public Markets(String day,String discription, String end_time, String end_date, ArrayList<Double> gps, String month, String name, String start_date, String start_location, String start_time, int week){
 
         this.day=day;
         this.discription=discription;

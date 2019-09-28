@@ -1,14 +1,19 @@
 package com.example.fleago;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +25,8 @@ import net.daum.mf.map.api.MapView;
 //import net.daum.mf.map.api.MapPOIItem;
 //import net.daum.mf.map.api.MapPoint;
 
+
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -51,35 +58,36 @@ public class Main2Activity extends AppCompatActivity {
             flipperImages(image);
         }
 
+
+        intent1 = getIntent();
+        intent2 = getIntent();
+        intent3 = getIntent();
+
+
+        List<Double> gps=(List<Double>)intent1.getSerializableExtra("gps");
+        double gps1=gps.get(0);
+        double gps2=gps.get(1);
+
         MapView mapView = new MapView(this);
         ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
-        MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(37.541, 126.986);
+        MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(gps2, gps1);//중심점
         mapView.setMapCenterPoint(mapPoint, true);
-// 중심점 변경
-        //mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.33, 127.3), true);
-// 줌 레벨 변경
-        mapView.setZoomLevel(7, true);
-// 중심점 변경 + 줌 레벨 변경
-        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(37.541, 126.986), 6, true);
-// 줌 인
-        mapView.zoomIn(true);
-// 줌 아웃
-        mapView.zoomOut(true);
+        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(gps2,gps1), true);//중심점변경
+        mapView.setZoomLevel(7, true);//줌레벨
+        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(gps2,gps1), 6, true);//중심점, 줌레벨
+        mapView.zoomIn(true);//줌인
+        mapView.zoomOut(true);//줌아웃
+        //마커
         MapPOIItem marker = new MapPOIItem();
-
-        marker.setItemName("mar1");
+        marker.setItemName("market");
         marker.setTag(0);
         marker.setMapPoint(mapPoint);
-        // 기본으로 제공하는 BluePin 마커 모양.
         marker.setMarkerType(MapPOIItem.MarkerType.BluePin);
         marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
         mapView.addPOIItem(marker);
 
 
-        intent1 = getIntent();
-        intent2 = getIntent();
-        intent3 = getIntent();
         TextView textView = (TextView) findViewById(R.id.textView);//name
         TextView textView3 = (TextView) findViewById(R.id.textView3);//discription
         TextView textView4 = (TextView) findViewById(R.id.textView4);//url
@@ -98,8 +106,9 @@ public class Main2Activity extends AppCompatActivity {
 
         textView.setText(intent1.getStringExtra("name"));
         textView3.setText(intent1.getStringExtra("discription"));
-        textView6.setText(intent1.getStringExtra("start_date"));
         textView5.setText(intent1.getStringExtra("start_location"));
+        textView6.setText(intent1.getStringExtra("start_date"));
+
         textView11.setText(intent1.getStringExtra("start_time"));
       //  textView12.setText(formatDate);
 
@@ -139,6 +148,15 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
 
+        String location= textView5.getText().toString();
+
+
+        ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        ClipData clipData = ClipData.newPlainText("위치복사", location);
+        clipboardManager.setPrimaryClip(clipData);
+        Toast.makeText(getApplication(), "위치가 복사되었습니다.",Toast.LENGTH_LONG).show();
+
+
     }
 
     private void flipperImages(int image) {
@@ -149,10 +167,11 @@ public class Main2Activity extends AppCompatActivity {
         v_flipper.addView(imageView);
         v_flipper.setFlipInterval(2000);
         v_flipper.setAutoStart(true);
-
         v_flipper.setInAnimation(this,android.R.anim.slide_in_left);
         v_flipper.setOutAnimation(this,android.R.anim.slide_out_right);
     }
+
+
 
 
 }
