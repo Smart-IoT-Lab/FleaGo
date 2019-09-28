@@ -87,8 +87,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
-
-
         requestLocationPermission();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -102,9 +100,24 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // Firebase 데이터 load
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
-
                     int distance;
                     Markets tmp = d.getValue(Markets.class);
+
+                    // 중복 제거
+                    if (list.size() != 0) {
+                        boolean hasDup = false;
+
+                        for (Markets m : list) {
+                            if (m.getName().equals(tmp.getName())) {
+
+                                hasDup = true;
+                                break;
+                            }
+                        }
+
+                        if(hasDup)
+                            continue;
+                    }
 
                     // 2주 안에 있으면 list에 추가한다.
                     Log.d("TEST start date", tmp.getStart_date());
@@ -126,7 +139,6 @@ public class MainActivity extends AppCompatActivity {
                             distance = MAX_DISTANCE;
                             tmp.setDistance(distance);
                         }
-
 
                         list.add(tmp);
                     }

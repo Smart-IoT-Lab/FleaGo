@@ -161,8 +161,15 @@ public class Main2Activity extends AppCompatActivity {
         mapView.addPOIItem(marker);
 
 
+        // (건대입구역) 교체
+        String kk = intent1.getStringExtra("name");
+        if (kk.equals("(건대입구역)")) {
+            String name = "건대입구 플리마켓";
+            textView.setText(name);
+        } else
+            textView.setText(kk);
 
-        textView.setText(intent1.getStringExtra("name"));
+//        textView.setText(intent1.getStringExtra("name"));
         textView3.setText(intent1.getStringExtra("discription"));
         textView4.setText(intent1.getStringExtra("url"));
         textView6.setText(intent1.getStringExtra("start_date")+" ~ "+intent1.getStringExtra("end_date"));
