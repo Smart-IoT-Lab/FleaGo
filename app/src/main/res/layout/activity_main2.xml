@@ -296,9 +296,7 @@
                         android:id="@+id/textView4"
                         android:layout_width="360dp"
                         android:layout_height="wrap_content"
-                        
                         android:fontFamily="@font/roboto_regular"
-
                         android:paddingLeft="0dp"
                         android:paddingTop="7.7dp"
                         android:paddingBottom="8.3dp"
@@ -307,7 +305,9 @@
                         tools:layout_conversion_absoluteHeight="34dp"
                         tools:layout_conversion_absoluteWidth="141dp"
                         tools:layout_editor_absoluteX="257dp"
-                        tools:layout_editor_absoluteY="378dp" />
+                        tools:layout_editor_absoluteY="378dp"
+                        android:autoLink="web"
+                        android:linksClickable="true"/>
                 </LinearLayout>
 
                 <LinearLayout
