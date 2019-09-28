@@ -59,6 +59,7 @@ public class Main2Activity extends AppCompatActivity {
 
 
         List<String> gps=(List<String>)intent1.getSerializableExtra("gps");
+
         double gps1 = Double.parseDouble(gps.get(0));
         double gps2 = Double.parseDouble(gps.get(1));
 
