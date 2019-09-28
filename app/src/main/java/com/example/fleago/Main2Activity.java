@@ -67,12 +67,23 @@ public class Main2Activity extends AppCompatActivity {
         intent3 = getIntent();
 
         final ArrayList<String> gps=(ArrayList<String>)intent1.getSerializableExtra("gps");
+        final double gps1;
+        final double gps2;
+
+        // gps 정보가 없을 때 처리하는 부분
+        if(gps.get(0).equals("N") || gps.get(1).equals("N")) {
+            gps1 = Double.parseDouble("131.865077");
+            gps2 = Double.parseDouble("37.241828");
+        }
+
+        else{
+            gps1 = Double.parseDouble(gps.get(0));
+            gps2 = Double.parseDouble(gps.get(1));
+
+        }
 
         System.out.println("before MainACtivity la" + gps.get(0));
         System.out.println("before MainACtivity long" + gps.get(1));
-
-        final double gps1 = Double.parseDouble(gps.get(0));
-        final double gps2 = Double.parseDouble(gps.get(1));
 
         System.out.println("MainACtivity la" + gps1);
         System.out.println("MainACtivity long" + gps2);
@@ -93,8 +104,6 @@ public class Main2Activity extends AppCompatActivity {
         Button button3 = (Button)findViewById(R.id.button3);
         textView5.setText(intent1.getStringExtra("start_location"));
         String location= textView5.getText().toString();
-
-
 
 
 
