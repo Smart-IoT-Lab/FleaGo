@@ -215,9 +215,6 @@ public class Main2Activity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item) ;
         }
     }
-    @Override public void onBackPressed() {
-        //super.onBackPressed();
-    }
 
 
 }
