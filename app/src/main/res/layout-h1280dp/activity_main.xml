@@ -1,70 +1,61 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:sothree="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent"
+<?xml version="1.0" encoding="utf-8"?>
+<com.sothree.slidinguppanel.SlidingUpPanelLayout android:id="@+id/sliding_layout"
     android:layout_width="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:gravity="bottom"
 
-    <com.sothree.slidinguppanel.SlidingUpPanelLayout
-        android:id="@+id/sliding_layout"
+    sothree:umanoDragView="@+id/btn_handle"
+    sothree:umanoPanelHeight="@dimen/xxhdpi_small_list_height"
+    sothree:umanoShadowHeight="0dp"
+    sothree:umanoParallaxOffset="100dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sothree="http://schemas.android.com/apk/res-auto">
+
+    <!-- MAIN CONTENT (지도 들어갈 공간) -->
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="bottom"
-        sothree:umanoDragView="@+id/btn_handle"
-        sothree:umanoPanelHeight="@dimen/xhdpi_small_list_height"
-        sothree:umanoShadowHeight="0dp"
-        sothree:umanoParallaxOffset="100dp">
+        android:orientation="vertical">
 
-        <!-- MAIN CONTENT (지도 들어갈 공간) -->
-        <FrameLayout
+
+        <TextView
+            android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-
-            <TextView
-                android:id="@+id/main"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="?attr/actionBarSize"
-                android:gravity="center"
-                android:text="h1280"
-                android:clickable="true"
-                android:focusable="false"
-                android:focusableInTouchMode="true"
-                android:textSize="16sp" />
-
-        </FrameLayout>
-
-        <!-- SLIDING LAYOUT -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/xhdpi_full_list_height"
-            android:background="@drawable/white"
-            android:orientation="vertical"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:gravity="center"
+            android:text="xxhdpi"
+            android:clickable="true"
             android:focusable="false"
-            android:clickable="false">
+            android:focusableInTouchMode="true"
+            android:textSize="16sp" />
 
-            <!--- 손잡이 -->
-            <Button
-                android:id="@+id/btn_handle"
-                android:background="#00ff0000"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_gravity="right"
-                android:layout_marginRight="10dp"
-                android:clickable="true"    >
-            </Button>
+    </FrameLayout>
 
-            <ListView
-                android:id="@+id/marketList"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-            </ListView>
-        </LinearLayout>
+    <!-- SLIDING LAYOUT -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/xxhdpi_full_list_height"
+        android:background="#ffffff"
+        android:orientation="vertical"
+        android:focusable="false"
+        android:clickable="false">
 
-    </com.sothree.slidinguppanel.SlidingUpPanelLayout>
+        <!--- 손잡이 -->
+        <Button
+            android:id="@+id/btn_handle"
+            android:background="#00ff0000"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            android:clickable="true"    />
 
+        <ListView
+            android:id="@+id/marketList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </ListView>
+    </LinearLayout>
 
-</LinearLayout>
-
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>
