@@ -74,6 +74,8 @@ public class Main2Activity extends AppCompatActivity {
         if(gps.get(0).equals("N") || gps.get(1).equals("N")) {
             gps1 = Double.parseDouble("131.865077");
             gps2 = Double.parseDouble("37.241828");
+            gps.set(0, String.valueOf(gps1));
+            gps.set(1, String.valueOf(gps2));
         }
 
         else{
