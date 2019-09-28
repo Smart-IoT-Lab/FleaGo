@@ -123,7 +123,7 @@ public class ListViewAdapter extends BaseSwipeAdapter {
         // 거리 출력
         int distance = list.get(position).getDistance();
         TextView tv_distance = convertView.findViewById(R.id.tv_distance);
-        if (distance == Integer.MAX_VALUE) {
+        if (distance == Integer.MAX_VALUE || distance < 0) {
             tv_distance.setText("no data");
         } else {
             tv_distance.setText(String.format("%,d", distance) + "m");

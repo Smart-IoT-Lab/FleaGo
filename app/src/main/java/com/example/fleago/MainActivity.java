@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // 데이터 load
+                // Firebase 데이터 load
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
                     int distance;
                     Market tmp = d.getValue(Market.class);
@@ -88,6 +88,8 @@ public class MainActivity extends AppCompatActivity {
                         distance = MAX_DISTANCE;
                         tmp.setDistance(distance);
                     }
+
+                    // TODO 현재 날짜를 기준으로 2주동안의 시장만 추가하기.
 
                     list.add(tmp);
                 }
