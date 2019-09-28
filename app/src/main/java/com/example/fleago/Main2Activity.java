@@ -54,7 +54,6 @@ public class Main2Activity extends AppCompatActivity {
             flipperImages(image);
         }
 
-
         intent1 = getIntent();
         intent2 = getIntent();
         intent3 = getIntent();

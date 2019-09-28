@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 
 
@@ -65,10 +67,8 @@ public class ListViewAdapter extends BaseSwipeAdapter implements Filterable {
 
     @Override
     public View generateView(final int position, ViewGroup parent) {
-        // 리스트의 아이템 표현하는데 item_view.xml 사용
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_view, null);
 
-//       SwipeLayout swipeLayout = view.findViewById(getSwipeLayoutResourceId(position));
+//        SwipeLayout swipeLayout = view.findViewById(getSwipeLayoutResourceId(position));
         // 더블클릭
 //        swipeLayout.setOnDoubleClickListener(new SwipeLayout.DoubleClickListener() {
 //            @Override
@@ -77,39 +77,12 @@ public class ListViewAdapter extends BaseSwipeAdapter implements Filterable {
 //            }
 //        });
 
-        // 상세정보(돋보기) 클릭 시
-        view.findViewById(R.id.magnifier).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Toast.makeText(mContext, "click magnifier", Toast.LENGTH_SHORT).show();
-
-                Intent intent1 = new Intent(view.getContext(), Main2Activity.class);
-//                intent1.putExtra("name", list.get(position).getName());
-//                intent1.putExtra("district", list.get(position).getDistrict());
-//                intent1.putExtra("event_type", list.get(position).getEvent_type());
-//                intent1.putExtra("location", list.get(position).getLocation());
-//                intent1.putExtra("introduction", list.get(position).getIntroduction());
-//                intent1.putExtra("page_url", list.get(position).getPage_url());
-                  intent1.putExtra("day", list.get(position).getDay());
-                  intent1.putExtra("discription", list.get(position).getDiscription());
-                  intent1.putExtra("end_date", list.get(position).getEnd_date());
-                  intent1.putExtra("end_time", list.get(position).getEnd_time());
-                  intent1.putExtra("gps", list.get(position).getGps());
-                  intent1.putExtra("month", list.get(position).getMonth());
-                  intent1.putExtra("name", list.get(position).getName());
-                  intent1.putExtra("start_date", list.get(position).getStart_date());
-                  intent1.putExtra("start_location", list.get(position).getStart_location());
-                  intent1.putExtra("start_time", list.get(position).getStart_time());
-                  intent1.putExtra("week", list.get(position).getWeek());
-                mContext.startActivity(intent1);
-            }
-        });
-
-        return view;
+        // 리스트의 아이템 표현하는데 item_view.xml 사용
+        return LayoutInflater.from(mContext).inflate(R.layout.item_view, null);
     }
 
     @Override
-    public void fillValues(int position, View convertView) {
+    public void fillValues(final int position, View convertView) {
         // 그 position의 item 에다가 데이터 채우기
 
         // 이미지 출력
@@ -148,8 +121,41 @@ public class ListViewAdapter extends BaseSwipeAdapter implements Filterable {
         if (distance == Integer.MAX_VALUE || distance < 0) {
             tv_distance.setText("no data");
         } else {
-            tv_distance.setText(String.format("%,d", distance) + "m");
+            if (distance/1000.0 > 1.0)
+                tv_distance.setText(String.format("%.2f ", distance/1000.0) + "km");
+            else
+                tv_distance.setText(String.format("%d ", distance) + "m");
         }
+
+        // 상세정보(돋보기) 클릭 시
+        convertView.findViewById(R.id.magnifier).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Toast.makeText(mContext, "click magnifier", Toast.LENGTH_SHORT).show();
+                Intent intent1 = new Intent(view.getContext(), Main2Activity.class);
+//                intent1.putExtra("name", list.get(position).getName());
+//                intent1.putExtra("district", list.get(position).getDistrict());
+//                intent1.putExtra("event_type", list.get(position).getEvent_type());
+//                intent1.putExtra("location", list.get(position).getLocation());
+//                intent1.putExtra("introduction", list.get(position).getIntroduction());
+//                intent1.putExtra("page_url", list.get(position).getPage_url());
+                intent1.putExtra("day", list.get(position).getDay());
+                intent1.putExtra("discription", list.get(position).getDiscription());
+                intent1.putExtra("end_date", list.get(position).getEnd_date());
+                intent1.putExtra("end_time", list.get(position).getEnd_time());
+                intent1.putExtra("gps", list.get(position).getGps());
+                intent1.putExtra("month", list.get(position).getMonth());
+                intent1.putExtra("name", list.get(position).getName());
+                intent1.putExtra("start_date", list.get(position).getStart_date());
+                intent1.putExtra("start_location", list.get(position).getStart_location());
+                intent1.putExtra("start_time", list.get(position).getStart_time());
+                intent1.putExtra("week", list.get(position).getWeek());
+                mContext.startActivity(intent1);
+
+                Log.d("TEST position", String.valueOf(position));
+            }
+        });
+
     }
 
     @Override
