@@ -12,4 +12,5 @@
     <color name="seoul_default">#4C6C61</color>
     <color name="seoul_default_light">#638C7E</color>
     <color name="seoul_default_lightest">#6E9B8B</color>
+    <color name="linkBlack">#000000</color>
 </resources>
