@@ -3,6 +3,7 @@ package adapter;
 import android.content.Context;
 import android.content.Intent;
 
+import android.location.Location;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,6 +40,7 @@ public class ListViewAdapter extends BaseSwipeAdapter implements Filterable {
 
     private ArrayList<Markets> list;
     private ArrayList<Markets> list2;
+    private Location currentLocation;
 
 
     //firebaseStorage 인스턴스 생성
@@ -56,9 +58,10 @@ public class ListViewAdapter extends BaseSwipeAdapter implements Filterable {
     FirebaseUser user = mAuth.getCurrentUser();
     private String urii;
 
-    public ListViewAdapter(Context mContext, ArrayList list) {
+    public ListViewAdapter(Context mContext, ArrayList list, Location currentLocation) {
         this.mContext = mContext;
         this.list = list;
+        this.currentLocation = currentLocation;
         list2 = new ArrayList<Markets>();
         list2.addAll(list);
     }
@@ -94,7 +97,14 @@ public class ListViewAdapter extends BaseSwipeAdapter implements Filterable {
         setImage(image, position);
 
         // 제목 출력
-        ((TextView) convertView.findViewById(R.id.text_data)).setText(list.get(position).getName());
+        // (건대입구역) 교체
+        if (list.get(position).getName().equals("(건대입구역)")) {
+            String name = "건대입구 플리마켓";
+            ((TextView) convertView.findViewById(R.id.text_data)).setText(name);
+        }
+        else{
+            ((TextView) convertView.findViewById(R.id.text_data)).setText(list.get(position).getName());
+        }
 
         // 카테고리 출력
         String eventsToString = "";
@@ -156,6 +166,13 @@ public class ListViewAdapter extends BaseSwipeAdapter implements Filterable {
                 intent1.putExtra("week", list.get(position).getWeek());
                 intent1.putExtra("url", list.get(position).getUrl());
                 intent1.putExtra("event_type", list.get(position).getEvent_type());
+
+                // 현재 기기의 위치정보.
+                ArrayList<Double> me = new ArrayList<>();
+                me.add(currentLocation.getLatitude());
+                me.add(currentLocation.getLongitude());
+                intent1.putExtra("my location", me);
+
                 mContext.startActivity(intent1);
 
                 Log.d("TEST position", String.valueOf(position));
@@ -181,10 +198,11 @@ public class ListViewAdapter extends BaseSwipeAdapter implements Filterable {
 
     public void setImage(final ImageView image, final int position) {
         pathReference = storageRef1.child(list2.get(position).getName() + "/" + list2.get(position).getName() + "_1.jpg");
-        //pathReference = storageRef1.child("(건대입구역)/(건대입구역)_1.jpg");
+        // pathReference = storageRef1.child("(건대입구역)/(건대입구역)_1.jpg");
+        Log.d("TEST position", "position : " + position + "  name : " +list2.get(position).getName());
+
         if (pathReference == null)
             storageRef2.child(list2.get(position).getName() + "/" + list2.get(position).getName() + "_1.jpg");
-
 
         pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override

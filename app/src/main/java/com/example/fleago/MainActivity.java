@@ -37,7 +37,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 import adapter.ListViewAdapter;
 
@@ -78,12 +77,18 @@ public class MainActivity extends AppCompatActivity {
         //actionBar.setDisplayHomeAsUpEnabled(true);
         //Toolbar toolbar = new Toolbar(this);
         //setSupportActionBar(toolbar);
+        MainFragment fragment  = new MainFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
 
+
+        getSupportActionBar().setIcon(R.drawable.fleagologo);
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
-        // TODO 맨 처음에 GPS 허가 받는데, 받지 않으면 currentLocation이 null이므로 에러가 떠서 종료됨.
+
+
         requestLocationPermission();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -135,7 +140,8 @@ public class MainActivity extends AppCompatActivity {
                 final ListView lv = (ListView) findViewById(R.id.marketList);
                 Log.d("TEST market list size", "value : " + list.size());
 
-                mAdapter = new ListViewAdapter(MainActivity.this, list);
+                // Main2 로 위치 전달
+                mAdapter = new ListViewAdapter(MainActivity.this, list, currentLocation);
                 lv.setAdapter(mAdapter);
                 mAdapter.setMode(Attributes.Mode.Single);
 

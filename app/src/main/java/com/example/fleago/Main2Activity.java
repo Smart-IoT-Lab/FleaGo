@@ -8,7 +8,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+
 import android.text.Html;
+
+import android.util.Log;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -79,10 +83,29 @@ public class Main2Activity extends AppCompatActivity {
         intent2 = getIntent();
         intent3 = getIntent();
 
-        List<String> gps=(List<String>)intent1.getSerializableExtra("gps");
+        final ArrayList<String> gps=(ArrayList<String>)intent1.getSerializableExtra("gps");
+        final double gps1;
+        final double gps2;
 
-        final double gps1 = Double.parseDouble(gps.get(0));
-        final double gps2 = Double.parseDouble(gps.get(1));
+        // gps 정보가 없을 때 처리하는 부분
+        if(gps.get(0).equals("N") || gps.get(1).equals("N")) {
+            gps1 = Double.parseDouble("131.865077");
+            gps2 = Double.parseDouble("37.241828");
+            gps.set(0, String.valueOf(gps1));
+            gps.set(1, String.valueOf(gps2));
+        }
+
+        else{
+            gps1 = Double.parseDouble(gps.get(0));
+            gps2 = Double.parseDouble(gps.get(1));
+
+        }
+
+        System.out.println("before MainACtivity la" + gps.get(0));
+        System.out.println("before MainACtivity long" + gps.get(1));
+
+        System.out.println("MainACtivity la" + gps1);
+        System.out.println("MainACtivity long" + gps2);
 
         TextView textView = (TextView) findViewById(R.id.textView);//name
         TextView textView3 = (TextView) findViewById(R.id.textView3);//discription
@@ -150,13 +173,25 @@ public class Main2Activity extends AppCompatActivity {
             linearlayout1.addView(textView01, params);//linearLayout01 위에 생성
         }
 
+        // 나의 GPS
+        final ArrayList<Double> my_location =(ArrayList<Double>)intent1.getSerializableExtra("my location");
+        for (Double s : my_location) {
+            Log.d("TEST location", "me : " + s);
+        }
         //*길찾기 버튼*//
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent2 = new Intent(Intent.ACTION_VIEW);
-                intent2.setData(Uri.parse("https://map.kakao.com/?"));
-                startActivity(intent2);
+
+                try {
+                    intent2.setData(Uri.parse("daummaps://route?sp=" + my_location.get(0) + "," + my_location.get(1) + "&ep= + " + gps2 + "," + gps1 + "&by=PUBLICTRANSIT"));
+                    startActivity(intent2);
+                } catch(Exception e) {
+                    e.printStackTrace();
+                    intent2.setData(Uri.parse("market://details?id=net.daum.android.map"));
+                    startActivity(intent2);
+                }
             }
         });
 
@@ -164,8 +199,14 @@ public class Main2Activity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),ARActivity.class);
-                startActivity(intent);//액티비티 띄우기
+                Intent intentAR = new Intent(getApplicationContext(),ARActivity.class);
+                intentAR.putExtra("name", intent1.getStringExtra("name"));
+
+                intentAR.putExtra("gps", gps);
+
+                intentAR.putExtra("latitude", gps2);
+                intentAR.putExtra("longitude", gps1);
+                startActivity(intentAR);//액티비티 띄우기
             }
         });
 
@@ -179,8 +220,6 @@ public class Main2Activity extends AppCompatActivity {
                 Toast.makeText(getApplication(), "위치가 복사되었습니다.",Toast.LENGTH_LONG).show();
             }
         });
-
-
     }
 
 //
