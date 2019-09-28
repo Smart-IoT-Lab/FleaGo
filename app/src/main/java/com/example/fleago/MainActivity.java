@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -38,7 +37,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 import adapter.ListViewAdapter;
 
@@ -80,8 +78,13 @@ public class MainActivity extends AppCompatActivity {
         //Toolbar toolbar = new Toolbar(this);
         //setSupportActionBar(toolbar);
 
+        getSupportActionBar().setIcon(R.drawable.fleagologo);
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
+
 
         requestLocationPermission();
 
