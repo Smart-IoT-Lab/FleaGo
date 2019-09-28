@@ -3,6 +3,7 @@ package com.example.fleago;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.Intent;
 import android.util.Log;
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -24,6 +25,9 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.hardware.SensorManager.*;
 import static android.view.Surface.*;
@@ -54,20 +58,34 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
     boolean isNetworkEnabled;
     boolean locationServiceAvailable;
     private float declination;
-    private double intentLatitude=37.301597;
-    private double intentLongitude=127.044993;
+    private Intent intentAR;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ar);
 
+        intentAR = getIntent();
+
         sensorManager = (SensorManager) this.getSystemService(SENSOR_SERVICE);
         cameraContainerLayout = findViewById(R.id.camera_container_layout);
         surfaceView = findViewById(R.id.surface_view);
         tvCurrentLocation = findViewById(R.id.tv_current_location);
         tvBearing = findViewById(R.id.tv_bearing);
-        arOverlayView = new AROverlayView(this, "광교역", intentLatitude, intentLongitude);
+
+
+        final ArrayList<String> gps=(ArrayList<String>)intentAR.getSerializableExtra("gps");
+
+        //String stringlatitude = intentAR.getStringExtra("latitude");
+        //String stringlongtitude = intentAR.getStringExtra("longitude");
+        //System.out.println("stringlatitude" + stringlatitude);
+        //System.out.println("stringlongtitude" + stringlongtitude);
+        final double gps1 = Double.parseDouble(gps.get(0));
+        final double gps2 = Double.parseDouble(gps.get(1));
+        System.out.println("stringlatitude" + gps1 );
+        System.out.println("stringlongtitude" + gps2 );
+        arOverlayView = new AROverlayView(this, intentAR.getStringExtra("name") , gps2, gps1);
     }
 
     @Override
@@ -275,11 +293,19 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
 
     @Override
     public void onLocationChanged(Location location2) {
-        location.setLatitude(location2.getLatitude());
-        location.setLongitude(location2.getLongitude());
-        location.setAltitude(location2.getAltitude());
-        System.out.println("AR activity LAT : "+ location2.getLatitude()+"LONG : " + location2.getLongitude()+"ALTI : " + location2.getAltitude());
-        updateLatestLocation();
+
+        try {
+            if (location2.getLatitude() > 37) {
+                location.setLatitude(location2.getLatitude());
+                location.setLongitude(location2.getLongitude());
+                location.setAltitude(location2.getAltitude());
+                System.out.println("AR activity LAT : " + location2.getLatitude() + "LONG : " + location2.getLongitude() + "ALTI : " + location2.getAltitude());
+                updateLatestLocation();
+            } else
+                System.out.println("GPS를 불러오지 못했습니다.");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override

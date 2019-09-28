@@ -66,10 +66,16 @@ public class Main2Activity extends AppCompatActivity {
         intent2 = getIntent();
         intent3 = getIntent();
 
-        List<String> gps=(List<String>)intent1.getSerializableExtra("gps");
+        final ArrayList<String> gps=(ArrayList<String>)intent1.getSerializableExtra("gps");
+
+        System.out.println("before MainACtivity la" + gps.get(0));
+        System.out.println("before MainACtivity long" + gps.get(1));
 
         final double gps1 = Double.parseDouble(gps.get(0));
         final double gps2 = Double.parseDouble(gps.get(1));
+
+        System.out.println("MainACtivity la" + gps1);
+        System.out.println("MainACtivity long" + gps2);
 
         TextView textView = (TextView) findViewById(R.id.textView);//name
         TextView textView3 = (TextView) findViewById(R.id.textView3);//discription
@@ -120,7 +126,7 @@ public class Main2Activity extends AppCompatActivity {
         textView6.setText(intent1.getStringExtra("start_date"));
         textView8.setText(intent1.getStringExtra("end_date"));
         textView9.setText(intent1.getStringExtra("end_time"));
-        textView11.setText(intent1.getStringExtra("start_time"));
+        textView11.setText(intent1.getStringExtra("start _time"));
 
 
 
@@ -151,8 +157,14 @@ public class Main2Activity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),ARActivity.class);
-                startActivity(intent);//액티비티 띄우기
+                Intent intentAR = new Intent(getApplicationContext(),ARActivity.class);
+                intentAR.putExtra("name", intent1.getStringExtra("name"));
+
+                intentAR.putExtra("gps", gps);
+
+                intentAR.putExtra("latitude", gps2);
+                intentAR.putExtra("longitude", gps1);
+                startActivity(intentAR);//액티비티 띄우기
             }
         });
 

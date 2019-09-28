@@ -404,6 +404,7 @@
 
                 </LinearLayout>
 
+
                 <RelativeLayout
                     android:id="@+id/map_view"
                     android:layout_width="match_parent"
@@ -411,7 +412,6 @@
                     android:layout_gravity="center">
 
                 </RelativeLayout>
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
