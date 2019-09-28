@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -82,8 +83,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-
-        // TODO 맨 처음에 GPS 허가 받는데, 받지 않으면 currentLocation이 null이므로 에러가 떠서 종료됨.
         requestLocationPermission();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();

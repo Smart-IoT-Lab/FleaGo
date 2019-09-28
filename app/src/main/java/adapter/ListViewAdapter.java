@@ -154,6 +154,8 @@ public class ListViewAdapter extends BaseSwipeAdapter implements Filterable {
                 intent1.putExtra("start_location", list.get(position).getStart_location());
                 intent1.putExtra("start_time", list.get(position).getStart_time());
                 intent1.putExtra("week", list.get(position).getWeek());
+                intent1.putExtra("url", list.get(position).getUrl());
+                intent1.putExtra("event_type", list.get(position).getEvent_type());
                 mContext.startActivity(intent1);
 
                 Log.d("TEST position", String.valueOf(position));
@@ -180,6 +182,8 @@ public class ListViewAdapter extends BaseSwipeAdapter implements Filterable {
     public void setImage(final ImageView image, final int position) {
         pathReference = storageRef1.child(list2.get(position).getName() + "/" + list2.get(position).getName() + "_1.jpg");
         //pathReference = storageRef1.child("(건대입구역)/(건대입구역)_1.jpg");
+        Log.d("TEST position", "position : " + position + "  name : " +list2.get(position).getName());
+
         if (pathReference == null)
             storageRef2.child(list2.get(position).getName() + "/" + list2.get(position).getName() + "_1.jpg");
 
