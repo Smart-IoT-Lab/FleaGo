@@ -46,14 +46,10 @@ public class Main2Activity extends AppCompatActivity {
     private Intent intent3;
     ViewFlipper v_flipper;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-
 
         int images[]={R.drawable.blur_img,R.drawable.img1,R.drawable.ic_info};
         v_flipper=findViewById(R.id.v_flipper);
@@ -62,11 +58,9 @@ public class Main2Activity extends AppCompatActivity {
             flipperImages(image);
         }
 
-
         intent1 = getIntent();
         intent2 = getIntent();
         intent3 = getIntent();
-
 
         List<String> gps=(List<String>)intent1.getSerializableExtra("gps");
 
@@ -82,36 +76,33 @@ public class Main2Activity extends AppCompatActivity {
 //        TextView textView7 = (TextView) findViewById(R.id.textView7);//day
         TextView textView8 = (TextView) findViewById(R.id.textView8);//end_Date
         TextView textView9 = (TextView) findViewById(R.id.textView9);//end_time
-//        TextView textView10 = (TextView) findViewById(R.id.textView10);//month
+//      TextView textView10 = (TextView) findViewById(R.id.textView10);//month
         TextView textView11 = (TextView) findViewById(R.id.textView11);//start_time
         TextView textView12 = (TextView) findViewById(R.id.textView12);//월 test
-      //  TextView textView13 = (TextView) findViewById(R.id.textView13);//date test
+
         Button button = (Button) findViewById(R.id.button);
-        Button button2 = (Button)findViewById(R.id.button2);
+        com.google.android.material.floatingactionbutton.FloatingActionButton button2 = (com.google.android.material.floatingactionbutton.FloatingActionButton)findViewById(R.id.button2);
         Button button3 = (Button)findViewById(R.id.button3);
 
         String location= textView5.getText().toString();
 
-
-
-
-        PieChartView pieChartView = findViewById(R.id.chart);
-
-        List<SliceValue> pieData = new ArrayList<>();
-
-        pieData.add(new SliceValue(15, Color.BLUE));
-        pieData.add(new SliceValue(25, Color.GRAY));
-        pieData.add(new SliceValue(10, Color.RED));
-
-        PieChartData pieChartData = new PieChartData(pieData);
-        pieChartView.setPieChartData(pieChartData);
-
-        pieData.add(new SliceValue(15, Color.BLUE).setLabel("운영시간"));
-        pieData.add(new SliceValue(25, Color.GRAY).setLabel("test1"));
-        pieData.add(new SliceValue(10, Color.RED).setLabel("test2"));
-
-        pieChartData.setHasLabels(true);
-        pieChartData.setHasLabels(true).setValueLabelTextSize(17);
+        //그래프
+//        PieChartView pieChartView = findViewById(R.id.chart);
+//        List<SliceValue> pieData = new ArrayList<>();
+//
+//        pieData.add(new SliceValue(15, Color.BLUE));
+//        pieData.add(new SliceValue(25, Color.GRAY));
+//        pieData.add(new SliceValue(10, Color.RED));
+//
+//        PieChartData pieChartData = new PieChartData(pieData);
+//        pieChartView.setPieChartData(pieChartData);
+//
+//        pieData.add(new SliceValue(15, Color.BLUE).setLabel("운영시간"));
+//        pieData.add(new SliceValue(25, Color.GRAY).setLabel("test1"));
+//        pieData.add(new SliceValue(10, Color.RED).setLabel("test2"));
+//
+//        pieChartData.setHasLabels(true);
+//        pieChartData.setHasLabels(true).setValueLabelTextSize(17);
 
 
         MapView mapView = new MapView(this);
@@ -134,16 +125,13 @@ public class Main2Activity extends AppCompatActivity {
         mapView.addPOIItem(marker);
 
 
-
         textView.setText(intent1.getStringExtra("name"));
         textView3.setText(intent1.getStringExtra("discription"));
         textView5.setText(intent1.getStringExtra("start_location"));
         textView6.setText(intent1.getStringExtra("start_date"));
-        textView6.append("~");
         textView8.setText(intent1.getStringExtra("end_date"));
         textView9.setText(intent1.getStringExtra("end_time"));
         textView11.setText(intent1.getStringExtra("start_time"));
-        textView11.append("~");
 
 
 
@@ -162,7 +150,8 @@ public class Main2Activity extends AppCompatActivity {
 */
 
         //textView4.setText(intent1.getStringExtra("page_url"));
-        //길찾기 버튼/
+
+        //길찾기 버튼//
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,7 +161,7 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
 
-      //  button2 = findViewById(R.id.button2); /*페이지 전환버튼*/
+        //ar버튼//
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,7 +170,7 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
 
-        //클립보드복사버튼/
+        //클립보드복사버튼//
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -193,16 +182,12 @@ public class Main2Activity extends AppCompatActivity {
         });
 
 
-
-
-
     }
 
+    //image slider//
     private void flipperImages(int image) {
-
         ImageView imageView=new ImageView(this);
         imageView.setBackgroundResource(image);
-
         v_flipper.addView(imageView);
         v_flipper.setFlipInterval(2000);
         v_flipper.setAutoStart(true);
