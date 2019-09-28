@@ -103,7 +103,8 @@ public class Main2Activity extends AppCompatActivity {
         TextView textView12 = (TextView) findViewById(R.id.textView12);//월 test
 
         Button button = (Button) findViewById(R.id.button);
-        com.google.android.material.floatingactionbutton.FloatingActionButton button2 = (com.google.android.material.floatingactionbutton.FloatingActionButton)findViewById(R.id.button2);
+//        com.google.android.material.floatingactionbutton.FloatingActionButton button2 = (com.google.android.material.floatingactionbutton.FloatingActionButton)findViewById(R.id.button2);
+        TextView button2 = findViewById(R.id.button2);
         Button button3 = (Button)findViewById(R.id.button3);
         textView5.setText(intent1.getStringExtra("start_location"));
         String location= textView5.getText().toString();
