@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.Manifest;
 import android.Manifest.permission;
@@ -73,6 +75,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //타이틀 바에 뒤로가기 버튼
+        //ActionBar actionBar = getActionBar();
+        //actionBar.setDisplayHomeAsUpEnabled(true);
+        //Toolbar toolbar = new Toolbar(this);
+        //setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 
         // TODO 맨 처음에 GPS 허가 받는데, 받지 않으면 currentLocation이 null이므로 에러가 떠서 종료됨.
         requestLocationPermission();
@@ -162,7 +174,6 @@ public class MainActivity extends AppCompatActivity {
     // Menu method
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu) ;
-
         // Searchview 길이 max로
         SearchView searchView = (SearchView)menu.findItem(R.id.action_serach).getActionView();
         searchView.setMaxWidth(Integer.MAX_VALUE);
@@ -191,8 +202,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_serach :
                 Log.d("search bar","qqqqqqqqqqq");
                 return true ;
-            // ...
-            // ...
+            //case R.id.backbar :
+                //return true ;
             default :
                 return super.onOptionsItemSelected(item) ;
         }

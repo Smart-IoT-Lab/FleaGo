@@ -1,5 +1,6 @@
 package com.example.fleago;
 
+import android.app.ActionBar;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -35,9 +36,9 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
-import lecho.lib.hellocharts.model.PieChartData;
+/*import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.model.SliceValue;
-import lecho.lib.hellocharts.view.PieChartView;
+import lecho.lib.hellocharts.view.PieChartView;*/
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -50,6 +51,7 @@ public class Main2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
 
         int images[]={R.drawable.blur_img,R.drawable.img1,R.drawable.ic_info};
         v_flipper=findViewById(R.id.v_flipper);
@@ -215,7 +217,6 @@ public class Main2Activity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item) ;
         }
     }
-
 
 
 }
