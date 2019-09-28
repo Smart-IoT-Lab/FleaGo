@@ -17,22 +17,12 @@
 
         <!-- MAIN CONTENT (지도 들어갈 공간) -->
         <FrameLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
 
-            <TextView
-                android:id="@+id/main"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="?attr/actionBarSize"
-                android:gravity="center"
-                android:text="default"
-                android:clickable="true"
-                android:focusable="false"
-                android:focusableInTouchMode="true"
-                android:textSize="16sp" />
 
         </FrameLayout>
 

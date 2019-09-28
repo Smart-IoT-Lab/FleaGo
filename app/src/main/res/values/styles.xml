@@ -15,4 +15,8 @@
 
     </style>
 
+    <style name="AppThemeBlackAccent">
+        <item name="colorAccent">@color/linkBlack</item>
+    </style>
+
 </resources>
