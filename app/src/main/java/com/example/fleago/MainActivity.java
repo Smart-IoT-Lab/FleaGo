@@ -77,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
         //actionBar.setDisplayHomeAsUpEnabled(true);
         //Toolbar toolbar = new Toolbar(this);
         //setSupportActionBar(toolbar);
-
+        MainFragment fragment  = new MainFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
 
         getSupportActionBar().setIcon(R.drawable.fleagologo);
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
