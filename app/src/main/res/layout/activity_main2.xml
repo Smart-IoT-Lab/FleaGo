@@ -13,6 +13,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_weight="1"
+    android:background="@color/seoul_default_light"
     android:scrollbars="none">
 
     <LinearLayout
@@ -34,13 +35,11 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@drawable/shadow2"/>
+            android:layout_height="2dp"/>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="12.3dp"
-            android:background="#f6f6f6"/>
+            android:layout_height="12.3dp"/>
 
         <TextView
             android:id="@+id/textView"
@@ -51,6 +50,7 @@
             android:letterSpacing="0.03"
             android:textSize="15sp"
             android:textStyle="bold"
+            android:textColor="@color/seoul_default"
             android:layout_marginLeft="14dp"/>
 
 
@@ -73,13 +73,11 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@drawable/shadow2"/>
+            android:layout_height="2dp"/>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="12.3dp"
-            android:background="#f6f6f6"/>
+            android:layout_height="12.3dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -89,7 +87,7 @@
             android:paddingTop="13.3dp"
             android:text="일정"
             android:textStyle="bold"
-            android:textColor="#069661"
+            android:textColor="@color/seoul_default"
             android:textSize="11.7sp"
             />
         <LinearLayout
@@ -111,13 +109,13 @@
                 android:paddingBottom="8.3dp"
                 android:text="날짜"
                 android:id="@+id/textView6"
-                android:textColor="#7a7f85"
+                android:textColor="@color/seoul_default_light"
                 android:textSize="13sp" />
             <View
                 android:layout_width="0.5dp"
                 android:layout_height="80dp"
                 android:layout_centerInParent="true"
-                android:background="#7a7f85"/>
+                android:background="@color/seoul_default"/>
             <TextView
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
@@ -131,7 +129,7 @@
                 android:paddingTop="7.7dp"
                 android:paddingBottom="8.3dp"
                 android:text="시간"
-                android:textColor="#7a7f85"
+                android:textColor="@color/seoul_default_light"
                 android:textSize="13sp" />
         </LinearLayout>
         <!--        <AnalogClock-->
@@ -140,13 +138,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@drawable/shadow2"/>
+            android:layout_height="0.5dp"
+            android:layout_marginHorizontal="5dp"
+            android:background="@color/seoul_default_lightest"/>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="12.3dp"
-            android:background="#f6f6f6"/>
+            android:layout_height="12.3dp"/>
 
 
         <TextView
@@ -157,7 +155,7 @@
             android:paddingTop="13.3dp"
             android:text="소개"
             android:textStyle="bold"
-            android:textColor="#069661"
+            android:textColor="@color/seoul_default"
             android:textSize="11.7sp"
             />
 
@@ -190,7 +188,7 @@
                 android:paddingTop="7.7dp"
                 android:paddingBottom="8.3dp"
                 android:text="TextView"
-                android:textColor="#7a7f85"
+                android:textColor="@color/seoul_default_light"
                 android:textSize="13sp"
                 tools:layout_conversion_absoluteHeight="95dp"
                 tools:layout_editor_absoluteY="378dp"
@@ -206,7 +204,7 @@
             android:fontFamily="@font/georgia"
             android:paddingTop="13.3dp"
             android:text="홈페이지"
-            android:textColor="#069661"
+            android:textColor="@color/seoul_default"
             android:textSize="11.7sp"
             android:textStyle="bold"
             tools:layout_conversion_absoluteHeight="29dp"
@@ -240,12 +238,12 @@
                 android:layout_height="wrap_content"
                 android:autoLink="web"
                 android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/seoul_default_light"
                 android:linksClickable="true"
                 android:paddingLeft="0dp"
                 android:paddingTop="7.7dp"
                 android:paddingBottom="8.3dp"
                 android:text="url"
-                android:textColor="#7a7f85"
                 android:textSize="13sp"
                 tools:layout_conversion_absoluteHeight="34dp"
                 tools:layout_conversion_absoluteWidth="141dp"
@@ -255,13 +253,13 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@drawable/shadow2"/>
+            android:layout_height="0.5dp"
+            android:layout_marginHorizontal="5dp"
+            android:background="@color/seoul_default_lightest"/>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="12.3dp"
-            android:background="#f6f6f6"/>
+            android:layout_height="12.3dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -270,7 +268,7 @@
             android:fontFamily="@font/georgia"
             android:paddingTop="13.3dp"
             android:text="위치"
-            android:textColor="#069661"
+            android:textColor="@color/seoul_default"
             android:textSize="11.7sp"
             android:textStyle="bold" />
 
@@ -344,18 +342,17 @@
                 android:layout_height="wrap_content"
                 android:text="길찾기"
                 android:onClick="onButton1Clicked"/>
+
         </RelativeLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@drawable/shadow2"/>
+            android:layout_height="2dp"/>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="12.3dp"
-            android:background="#f6f6f6"/>
+            android:layout_height="12.3dp"/>
 
 
     </LinearLayout>
