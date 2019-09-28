@@ -6,6 +6,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.Intent;
 import android.Manifest;
 import android.Manifest.permission;
 import android.app.Activity;
@@ -16,9 +17,13 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.util.Attributes;
@@ -154,6 +159,45 @@ public class MainActivity extends AppCompatActivity {
         // 다음 달 Firebase reference
         myRef2.addValueEventListener(evl);
     }
+    // Menu method
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu) ;
+
+        // Searchview 길이 max로
+        SearchView searchView = (SearchView)menu.findItem(R.id.action_serach).getActionView();
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+        // Hint
+        searchView.setQueryHint("ex) 뚝섬 ");
+
+        //리스너 구현
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String newText) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                mAdapter.getFilter().filter(query);
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
+    }
+    // Search bar method
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_serach :
+                Log.d("search bar","qqqqqqqqqqq");
+                return true ;
+            // ...
+            // ...
+            default :
+                return super.onOptionsItemSelected(item) ;
+        }
+    }
+
 
 
     LocationListener gpsLocationListener = new LocationListener() {
