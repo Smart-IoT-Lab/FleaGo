@@ -102,7 +102,7 @@ public class AROverlayView extends View {
 
                 Bitmap image;
                 Resources r = context.getResources();
-                image = BitmapFactory.decodeResource(r, R.drawable.siminlogo);
+                image = BitmapFactory.decodeResource(r, R.drawable.fleago);
 
                 int viewHeight = 100;
                 float width = image.getWidth();
