@@ -365,17 +365,23 @@
 
             <Button
                 android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="66dp"
+                android:layout_height="32dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/button"
+                android:onClick="onButton3Clicked"
                 android:text="복사"
-                android:onClick="onButton3Clicked"/>
+                android:textColor="#ffffff" />
+
             <Button
                 android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="66dp"
+                android:layout_height="32dp"
+                android:background="@drawable/button"
+                android:onClick="onButton1Clicked"
                 android:text="길찾기"
-                android:onClick="onButton1Clicked" />
-             </LinearLayout>
+                android:textColor="#ffffff" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
