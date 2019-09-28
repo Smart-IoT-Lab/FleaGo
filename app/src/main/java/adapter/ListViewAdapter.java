@@ -154,6 +154,8 @@ public class ListViewAdapter extends BaseSwipeAdapter implements Filterable {
                 intent1.putExtra("start_location", list.get(position).getStart_location());
                 intent1.putExtra("start_time", list.get(position).getStart_time());
                 intent1.putExtra("week", list.get(position).getWeek());
+                intent1.putExtra("url", list.get(position).getUrl());
+                intent1.putExtra("event_type", list.get(position).getEvent_type());
                 mContext.startActivity(intent1);
 
                 Log.d("TEST position", String.valueOf(position));

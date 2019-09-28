@@ -77,8 +77,8 @@ public class Main2Activity extends AppCompatActivity {
         final TextView textView5 = (TextView) findViewById(R.id.textView5);//start_location
         LinearLayout linearlayout1 = (LinearLayout)findViewById(R.id.linearlayout1);//event_type
         TextView textView6 = (TextView) findViewById(R.id.textView6);//start_date
-        TextView textView8 = (TextView) findViewById(R.id.textView8);//end_Date
-        TextView textView9 = (TextView) findViewById(R.id.textView9);//end_time
+       // TextView textView8 = (TextView) findViewById(R.id.textView8);//end_Date
+       // TextView textView9 = (TextView) findViewById(R.id.textView9);//end_time
         TextView textView11 = (TextView) findViewById(R.id.textView11);//start_time
         TextView textView12 = (TextView) findViewById(R.id.textView12);//월 test
 
@@ -117,25 +117,23 @@ public class Main2Activity extends AppCompatActivity {
         textView.setText(intent1.getStringExtra("name"));
         textView3.setText(intent1.getStringExtra("discription"));
         textView4.setText(intent1.getStringExtra("url"));
-        textView6.setText(intent1.getStringExtra("start_date"));
-        textView8.setText(intent1.getStringExtra("end_date"));
-        textView9.setText(intent1.getStringExtra("end_time"));
-        textView11.setText(intent1.getStringExtra("start_time"));
+        textView6.setText(intent1.getStringExtra("start_date")+" ~ "+intent1.getStringExtra("end_date"));
+        //textView8.setText(intent1.getStringExtra("end_date"));
+        //textView9.setText(intent1.getStringExtra("end_time"));
+        textView11.setText(intent1.getStringExtra("start_time")+" ~ "+intent1.getStringExtra("end_time"));
 
 
+        List<String> event_type=(List<String>)intent1.getSerializableExtra("event_type");
+        linearlayout1.removeAllViews();
+        for(int i = 0; i < event_type.size(); i++){
+            TextView textView01 = new TextView(getApplicationContext());
+            textView01.setText("#"+event_type.get(i)+" ");  //배열리스트 이용
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
 
-//
-//        List<String> event_type=(List<String>)intent1.getSerializableExtra("event_type");
-//        linearlayout1.removeAllViews();
-//        for(int i = 0; i < event_type.size(); i++){
-//            TextView textView01 = new TextView(getApplicationContext());
-//            textView01.setText(event_type.get(i));  //배열리스트 이용
-//            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-//                    LinearLayout.LayoutParams.MATCH_PARENT,
-//                    LinearLayout.LayoutParams.WRAP_CONTENT);
-//
-//            linearlayout1.addView(textView01, params);  //linearLayout01 위에 생성
-//        }
+            linearlayout1.addView(textView01, params);//linearLayout01 위에 생성
+        }
 
         //*길찾기 버튼*//
         button.setOnClickListener(new View.OnClickListener() {
