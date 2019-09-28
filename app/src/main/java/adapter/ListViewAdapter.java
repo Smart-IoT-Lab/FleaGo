@@ -25,6 +25,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
@@ -44,11 +45,13 @@ public class ListViewAdapter extends BaseSwipeAdapter implements Filterable {
     //하나의 Storage와 연동되어 있는 경우, getInstance()의 파라미터는 공백으로 두어도 됨
     //하나의 앱이 두개 이상의 Storage와 연동이 되어있 경우, 원하는 저장소의 스킴을 입력
     //getInstance()의 파라미터는 firebase console에서 확인 가능('gs:// ... ')
-    FirebaseStorage storage = FirebaseStorage.getInstance();
+    FirebaseStorage storage = FirebaseStorage.getInstance("gs://fleago-8b03c.appspot.com");
     //생성된 FirebaseStorage를 참조하는 storage 생성
-    StorageReference storageRef = storage.getReference();
+    StorageReference storageRef1 = storage.getReference("image/9월/");
+    StorageReference storageRef2 = storage.getReference("image/10월/");
+    StorageReference pathReference;
     //Storage 내부의 images 폴더 안의 image.jpg 파일명을 가리키는 참조 생성
-    StorageReference pathReference = storageRef.child("/FLEAGO.png");
+    //StorageReference pathReference = storageRef.child("/FLEAGO.png");
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser user = mAuth.getCurrentUser();
     private String urii;
@@ -79,6 +82,7 @@ public class ListViewAdapter extends BaseSwipeAdapter implements Filterable {
 
         // 리스트의 아이템 표현하는데 item_view.xml 사용
         return LayoutInflater.from(mContext).inflate(R.layout.item_view, null);
+
     }
 
     @Override
@@ -87,7 +91,7 @@ public class ListViewAdapter extends BaseSwipeAdapter implements Filterable {
 
         // 이미지 출력
         ImageView image = (ImageView) convertView.findViewById(R.id.marketImage);
-        setImage(image);
+        setImage(image, position);
 
         // 제목 출력
         ((TextView) convertView.findViewById(R.id.text_data)).setText(list.get(position).getName());
@@ -173,21 +177,26 @@ public class ListViewAdapter extends BaseSwipeAdapter implements Filterable {
         return position;
     }
 
-    public void setImage(final ImageView image) {
+    public void setImage(final ImageView image, final int position) {
+        pathReference = storageRef1.child(list2.get(position).getName() + "/" + list2.get(position).getName() + "_1.jpg");
+        //pathReference = storageRef1.child("(건대입구역)/(건대입구역)_1.jpg");
+        if (pathReference == null)
+            storageRef2.child(list2.get(position).getName() + "/" + list2.get(position).getName() + "_1.jpg");
+
+
         pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                urii = uri.toString();
-//                Log.d("uri", urii);
                 Picasso.with(
                         mContext).
-                        load(urii).
+                        load(uri).
                         fit().
                         centerInside().
                         into(image);
             }
-        });
-    }
+    });
+
+}
 
     @Override
     public Filter getFilter() {

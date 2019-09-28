@@ -1,9 +1,11 @@
 package com.example.fleago;
 
+import android.app.ActionBar;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -20,13 +22,23 @@ import android.widget.ViewFlipper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
+
+/*import lecho.lib.hellocharts.model.PieChartData;
+import lecho.lib.hellocharts.model.SliceValue;
+import lecho.lib.hellocharts.view.PieChartView;*/
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -34,12 +46,6 @@ public class Main2Activity extends AppCompatActivity {
     private Intent intent2;
     private Intent intent3;
     ViewFlipper v_flipper;
-
-//    long now = System.currentTimeMillis();
-//    Date date= new Date(now);
-//    SimpleDateFormat sdf= new SimpleDateFormat("M월");
-//    String formatDate = sdf.format(date);
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +64,48 @@ public class Main2Activity extends AppCompatActivity {
         intent2 = getIntent();
         intent3 = getIntent();
 
-
         List<String> gps=(List<String>)intent1.getSerializableExtra("gps");
 
-        double gps1 = Double.parseDouble(gps.get(0));
-        double gps2 = Double.parseDouble(gps.get(1));
+        final double gps1 = Double.parseDouble(gps.get(0));
+        final double gps2 = Double.parseDouble(gps.get(1));
+
+        TextView textView = (TextView) findViewById(R.id.textView);//name
+        TextView textView3 = (TextView) findViewById(R.id.textView3);//discription
+        TextView textView4 = (TextView) findViewById(R.id.textView4);//url
+        final TextView textView5 = (TextView) findViewById(R.id.textView5);//start_location
+        LinearLayout linearlayout1 = (LinearLayout)findViewById(R.id.linearlayout1);//event_type
+        TextView textView6 = (TextView) findViewById(R.id.textView6);//start_date
+//        TextView textView7 = (TextView) findViewById(R.id.textView7);//day
+        TextView textView8 = (TextView) findViewById(R.id.textView8);//end_Date
+        TextView textView9 = (TextView) findViewById(R.id.textView9);//end_time
+//      TextView textView10 = (TextView) findViewById(R.id.textView10);//month
+        TextView textView11 = (TextView) findViewById(R.id.textView11);//start_time
+        TextView textView12 = (TextView) findViewById(R.id.textView12);//월 test
+
+        Button button = (Button) findViewById(R.id.button);
+        com.google.android.material.floatingactionbutton.FloatingActionButton button2 = (com.google.android.material.floatingactionbutton.FloatingActionButton)findViewById(R.id.button2);
+        Button button3 = (Button)findViewById(R.id.button3);
+
+        String location= textView5.getText().toString();
+
+        //그래프
+//        PieChartView pieChartView = findViewById(R.id.chart);
+//        List<SliceValue> pieData = new ArrayList<>();
+//
+//        pieData.add(new SliceValue(15, Color.BLUE));
+//        pieData.add(new SliceValue(25, Color.GRAY));
+//        pieData.add(new SliceValue(10, Color.RED));
+//
+//        PieChartData pieChartData = new PieChartData(pieData);
+//        pieChartView.setPieChartData(pieChartData);
+//
+//        pieData.add(new SliceValue(15, Color.BLUE).setLabel("운영시간"));
+//        pieData.add(new SliceValue(25, Color.GRAY).setLabel("test1"));
+//        pieData.add(new SliceValue(10, Color.RED).setLabel("test2"));
+//
+//        pieChartData.setHasLabels(true);
+//        pieChartData.setHasLabels(true).setValueLabelTextSize(17);
+
 
         MapView mapView = new MapView(this);
         ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
@@ -76,7 +119,7 @@ public class Main2Activity extends AppCompatActivity {
         mapView.zoomOut(true);//줌아웃
         //마커
         MapPOIItem marker = new MapPOIItem();
-        marker.setItemName("market");
+        marker.setItemName(location);
         marker.setTag(0);
         marker.setMapPoint(mapPoint);
         marker.setMarkerType(MapPOIItem.MarkerType.BluePin);
@@ -84,29 +127,15 @@ public class Main2Activity extends AppCompatActivity {
         mapView.addPOIItem(marker);
 
 
-        TextView textView = (TextView) findViewById(R.id.textView);//name
-        TextView textView3 = (TextView) findViewById(R.id.textView3);//discription
-        TextView textView4 = (TextView) findViewById(R.id.textView4);//url
-        TextView textView5 = (TextView) findViewById(R.id.textView5);//start_location
-        LinearLayout linearlayout1 = (LinearLayout)findViewById(R.id.linearlayout1);//event_type
-        TextView textView6 = (TextView) findViewById(R.id.textView6);//start_date
-//        TextView textView7 = (TextView) findViewById(R.id.textView7);//day
-//        TextView textView8 = (TextView) findViewById(R.id.textView8);//end_Date
-//        TextView textView9 = (TextView) findViewById(R.id.textView9);//end_time
-//        TextView textView10 = (TextView) findViewById(R.id.textView10);//month
-        TextView textView11 = (TextView) findViewById(R.id.textView11);//start_time
-        TextView textView12 = (TextView) findViewById(R.id.textView12);//월 test
-
-        Button button = (Button) findViewById(R.id.button);
-        com.google.android.material.floatingactionbutton.FloatingActionButton button2 = (com.google.android.material.floatingactionbutton.FloatingActionButton)findViewById(R.id.button2);
-
         textView.setText(intent1.getStringExtra("name"));
         textView3.setText(intent1.getStringExtra("discription"));
         textView5.setText(intent1.getStringExtra("start_location"));
         textView6.setText(intent1.getStringExtra("start_date"));
-
+        textView8.setText(intent1.getStringExtra("end_date"));
+        textView9.setText(intent1.getStringExtra("end_time"));
         textView11.setText(intent1.getStringExtra("start_time"));
-      //  textView12.setText(formatDate);
+
+
 
 /*event_type 출력
         List<String> event_type=(List<String>)intent1.getSerializableExtra("event_type");
@@ -124,7 +153,17 @@ public class Main2Activity extends AppCompatActivity {
 
         //textView4.setText(intent1.getStringExtra("page_url"));
 
-      //  button2 = findViewById(R.id.button2); /*페이지 전환버튼*/
+        //길찾기 버튼//
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent(Intent.ACTION_VIEW);
+                intent2.setData(Uri.parse("https://map.kakao.com/?"));
+                startActivity(intent2);
+            }
+        });
+
+        //ar버튼//
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,33 +172,24 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
 
-
-
-        button.setOnClickListener(new View.OnClickListener() {
+        //클립보드복사버튼//
+        button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent2 = new Intent(Intent.ACTION_VIEW);
-                intent2.setData(Uri.parse("daummaps://open?page=routeSearch"));
-                startActivity(intent2);
+                ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                ClipData clipData = ClipData.newPlainText("위치복사",textView5.getText().toString() );
+                clipboardManager.setPrimaryClip(clipData);
+                Toast.makeText(getApplication(), "위치가 복사되었습니다.",Toast.LENGTH_LONG).show();
             }
         });
-
-        String location= textView5.getText().toString();
-
-
-        ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-        ClipData clipData = ClipData.newPlainText("위치복사", location);
-        clipboardManager.setPrimaryClip(clipData);
-        Toast.makeText(getApplication(), "위치가 복사되었습니다.",Toast.LENGTH_LONG).show();
 
 
     }
 
+    //image slider//
     private void flipperImages(int image) {
-
         ImageView imageView=new ImageView(this);
         imageView.setBackgroundResource(image);
-
         v_flipper.addView(imageView);
         v_flipper.setFlipInterval(2000);
         v_flipper.setAutoStart(true);
@@ -185,7 +215,6 @@ public class Main2Activity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item) ;
         }
     }
-
 
 
 }
