@@ -15,7 +15,7 @@ public class Markets {
     private String start_location;
     private String start_time;
     private Integer week;
-
+    private String url;
     // not Firebase
     private int distance;
 
@@ -59,9 +59,13 @@ public class Markets {
     public Integer getWeek() { return week; }
     public void setWeek(Integer week) { this.week = week; }
 
+    public String getUrl() { return url; }
+
+    public void setUrl(String url) { this.url = url; }
+
     public Markets(){ }
 
-    public Markets(String day,String discription, String end_time, String end_date, ArrayList<String> gps, String month, String name, String start_date, String start_location, String start_time, int week){
+    public Markets(String day,String discription, String end_time, String end_date, ArrayList<String> gps, String month, String name, String start_date, String start_location, String start_time, int week, String url){
 
         this.day=day;
         this.discription=discription;
@@ -74,6 +78,8 @@ public class Markets {
         this.start_location=start_location;
         this.start_time=start_time;
         this.week=week;
+        this.url=url;
+
     }
 
     public String toString() {
