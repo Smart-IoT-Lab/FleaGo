@@ -15,6 +15,7 @@
     <uses-feature android:name="android.hardware.camera"/>
 
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -25,6 +26,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:icon">
+        <uses-library android:name="com.google.android.maps"/>
         <activity android:name=".splash_screen">
             <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -58,6 +60,11 @@
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="dc74db3ed57275a241ad8da6e1c8bc0c" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBfDCr14Euqv0ffy99pRoxR1cgmaM2trKc"/>
+
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/actions_menu" />
