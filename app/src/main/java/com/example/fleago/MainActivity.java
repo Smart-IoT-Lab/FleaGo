@@ -140,7 +140,8 @@ public class MainActivity extends AppCompatActivity {
                 final ListView lv = (ListView) findViewById(R.id.marketList);
                 Log.d("TEST market list size", "value : " + list.size());
 
-                mAdapter = new ListViewAdapter(MainActivity.this, list);
+                // Main2 로 위치 전달
+                mAdapter = new ListViewAdapter(MainActivity.this, list, currentLocation);
                 lv.setAdapter(mAdapter);
                 mAdapter.setMode(Attributes.Mode.Single);
 

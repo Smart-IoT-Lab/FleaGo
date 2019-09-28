@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -152,13 +153,25 @@ public class Main2Activity extends AppCompatActivity {
             linearlayout1.addView(textView01, params);//linearLayout01 위에 생성
         }
 
+        // 나의 GPS
+        final ArrayList<Double> my_location =(ArrayList<Double>)intent1.getSerializableExtra("my location");
+        for (Double s : my_location) {
+            Log.d("TEST location", "me : " + s);
+        }
         //*길찾기 버튼*//
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent2 = new Intent(Intent.ACTION_VIEW);
-                intent2.setData(Uri.parse("https://map.kakao.com/?"));
-                startActivity(intent2);
+
+                try {
+                    intent2.setData(Uri.parse("daummaps://route?sp=" + my_location.get(0) + "," + my_location.get(1) + "&ep= + " + gps2 + "," + gps1 + "&by=PUBLICTRANSIT"));
+                    startActivity(intent2);
+                } catch(Exception e) {
+                    e.printStackTrace();
+                    intent2.setData(Uri.parse("market://details?id=net.daum.android.map"));
+                    startActivity(intent2);
+                }
             }
         });
 
@@ -187,8 +200,6 @@ public class Main2Activity extends AppCompatActivity {
                 Toast.makeText(getApplication(), "위치가 복사되었습니다.",Toast.LENGTH_LONG).show();
             }
         });
-
-
     }
 
     //*image slider*//
