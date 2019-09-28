@@ -126,11 +126,11 @@ public class AROverlayView extends View {
 
                 Bitmap sizingBmp = Bitmap.createScaledBitmap(image, (int) width, (int) height, true);
                 //canvas.drawCircle(x, y, radius, paint);
-                canvas.drawText(arPoints.get(i).getName(), x + ( 90 * arPoints.get(i).getName().length() / 2), y + 180, paint);
+                canvas.drawText(arPoints.get(i).getName(), x + 420, y + 180, paint);
                 if(too_long)
-                    canvas.drawText(String.format("%.2f",distance) + "KM", x + ( 90 *arPoints.get(i).getName().length() / 2), y + 380 , paint);
+                    canvas.drawText(String.format("%.2f",distance) + "KM", x + 420, y + 380 , paint);
                 else
-                    canvas.drawText(((int)distance)+ "M", x + ( 90 *arPoints.get(i).getName().length() / 2), y + 380 , paint);
+                    canvas.drawText(((int)distance)+ "M", x + 420, y + 380 , paint);
                 //canvas.drawText(arPoints.get(i).getName(), x + (280 * arPoints.get(i).getName().length() / 2), y + 180, paint);
                 //canvas.drawText((int)distance + "M", x + (280 * arPoints.get(i).getName().length() / 2), y + 380 , paint);
 
