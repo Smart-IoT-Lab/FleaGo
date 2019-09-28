@@ -33,6 +33,7 @@ import com.google.maps.android.data.kml.KmlLayer;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -87,10 +88,10 @@ public class MainFragment extends Fragment {
     }
     private void retrieveFileFromResource(GoogleMap mMap) {
         try {
-            KmlLayer kmlLayer = new KmlLayer(mMap, R.raw.taker_fusiontable_seoul, this.getContext());
+            KmlLayer kmlLayer = new KmlLayer(mMap, R.raw.taker_fusiontable_seoul, getActivity().getApplicationContext());
             kmlLayer.addLayerToMap();
 
-            Log.d("dda", kmlLayer.getContainers().toString());
+            Log.d("fdda", kmlLayer.getContainers().toString());
 
             //moveCameraToKml(kmlLayer);
 
@@ -134,15 +135,15 @@ public class MainFragment extends Fragment {
         mapFragment.getMapAsync(new OnMapReadyCallback() {
 
             @Override
-            public void onMapReady(final GoogleMap gmMap) {
+            public void onMapReady(final GoogleMap gMap) {
 
-                gmMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-                gmMap.setMinZoomPreference(10);
-                gmMap.setMaxZoomPreference(13);
+                gMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                gMap.setMinZoomPreference(10);
+                gMap.setMaxZoomPreference(13);
 
-                retrieveFileFromResource(gmMap);
+                gMap.clear(); //clear old markers
 
-                gmMap.clear(); //clear old markers
+                retrieveFileFromResource(gMap);
 
                 CameraPosition googlePlex = CameraPosition.builder()
                         .target(new LatLng(37.543545, 126.981061))
@@ -151,21 +152,21 @@ public class MainFragment extends Fragment {
                         .tilt(45)
                         .build();
 
-                gmMap.animateCamera(CameraUpdateFactory.newCameraPosition(googlePlex), 10, null);
+                gMap.animateCamera(CameraUpdateFactory.newCameraPosition(googlePlex), 10, null);
 
-                gmMap.addMarker(new MarkerOptions()
+                gMap.addMarker(new MarkerOptions()
                         .position(new LatLng(37.543333,126.981111))
                         .title("서울 중앙인데요")
                         .snippet("I'm center marker"));
 
-                gmMap.addMarker(new MarkerOptions()
+                gMap.addMarker(new MarkerOptions()
                         .position(new LatLng(37.443545, 126.981061))
                         .title("경기돈데요")
                         .snippet("서울인줄 알았죠?"));
 
-                mClusterManager = new ClusterManager<>(getContext(), gmMap);
-                gmMap.setOnCameraIdleListener(mClusterManager);
-                gmMap.setOnMarkerClickListener(mClusterManager);
+                mClusterManager = new ClusterManager<>(getContext(), gMap);
+                gMap.setOnCameraIdleListener(mClusterManager);
+                gMap.setOnMarkerClickListener(mClusterManager);
                 LatLng seoul_center = new LatLng(37.543545, 126.981061);//   +0.038ed          +0.03                      -0.04           -0.03
 
                 //ClusterManager의 item들인 마커들+클러스터 클릭리스너
@@ -178,8 +179,8 @@ public class MainFragment extends Fragment {
                         Log.d("cluster_position_lat", String.valueOf(position.latitude));
                         Log.d("cluster_position_lng", String.valueOf(position.longitude));
                         seoul_bounds = get_bounds(11);
-                        gmMap.setLatLngBoundsForCameraTarget(seoul_bounds);
-                        gmMap.animateCamera(CameraUpdateFactory.newLatLngZoom(cluster_center, 11));
+                        gMap.setLatLngBoundsForCameraTarget(seoul_bounds);
+                        gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(cluster_center, 11));
                         return true;
                     }
                 });
@@ -192,31 +193,31 @@ public class MainFragment extends Fragment {
                         Log.d("item_position_lat", String.valueOf(position.latitude));
                         Log.d("item_position_lng", String.valueOf(position.longitude));
                         seoul_bounds = get_bounds(12);
-                        gmMap.setLatLngBoundsForCameraTarget(seoul_bounds);
-                        gmMap.animateCamera(CameraUpdateFactory.newLatLngZoom(item_center, 12));
+                        gMap.setLatLngBoundsForCameraTarget(seoul_bounds);
+                        gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(item_center, 12));
                         return true;
                     }
                 });
 
                 seoul_bounds = new LatLngBounds(new LatLng(sq_h_center - 0.00001, sq_w_center - 0.00001), new LatLng(sq_h_center + 0.00001, sq_w_center + 0.00001));
-                gmMap.setLatLngBoundsForCameraTarget(seoul_bounds);
+                gMap.setLatLngBoundsForCameraTarget(seoul_bounds);
 
-                gmMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
+                gMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
                     @Override
                     public void onCameraMove() {
 
-                        float zoom_lv = gmMap.getCameraPosition().zoom;
+                        float zoom_lv = gMap.getCameraPosition().zoom;
                         Log.e("Zoom_level: ", String.valueOf(zoom_lv));
                         if (zoom_lv <= 13) {
                             seoul_bounds = get_bounds(zoom_lv);
-                            gmMap.setLatLngBoundsForCameraTarget(seoul_bounds);
+                            gMap.setLatLngBoundsForCameraTarget(seoul_bounds);
                             Log.e("Zoom_e: ", String.valueOf(seoul_bounds.toString()));
                         }
                     }
                 });
 
-                gmMap.setLatLngBoundsForCameraTarget(seoul_bounds);
-                gmMap.moveCamera(CameraUpdateFactory.newLatLngZoom(seoul_center, 10));
+                gMap.setLatLngBoundsForCameraTarget(seoul_bounds);
+                gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(seoul_center, 10));
             }
         });
 
