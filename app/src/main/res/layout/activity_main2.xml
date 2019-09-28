@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,7 +12,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical">
 
-<ScrollView
+    <ScrollView
     android:id="@+id/ScrollView1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -31,7 +35,9 @@
             android:layout_height="200dp"
             android:id="@+id/v_flipper"
             android:layout_centerHorizontal="true"
-            />
+            >
+
+        </ViewFlipper>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,14 +48,17 @@
             android:layout_height="12.3dp"/>
 
         <TextView
+            android:layout_marginHorizontal="20dp"
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/roboto_medium"
             android:letterSpacing="0.03"
-            android:textSize="15sp"
+            android:textSize="30dp"
             android:textStyle="bold"
+            android:text="title"
+            android:gravity="center"
             android:textColor="@color/seoul_default"
             android:layout_marginLeft="14dp"/>
 
@@ -76,6 +85,7 @@
             android:layout_height="2dp"/>
 
         <View
+            android:layout_marginHorizontal="20dp"
             android:layout_width="match_parent"
             android:layout_height="12.3dp"/>
 
@@ -143,6 +153,7 @@
             android:background="@color/seoul_default_lightest"/>
 
         <View
+            android:layout_marginHorizontal="20dp"
             android:layout_width="match_parent"
             android:layout_height="12.3dp"/>
 
@@ -162,12 +173,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="14dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginHorizontal="20dp"
             android:orientation="horizontal"
             android:id="@+id/linearLayout">
 
-            <ImageView
+            <!--<ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="0dp"
@@ -177,7 +187,7 @@
                 tools:layout_conversion_absoluteHeight="31dp"
                 tools:layout_editor_absoluteY="374dp"
                 tools:layout_editor_absoluteX="28dp"
-                tools:layout_conversion_absoluteWidth="13dp" />
+                tools:layout_conversion_absoluteWidth="13dp" />-->
 
             <TextView
                 android:id="@+id/textView3"
@@ -217,11 +227,11 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="14dp"
+            android:layout_marginHorizontal="20dp"
             android:orientation="horizontal"
             tools:ignore="DuplicateIds">
 
-            <ImageView
+           <!-- <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="0dp"
@@ -231,7 +241,7 @@
                 tools:layout_conversion_absoluteHeight="31dp"
                 tools:layout_conversion_absoluteWidth="13dp"
                 tools:layout_editor_absoluteX="244dp"
-                tools:layout_editor_absoluteY="374dp" />
+                tools:layout_editor_absoluteY="374dp" />-->
 
             <TextView
                 android:id="@+id/textView4"
@@ -259,6 +269,7 @@
             android:background="@color/seoul_default_lightest"/>
 
         <View
+            android:layout_marginHorizontal="20dp"
             android:layout_width="match_parent"
             android:layout_height="12.3dp"/>
 
@@ -276,7 +287,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="14dp"
+            android:layout_marginHorizontal="20dp"
             android:orientation="horizontal">
 
             <TextView
@@ -313,6 +324,7 @@
                 />
 
 
+
         </LinearLayout>
 
         <LinearLayout
@@ -330,11 +342,11 @@
 
 
 
-
         <RelativeLayout
             android:id="@+id/map_view"
-            android:layout_width="400dp"
-            android:layout_height="200dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
             android:layout_gravity="center">
 
             <Button
@@ -342,6 +354,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="길찾기"
+                android:textColor="#ffffff"
+                android:background="@color/seoul_default_light"
                 android:onClick="onButton1Clicked"/>
 
         </RelativeLayout>
@@ -359,11 +373,27 @@
     </LinearLayout>
 </ScrollView>
 
+    <!--<LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
     <Button
         android:id="@+id/button2"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="AR View"
+        android:background="@color/seoul_default_light"
         tools:context=".Main2Activity" />
-
+    </LinearLayout>-->
 </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="20dp"
+        app:fabCustomSize="70dp"
+        app:srcCompat="@drawable/ic_launcher"
+        app:backgroundTint="@color/seoul_default_light"
+        android:contentDescription="hi" />
+</FrameLayout>

@@ -97,7 +97,7 @@ public class Main2Activity extends AppCompatActivity {
         TextView textView12 = (TextView) findViewById(R.id.textView12);//월 test
 
         Button button = (Button) findViewById(R.id.button);
-        Button button2 = (Button)findViewById(R.id.button2);
+        com.google.android.material.floatingactionbutton.FloatingActionButton button2 = (com.google.android.material.floatingactionbutton.FloatingActionButton)findViewById(R.id.button2);
 
         textView.setText(intent1.getStringExtra("name"));
         textView3.setText(intent1.getStringExtra("discription"));
