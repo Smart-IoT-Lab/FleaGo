@@ -36,9 +36,11 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
-/*import lecho.lib.hellocharts.model.PieChartData;
+import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.model.SliceValue;
-import lecho.lib.hellocharts.view.PieChartView;*/
+import lecho.lib.hellocharts.view.PieChartView;
+
+
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -87,28 +89,30 @@ public class Main2Activity extends AppCompatActivity {
         Button button = (Button) findViewById(R.id.button);
         com.google.android.material.floatingactionbutton.FloatingActionButton button2 = (com.google.android.material.floatingactionbutton.FloatingActionButton)findViewById(R.id.button2);
         Button button3 = (Button)findViewById(R.id.button3);
+        textView5.setText(intent1.getStringExtra("start_location"));
 
         String location= textView5.getText().toString();
 
-        //그래프
+
+
+        //그래프//
 //        PieChartView pieChartView = findViewById(R.id.chart);
 //        List<SliceValue> pieData = new ArrayList<>();
 //
 //        pieData.add(new SliceValue(15, Color.BLUE));
 //        pieData.add(new SliceValue(25, Color.GRAY));
-//        pieData.add(new SliceValue(10, Color.RED));
 //
 //        PieChartData pieChartData = new PieChartData(pieData);
 //        pieChartView.setPieChartData(pieChartData);
 //
-//        pieData.add(new SliceValue(15, Color.BLUE).setLabel("운영시간"));
-//        pieData.add(new SliceValue(25, Color.GRAY).setLabel("test1"));
-//        pieData.add(new SliceValue(10, Color.RED).setLabel("test2"));
+//        pieData.add(new SliceValue(15, Color.GREEN).setLabel("opening hour"));
+//        pieData.add(new SliceValue(25, Color.GRAY).setLabel("closing hour"));
 //
 //        pieChartData.setHasLabels(true);
-//        pieChartData.setHasLabels(true).setValueLabelTextSize(17);
+//        pieChartData.setHasLabels(true).setValueLabelTextSize(100);
 
 
+        //*지도*//
         MapView mapView = new MapView(this);
         ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
@@ -119,7 +123,7 @@ public class Main2Activity extends AppCompatActivity {
         mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(gps2,gps1), 6, true);//중심점, 줌레벨
         mapView.zoomIn(true);//줌인
         mapView.zoomOut(true);//줌아웃
-        //마커
+        //*마커*//
         MapPOIItem marker = new MapPOIItem();
         marker.setItemName(location);
         marker.setTag(0);
@@ -131,12 +135,11 @@ public class Main2Activity extends AppCompatActivity {
 
         textView.setText(intent1.getStringExtra("name"));
         textView3.setText(intent1.getStringExtra("discription"));
-        textView5.setText(intent1.getStringExtra("start_location"));
         textView6.setText(intent1.getStringExtra("start_date"));
         textView8.setText(intent1.getStringExtra("end_date"));
         textView9.setText(intent1.getStringExtra("end_time"));
         textView11.setText(intent1.getStringExtra("start_time"));
-
+        textView4.setText(intent1.getStringExtra("url"));
 
 
 /*event_type 출력
@@ -155,7 +158,7 @@ public class Main2Activity extends AppCompatActivity {
 
         //textView4.setText(intent1.getStringExtra("page_url"));
 
-        //길찾기 버튼//
+        //*길찾기 버튼*//
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,7 +168,7 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
 
-        //ar버튼//
+        //*ar버튼*//
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -174,7 +177,7 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
 
-        //클립보드복사버튼//
+        //*클립보드복사버튼*//
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -188,7 +191,7 @@ public class Main2Activity extends AppCompatActivity {
 
     }
 
-    //image slider//
+    //*image slider*//
     private void flipperImages(int image) {
         ImageView imageView=new ImageView(this);
         imageView.setBackgroundResource(image);
@@ -199,13 +202,13 @@ public class Main2Activity extends AppCompatActivity {
         v_flipper.setOutAnimation(this,android.R.anim.slide_out_right);
     }
 
-    // Search bar
+    //* Search bar*//
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu) ;
 
         return true ;
     }
-    // Search bar
+    // *Search bar*//
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_serach :
