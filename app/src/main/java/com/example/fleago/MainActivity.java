@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.util.Attributes;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,9 +27,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Collections;
 import java.util.Comparator;
+
 
 import adapter.ListViewAdapter;
 
@@ -40,7 +47,16 @@ public class MainActivity extends AppCompatActivity {
 
     private SlidingUpPanelLayout mLayout;
     private ListViewAdapter mAdapter;
-    private ArrayList<Market> list;
+    private ArrayList<Markets> list;
+
+
+    long now = System.currentTimeMillis();
+    Date date= new Date(now);
+    SimpleDateFormat sdf= new SimpleDateFormat("M");
+    String formatDate = sdf.format(date);
+    int month = Integer.parseInt(formatDate)+1;
+    String nMonth=String.valueOf(month);
+
 
     private Location currentLocation;
     private LocationManager locationManager;
@@ -56,8 +72,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference myRef = database.getReference("Market");
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    final DatabaseReference myRef = database.getReference(formatDate+"월");
+    final DatabaseReference myRef2 = database.getReference(nMonth+"월");
+
         // 임시 test. 거리순 정렬 보려고 gps 칼럼이 있는 10월로 테스트
 //        final DatabaseReference myRef = database.getReference("10월");
 
@@ -65,12 +84,67 @@ public class MainActivity extends AppCompatActivity {
 
         requestLocationPermission();
 
-
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // Firebase 데이터 load
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
+                    list.add(d.getValue(Markets.class));
+//                    if(list.add(d.getValue(Market.class))) {
+//                        // 리스트에 market이 추가되었을 때,
+//                        // Log.d("TEST firebase list add", "return true");
+//                    }
+                }
+
+                /******************* Sliding up List View *******************/
+                mLayout = findViewById(R.id.sliding_layout);
+
+                final ListView lv = (ListView) findViewById(R.id.marketList);
+                Log.d("TEST market list size", "value : " + list.size());
+
+                mAdapter = new ListViewAdapter(MainActivity.this, list);
+                lv.setAdapter(mAdapter);
+                mAdapter.setMode(Attributes.Mode.Single);
+
+                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    // 클릭 시 돋보기 스와이프 되는 view
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        // Toast.makeText(view.getContext(), "lv..setOnItemClick", Toast.LENGTH_SHORT).show();
+                        ((SwipeLayout) (lv.getChildAt(position - lv.getFirstVisiblePosition()))).open(true);
+
+                        mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+                    }
+                });
+
+                // 바깥 눌렀을 때, 반응
+                mLayout.setFadeOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+                    }
+
+                });
+
+                /******************* Sliding up List View END *******************/
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+
+        myRef2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot d : dataSnapshot.getChildren()) {
+                    list.add(d.getValue(Markets.class));
+//                    if(list.add(d.getValue(Market.class))) {
+//                        // 리스트에 market이 추가되었을 때,
+//                        // Log.d("TEST firebase list add", "return true");
+//                    }
+
                     int distance;
                     Market tmp = d.getValue(Market.class);
 
@@ -132,7 +206,14 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
+<<<<<<< HEAD
+
         });
+        myRef.addValueEventListener(vel);
+//        myRef2.addValueEventListner(vel);
+=======
+        });
+>>>>>>> 46dbbc5a9ad44f058e9e63434b861e774e7b129e
 
     }
 
@@ -233,6 +314,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
 }
 

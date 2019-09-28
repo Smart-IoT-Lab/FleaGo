@@ -5,14 +5,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipe"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/default_item_height"
+    android:layout_height="200dp"
     app:clickToClose="true">
 
     <LinearLayout
         android:tag="Bottom1"
         android:id="@+id/bottom_wrapper"
         android:layout_width="80dp"
-        android:weightSum="1"
         android:layout_height="match_parent">
 
         <ImageView
@@ -21,7 +20,7 @@
             android:gravity="center"
             android:clickable="true"
             android:background="@color/seoul_default_light"
-            android:padding="25dp"
+            android:padding="15dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
@@ -32,7 +31,10 @@
         android:layout_height="match_parent"
         android:background="@drawable/item_selector"
         android:orientation="horizontal"
-        android:padding="10dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="5dp"
         android:weightSum="10">
 
         <ImageView
@@ -40,21 +42,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="7"
+            android:layout_marginRight="10dp"
             android:background="@drawable/white" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:weightSum="10"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:weightSum="10">
 
             <TextView
                 android:id="@+id/text_data"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:gravity="center_vertical"
-                android:layout_weight="6"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:gravity="top"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:tag="Hover"
                 android:text="시장 제목"
                 android:textSize="18dp"
@@ -78,7 +84,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="2"
+                android:layout_weight="3"
                 android:gravity="bottom"
                 android:orientation="horizontal">
 
@@ -87,7 +93,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center_vertical"
+                    android:gravity="bottom"
                     android:text="운영시간"
                     android:textSize="10dp" />
 
@@ -96,7 +102,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="right|center_vertical"
+                    android:gravity="right|bottom"
                     android:text="거리"
                     android:textSize="10dp" />
             </LinearLayout>

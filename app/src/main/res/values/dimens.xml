@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="default_small_list_height">350dp</dimen>
-    <dimen name="xhdpi_small_list_height">400dp</dimen>
+    <dimen name="default_small_list_height">300dp</dimen>
+    <dimen name="xhdpi_small_list_height">320dp</dimen>
     <dimen name="xxhdpi_small_list_height">450dp</dimen>
+
     <dimen name="default_full_list_height">500dp</dimen>
     <dimen name="xhdpi_full_list_height">600dp</dimen>
     <dimen name="xxhdpi_full_list_height">800dp</dimen>
+
+    <dimen name="default_item_height">150dp</dimen>
+    <dimen name="xhdpi_list_height">180dp</dimen>
+    <dimen name="xxhdpi_item_height">200dp</dimen>
 </resources>
