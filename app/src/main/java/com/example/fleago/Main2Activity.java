@@ -1,5 +1,6 @@
 package com.example.fleago;
 
+import android.app.ActionBar;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -46,6 +47,9 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        //타이틀 바에 뒤로가기 버튼
+        //ActionBar actionBar = getActionBar();
+        //actionBar.setDisplayHomeAsUpEnabled(true);
 
         int images[]={R.drawable.blur_img,R.drawable.img1,R.drawable.ic_info};
         v_flipper=findViewById(R.id.v_flipper);
@@ -186,7 +190,9 @@ public class Main2Activity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item) ;
         }
     }
-
+    @Override public void onBackPressed() {
+        //super.onBackPressed();
+    }
 
 
 }
