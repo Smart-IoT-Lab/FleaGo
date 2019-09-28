@@ -85,8 +85,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
-
-
         requestLocationPermission();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -100,9 +98,24 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // Firebase 데이터 load
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
-
                     int distance;
                     Markets tmp = d.getValue(Markets.class);
+
+                    // 중복 제거
+                    if (list.size() != 0) {
+                        boolean hasDup = false;
+
+                        for (Markets m : list) {
+                            if (m.getName().equals(tmp.getName())) {
+
+                                hasDup = true;
+                                break;
+                            }
+                        }
+
+                        if(hasDup)
+                            continue;
+                    }
 
                     // 2주 안에 있으면 list에 추가한다.
                     Log.d("TEST start date", tmp.getStart_date());
@@ -194,6 +207,11 @@ public class MainActivity extends AppCompatActivity {
 
             Log.d("TEST now", cal.getTime().toString());
             Log.d("TEST testcal", targetCal.getTime().toString());
+
+            // 날짜가 같으면 true
+            if (cal.compareTo(targetCal) == 0) {
+                return true;
+            }
 
             // 현재(cal)는 타겟보다 이후인가? > 즉, 타겟은 과거인가?
             if (cal.after(targetCal)) {
@@ -351,12 +369,12 @@ public class MainActivity extends AppCompatActivity {
         Collections.sort(list, new Comparator<Markets>() {
             @Override
             public int compare(Markets m1, Markets m2) {
-                if (m1.getDistance() < m2.getDistance()) {
-                    return -1;
-                } else if (m1.getDistance() > m2.getDistance()) {
-                    return 1;
-                }
-                return 0;
+            if (m1.getDistance() < m2.getDistance()) {
+                return -1;
+            } else if (m1.getDistance() > m2.getDistance()) {
+                return 1;
+            }
+            return 0;
             }
         });
     }

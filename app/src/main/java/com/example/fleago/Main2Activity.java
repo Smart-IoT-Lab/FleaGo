@@ -1,4 +1,5 @@
 package com.example.fleago;
+import android.annotation.SuppressLint;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -18,6 +19,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -174,9 +176,13 @@ public class Main2Activity extends AppCompatActivity {
 
 
 
-        Button button = (Button) findViewById(R.id.button);
-        com.google.android.material.floatingactionbutton.FloatingActionButton button2 = (com.google.android.material.floatingactionbutton.FloatingActionButton)findViewById(R.id.button2);
-        Button button3 = (Button)findViewById(R.id.button3);
+
+        ImageButton button = (ImageButton) findViewById(R.id.button);
+        ImageButton button3 = (ImageButton)findViewById(R.id.button3);
+
+//        com.google.android.material.floatingactionbutton.FloatingActionButton button2 = (com.google.android.material.floatingactionbutton.FloatingActionButton)findViewById(R.id.button2);
+        TextView button2 = findViewById(R.id.button2);
+
         textView5.setText(intent1.getStringExtra("start_location"));
         String location= textView5.getText().toString();
 
@@ -202,8 +208,15 @@ public class Main2Activity extends AppCompatActivity {
         mapView.addPOIItem(marker);
 
 
+        // (건대입구역) 교체
+        String kk = intent1.getStringExtra("name");
+        if (kk.equals("(건대입구역)")) {
+            String name = "건대입구 플리마켓";
+            textView.setText(name);
+        } else
+            textView.setText(kk);
 
-        textView.setText(intent1.getStringExtra("name"));
+//        textView.setText(intent1.getStringExtra("name"));
         textView3.setText(intent1.getStringExtra("discription"));
         textView4.setText(intent1.getStringExtra("url"));
         textView6.setText(intent1.getStringExtra("start_date")+" ~ "+intent1.getStringExtra("end_date"));
