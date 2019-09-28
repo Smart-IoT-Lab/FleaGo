@@ -3,17 +3,28 @@ package com.example.fleago;
 import java.util.ArrayList;
 
 public class Markets {
+    // Firebase 칼럼
     private String day;
     private String discription;
     private String end_time;
     private String end_date;
-    ArrayList<Double> gps ;
+    private ArrayList<String> gps ;
     private String month;
     private String name;
     private String start_date;
     private String start_location;
     private String start_time;
     private Integer week;
+
+    // not Firebase
+    private int distance;
+
+    public int getDistance() {
+        return distance;
+    }
+    public void setDistance(int distance) {
+        this.distance = distance;
+    }
 
     public String getDay() { return day; }
     public void setDay(String day) { this.day = day; }
@@ -27,8 +38,8 @@ public class Markets {
     public void setEnd_time(String end_time) { this.end_time = end_time; }
     public String getEnd_time() { return end_time; }
 
-    public ArrayList<Double> getGps() { return gps; }
-    public void setGps(ArrayList<Double> gps) { this.gps = gps; }
+    public ArrayList<String> getGps() { return gps; }
+    public void setGps(ArrayList<String> gps) { this.gps = gps; }
 
     public String getMonth() { return month; }
     public void setMonth(String month) { this.month = month; }
@@ -50,7 +61,7 @@ public class Markets {
 
     public Markets(){ }
 
-    public Markets(String day,String discription, String end_time, String end_date, ArrayList<Double> gps, String month, String name, String start_date, String start_location, String start_time, int week){
+    public Markets(String day,String discription, String end_time, String end_date, ArrayList<String> gps, String month, String name, String start_date, String start_location, String start_time, int week){
 
         this.day=day;
         this.discription=discription;
@@ -69,5 +80,38 @@ public class Markets {
         return name+day;
     }
 
+    public boolean hasGps() {
+        // gps 정보가 db에 있는가
+        if (this.gps == null) {
+            return false;
+        } else if (this.gps.size() == 0) {
+            return false;
+        }else if (this.gps.get(0).equals("N") || this.gps.get(1).equals("N")) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean hasTime() {
+        // 운영시간에 대한 정보가 db에 있는가
+        if (this.start_time == null || this.end_time == null) {
+            return false;
+        } else if (this.start_time.length() == 0 || this.end_time.length() == 0) {
+            return false;
+        } else if (this.start_time.equals("None") || this.end_time.equals("None")) {
+            return false;
+        }
+
+        return true;
+    }
+
+    // market과 markets 사이의 차이를 임시로 메꿈.
+    public ArrayList<String> getEvent_type() {
+        ArrayList<String> tmp = new ArrayList<>();
+        tmp.add("no");
+        tmp.add("event_type");
+        return tmp;
+    }
 }
 

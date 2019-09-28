@@ -110,9 +110,8 @@ public class ListViewAdapter extends BaseSwipeAdapter {
         ((TextView) convertView.findViewById(R.id.text_data)).setText(list.get(position).getName());
 
         // 카테고리 출력
-
-        ArrayList<String> events = list.get(position).getEvent_type();
         String eventsToString = "";
+        ArrayList<String> events = list.get(position).getEvent_type();
         if (events == null || events.size() == 0) {
             // exception: 카테고리 없음
         } else {

@@ -17,19 +17,13 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
-//import net.daum.android.map.MapView;
-//import net.daum.mf.map.api.MapPOIItem;
-//import net.daum.mf.map.api.MapPoint;
-
-
 import org.w3c.dom.Text;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class Main2Activity extends AppCompatActivity {
@@ -64,9 +58,9 @@ public class Main2Activity extends AppCompatActivity {
         intent3 = getIntent();
 
 
-        List<Double> gps=(List<Double>)intent1.getSerializableExtra("gps");
-        double gps1=gps.get(0);
-        double gps2=gps.get(1);
+        List<String> gps=(List<String>)intent1.getSerializableExtra("gps");
+        double gps1 = Double.parseDouble(gps.get(0));
+        double gps2 = Double.parseDouble(gps.get(1));
 
         MapView mapView = new MapView(this);
         ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);

@@ -72,16 +72,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    final DatabaseReference myRef = database.getReference(formatDate+"월");
-    final DatabaseReference myRef2 = database.getReference(nMonth+"월");
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference myRef = database.getReference(formatDate+"월");
+        final DatabaseReference myRef2 = database.getReference(nMonth+"월");
 
         // 임시 test. 거리순 정렬 보려고 gps 칼럼이 있는 10월로 테스트
 //        final DatabaseReference myRef = database.getReference("10월");
 
         list = new ArrayList<>();
 
+        // TODO 맨 처음에 GPS 허가 받는데, 받지 않으면 currentLocation이 null이므로 에러가 떠서 종료됨.
         requestLocationPermission();
 
         myRef.addValueEventListener(new ValueEventListener() {
@@ -89,14 +89,34 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // Firebase 데이터 load
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
-                    list.add(d.getValue(Markets.class));
-//                    if(list.add(d.getValue(Market.class))) {
-//                        // 리스트에 market이 추가되었을 때,
-//                        // Log.d("TEST firebase list add", "return true");
-//                    }
+
+                    int distance;
+                    Markets tmp = d.getValue(Markets.class);
+
+                    // 각 Market 까지의 거리를 설정
+                    if (tmp.hasGps()) {
+                        Location target = new Location("Firebase");
+                        ArrayList<String> gps = tmp.getGps();
+                        target.setLongitude(Double.parseDouble(gps.get(0)));    // 경도
+                        target.setLatitude(Double.parseDouble(gps.get(1)));     // 위도
+
+                        distance = (int) currentLocation.distanceTo(target);    // 소수점 버림
+                        tmp.setDistance(distance);
+                    } else {
+                        // GPS 정보가 없는 경우, 가까운 순으로 정렬을 위해 최대값으로 설정.
+                        distance = MAX_DISTANCE;
+                        tmp.setDistance(distance);
+                    }
+
+                    // TODO 현재 날짜를 기준으로 2주동안의 시장만 추가하기.
+
+                    list.add(tmp);
                 }
 
-                /******************* Sliding up List View *******************/
+                // 거리순 정렬
+                sortToDistance();
+
+                // Sliding Up List View
                 mLayout = findViewById(R.id.sliding_layout);
 
                 final ListView lv = (ListView) findViewById(R.id.marketList);
@@ -123,30 +143,22 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
                     }
-
                 });
-
-                /******************* Sliding up List View END *******************/
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        };
+        });
 
         myRef2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
-                    list.add(d.getValue(Markets.class));
-//                    if(list.add(d.getValue(Market.class))) {
-//                        // 리스트에 market이 추가되었을 때,
-//                        // Log.d("TEST firebase list add", "return true");
-//                    }
 
                     int distance;
-                    Market tmp = d.getValue(Market.class);
+                    Markets tmp = d.getValue(Markets.class);
 
                     // 각 Market 까지의 거리를 설정
                     if (tmp.hasGps()) {
@@ -155,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
                         target.setLongitude(Double.parseDouble(gps.get(0)));    // 경도
                         target.setLatitude(Double.parseDouble(gps.get(1)));     // 위도
 
+                        Log.d("TEST gps target", target.toString());
                         distance = (int) currentLocation.distanceTo(target);    // 소수점 버림
                         tmp.setDistance(distance);
                     } else {
@@ -206,15 +219,8 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-<<<<<<< HEAD
 
         });
-        myRef.addValueEventListener(vel);
-//        myRef2.addValueEventListner(vel);
-=======
-        });
->>>>>>> 46dbbc5a9ad44f058e9e63434b861e774e7b129e
-
     }
 
     LocationListener gpsLocationListener = new LocationListener() {
@@ -302,9 +308,9 @@ public class MainActivity extends AppCompatActivity {
 
     void sortToDistance() {
         // distance가 낮은 순으로 정렬
-        Collections.sort(list, new Comparator<Market>() {
+        Collections.sort(list, new Comparator<Markets>() {
             @Override
-            public int compare(Market m1, Market m2) {
+            public int compare(Markets m1, Markets m2) {
                 if (m1.getDistance() < m2.getDistance()) {
                     return -1;
                 } else if (m1.getDistance() > m2.getDistance()) {
