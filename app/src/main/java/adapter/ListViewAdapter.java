@@ -180,6 +180,8 @@ public class ListViewAdapter extends BaseSwipeAdapter implements Filterable {
     public void setImage(final ImageView image, final int position) {
         pathReference = storageRef1.child(list2.get(position).getName() + "/" + list2.get(position).getName() + "_1.jpg");
         //pathReference = storageRef1.child("(건대입구역)/(건대입구역)_1.jpg");
+        Log.d("TEST position", "position : " + position + "  name : " +list2.get(position).getName());
+
         if (pathReference == null)
             storageRef2.child(list2.get(position).getName() + "/" + list2.get(position).getName() + "_1.jpg");
 
