@@ -15,9 +15,14 @@ public class Markets {
     private String start_location;
     private String start_time;
     private Integer week;
-
-    // not Firebase
+    private String url;
     private int distance;
+    private ArrayList<String> event_type;
+
+
+
+
+    public void setEvent_type(ArrayList<String> event_type) { this.event_type = event_type; }
 
     public int getDistance() {
         return distance;
@@ -59,9 +64,13 @@ public class Markets {
     public Integer getWeek() { return week; }
     public void setWeek(Integer week) { this.week = week; }
 
+    public String getUrl() { return url; }
+
+    public void setUrl(String url) { this.url = url; }
+
     public Markets(){ }
 
-    public Markets(String day,String discription, String end_time, String end_date, ArrayList<String> gps, String month, String name, String start_date, String start_location, String start_time, int week){
+    public Markets(String day,String discription, String end_time, String end_date, ArrayList<String> gps, String month, String name, String start_date, String start_location, String start_time, int week, String url,ArrayList<String> event_type){
 
         this.day=day;
         this.discription=discription;
@@ -74,6 +83,9 @@ public class Markets {
         this.start_location=start_location;
         this.start_time=start_time;
         this.week=week;
+        this.url=url;
+        this.event_type=event_type;
+
     }
 
     public String toString() {
@@ -108,10 +120,7 @@ public class Markets {
 
     // market과 markets 사이의 차이를 임시로 메꿈.
     public ArrayList<String> getEvent_type() {
-        ArrayList<String> tmp = new ArrayList<>();
-        tmp.add("no");
-        tmp.add("event_type");
-        return tmp;
+        return event_type;
     }
 }
 

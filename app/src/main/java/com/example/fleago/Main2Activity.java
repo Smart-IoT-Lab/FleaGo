@@ -36,9 +36,11 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
-/*import lecho.lib.hellocharts.model.PieChartData;
+import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.model.SliceValue;
-import lecho.lib.hellocharts.view.PieChartView;*/
+import lecho.lib.hellocharts.view.PieChartView;
+
+
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -64,10 +66,29 @@ public class Main2Activity extends AppCompatActivity {
         intent2 = getIntent();
         intent3 = getIntent();
 
-        List<String> gps=(List<String>)intent1.getSerializableExtra("gps");
+        final ArrayList<String> gps=(ArrayList<String>)intent1.getSerializableExtra("gps");
+        final double gps1;
+        final double gps2;
 
-        final double gps1 = Double.parseDouble(gps.get(0));
-        final double gps2 = Double.parseDouble(gps.get(1));
+        // gps 정보가 없을 때 처리하는 부분
+        if(gps.get(0).equals("N") || gps.get(1).equals("N")) {
+            gps1 = Double.parseDouble("131.865077");
+            gps2 = Double.parseDouble("37.241828");
+            gps.set(0, String.valueOf(gps1));
+            gps.set(1, String.valueOf(gps2));
+        }
+
+        else{
+            gps1 = Double.parseDouble(gps.get(0));
+            gps2 = Double.parseDouble(gps.get(1));
+
+        }
+
+        System.out.println("before MainACtivity la" + gps.get(0));
+        System.out.println("before MainACtivity long" + gps.get(1));
+
+        System.out.println("MainACtivity la" + gps1);
+        System.out.println("MainACtivity long" + gps2);
 
         TextView textView = (TextView) findViewById(R.id.textView);//name
         TextView textView3 = (TextView) findViewById(R.id.textView3);//discription
@@ -75,38 +96,20 @@ public class Main2Activity extends AppCompatActivity {
         final TextView textView5 = (TextView) findViewById(R.id.textView5);//start_location
         LinearLayout linearlayout1 = (LinearLayout)findViewById(R.id.linearlayout1);//event_type
         TextView textView6 = (TextView) findViewById(R.id.textView6);//start_date
-//        TextView textView7 = (TextView) findViewById(R.id.textView7);//day
-        TextView textView8 = (TextView) findViewById(R.id.textView8);//end_Date
-        TextView textView9 = (TextView) findViewById(R.id.textView9);//end_time
-//      TextView textView10 = (TextView) findViewById(R.id.textView10);//month
+       // TextView textView8 = (TextView) findViewById(R.id.textView8);//end_Date
+       // TextView textView9 = (TextView) findViewById(R.id.textView9);//end_time
         TextView textView11 = (TextView) findViewById(R.id.textView11);//start_time
         TextView textView12 = (TextView) findViewById(R.id.textView12);//월 test
 
         Button button = (Button) findViewById(R.id.button);
         com.google.android.material.floatingactionbutton.FloatingActionButton button2 = (com.google.android.material.floatingactionbutton.FloatingActionButton)findViewById(R.id.button2);
         Button button3 = (Button)findViewById(R.id.button3);
-
+        textView5.setText(intent1.getStringExtra("start_location"));
         String location= textView5.getText().toString();
 
-        //그래프
-//        PieChartView pieChartView = findViewById(R.id.chart);
-//        List<SliceValue> pieData = new ArrayList<>();
-//
-//        pieData.add(new SliceValue(15, Color.BLUE));
-//        pieData.add(new SliceValue(25, Color.GRAY));
-//        pieData.add(new SliceValue(10, Color.RED));
-//
-//        PieChartData pieChartData = new PieChartData(pieData);
-//        pieChartView.setPieChartData(pieChartData);
-//
-//        pieData.add(new SliceValue(15, Color.BLUE).setLabel("운영시간"));
-//        pieData.add(new SliceValue(25, Color.GRAY).setLabel("test1"));
-//        pieData.add(new SliceValue(10, Color.RED).setLabel("test2"));
-//
-//        pieChartData.setHasLabels(true);
-//        pieChartData.setHasLabels(true).setValueLabelTextSize(17);
 
 
+        //*지도*//
         MapView mapView = new MapView(this);
         ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
@@ -117,7 +120,7 @@ public class Main2Activity extends AppCompatActivity {
         mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(gps2,gps1), 6, true);//중심점, 줌레벨
         mapView.zoomIn(true);//줌인
         mapView.zoomOut(true);//줌아웃
-        //마커
+        //*마커*//
         MapPOIItem marker = new MapPOIItem();
         marker.setItemName(location);
         marker.setTag(0);
@@ -127,33 +130,29 @@ public class Main2Activity extends AppCompatActivity {
         mapView.addPOIItem(marker);
 
 
+
         textView.setText(intent1.getStringExtra("name"));
         textView3.setText(intent1.getStringExtra("discription"));
-        textView5.setText(intent1.getStringExtra("start_location"));
-        textView6.setText(intent1.getStringExtra("start_date"));
-        textView8.setText(intent1.getStringExtra("end_date"));
-        textView9.setText(intent1.getStringExtra("end_time"));
-        textView11.setText(intent1.getStringExtra("start_time"));
+        textView4.setText(intent1.getStringExtra("url"));
+        textView6.setText(intent1.getStringExtra("start_date")+" ~ "+intent1.getStringExtra("end_date"));
+        //textView8.setText(intent1.getStringExtra("end_date"));
+        //textView9.setText(intent1.getStringExtra("end_time"));
+        textView11.setText(intent1.getStringExtra("start_time")+" ~ "+intent1.getStringExtra("end_time"));
 
 
-
-/*event_type 출력
         List<String> event_type=(List<String>)intent1.getSerializableExtra("event_type");
         linearlayout1.removeAllViews();
         for(int i = 0; i < event_type.size(); i++){
             TextView textView01 = new TextView(getApplicationContext());
-            textView01.setText(event_type.get(i));  //배열리스트 이용
+            textView01.setText("#"+event_type.get(i)+" ");  //배열리스트 이용
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT);
 
-            linearlayout1.addView(textView01, params);  //linearLayout01 위에 생성
+            linearlayout1.addView(textView01, params);//linearLayout01 위에 생성
         }
-*/
 
-        //textView4.setText(intent1.getStringExtra("page_url"));
-
-        //길찾기 버튼//
+        //*길찾기 버튼*//
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -163,16 +162,22 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
 
-        //ar버튼//
+        //*ar버튼*//
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),ARActivity.class);
-                startActivity(intent);//액티비티 띄우기
+                Intent intentAR = new Intent(getApplicationContext(),ARActivity.class);
+                intentAR.putExtra("name", intent1.getStringExtra("name"));
+
+                intentAR.putExtra("gps", gps);
+
+                intentAR.putExtra("latitude", gps2);
+                intentAR.putExtra("longitude", gps1);
+                startActivity(intentAR);//액티비티 띄우기
             }
         });
 
-        //클립보드복사버튼//
+        //*클립보드복사버튼*//
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -186,7 +191,7 @@ public class Main2Activity extends AppCompatActivity {
 
     }
 
-    //image slider//
+    //*image slider*//
     private void flipperImages(int image) {
         ImageView imageView=new ImageView(this);
         imageView.setBackgroundResource(image);
@@ -197,13 +202,13 @@ public class Main2Activity extends AppCompatActivity {
         v_flipper.setOutAnimation(this,android.R.anim.slide_out_right);
     }
 
-    // Search bar
+    //* Search bar*//
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu) ;
 
         return true ;
     }
-    // Search bar
+    // *Search bar*//
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_serach :

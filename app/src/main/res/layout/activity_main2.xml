@@ -6,418 +6,388 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-<LinearLayout
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:orientation="vertical">
-
-    <ScrollView
-    android:id="@+id/ScrollView1"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_weight="1"
-    android:background="@color/seoul_default_light"
-    android:scrollbars="none">
-
     <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="0dp"
-        android:background="@android:color/white"
-        android:orientation="vertical"
-        android:layout_marginRight="0dp"
-        tools:context=".Main2Activity">
+        android:layout_width="match_parent"
+        android:orientation="vertical">
 
-
-        <ViewFlipper
+        <ScrollView
+            android:id="@+id/ScrollView1"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:id="@+id/v_flipper"
-            android:layout_centerHorizontal="true"
-            >
-
-        </ViewFlipper>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="2dp"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="12.3dp"/>
-
-        <TextView
-            android:layout_marginHorizontal="20dp"
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/roboto_medium"
-            android:letterSpacing="0.03"
-            android:textSize="30dp"
-            android:textStyle="bold"
-            android:text="title"
-            android:gravity="center"
-            android:textColor="@color/seoul_default"
-            android:layout_marginLeft="14dp"/>
-
-
-        <LinearLayout
-            android:id="@+id/linearlayout1"
-            android:text="event_type"
-            android:layout_gravity="right"
-            android:orientation="horizontal"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/roboto_regular"
-            android:paddingBottom="8.3dp"
-            android:paddingLeft="16.7dp"
-            android:paddingTop="7.7dp"
-            android:textColor="#7a7f85"
-            android:textSize="13sp"
+            android:background="@color/seoul_default_light"
+            android:scrollbars="none">
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="2dp"/>
-
-        <View
-            android:layout_marginHorizontal="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="12.3dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16.7dp"
-            android:fontFamily="@font/georgia"
-            android:paddingTop="13.3dp"
-            android:text="일정"
-            android:textStyle="bold"
-            android:textColor="@color/seoul_default"
-            android:textSize="11.7sp"
-            />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="14dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="90dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="0dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/roboto_regular"
-                android:letterSpacing="0.03"
-                android:paddingLeft="16.7dp"
-                android:paddingTop="7.7dp"
-                android:paddingBottom="8.3dp"
-                android:id="@+id/textView6"
-                android:text="start_date"
-
-                android:textColor="@color/seoul_default_light"
-                android:textSize="13sp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="90dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="0dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/roboto_regular"
-                android:letterSpacing="0.03"
-                android:paddingLeft="16.7dp"
-                android:paddingTop="7.7dp"
-                android:paddingBottom="8.3dp"
-                android:id="@+id/textView11"
-                android:text="start_time"
-                android:textColor="@color/seoul_default_light"
-                android:textSize="13sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="14dp"
-            android:orientation="horizontal">
-
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
-                android:layout_height="90dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="0dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/roboto_regular"
-                android:letterSpacing="0.03"
-                android:paddingLeft="16.7dp"
-                android:paddingTop="7.7dp"
-                android:paddingBottom="8.3dp"
-                android:text="end_date"
-                android:textColor="@color/seoul_default_light"
-                android:textSize="13sp" />
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="90dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="0dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/roboto_regular"
-                android:letterSpacing="0.03"
-                android:paddingLeft="16.7dp"
-                android:paddingTop="7.7dp"
-                android:paddingBottom="8.3dp"
-                android:text="end_time"
-                android:textColor="@color/seoul_default_light"
-                android:textSize="13sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginHorizontal="5dp"
-            android:background="@color/seoul_default_lightest"/>
-
-        <View
-            android:layout_marginHorizontal="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="12.3dp"/>
-
-<!--        <lecho.lib.hellocharts.view.PieChartView-->
-<!--            android:id="@+id/chart"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent" />-->
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16.7dp"
-            android:fontFamily="@font/georgia"
-            android:paddingTop="13.3dp"
-            android:text="소개"
-            android:textStyle="bold"
-            android:textColor="@color/seoul_default"
-            android:textSize="11.7sp"
-            />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:orientation="horizontal"
-            android:id="@+id/linearLayout">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="0dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="8.3dp"
-                android:src="@drawable/ic_info"
-                tools:layout_conversion_absoluteHeight="31dp"
-                tools:layout_editor_absoluteY="374dp"
-                tools:layout_editor_absoluteX="28dp"
-                tools:layout_conversion_absoluteWidth="13dp"/>
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:letterSpacing="0.03"
-                android:paddingLeft="0dp"
-                android:paddingTop="7.7dp"
-                android:paddingBottom="8.3dp"
-                android:text="설명"
-                android:textColor="@color/seoul_default_light"
-                android:textSize="13sp"
-                tools:layout_conversion_absoluteHeight="95dp"
-                tools:layout_conversion_absoluteWidth="140dp"
-                tools:layout_editor_absoluteX="41dp"
-                tools:layout_editor_absoluteY="378dp" />
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16.7dp"
-            android:fontFamily="@font/georgia"
-            android:paddingTop="13.3dp"
-            android:text="홈페이지"
-            android:textColor="@color/seoul_default"
-            android:textSize="11.7sp"
-            android:textStyle="bold"
-            tools:layout_conversion_absoluteHeight="29dp"
-            tools:layout_conversion_absoluteWidth="46dp"
-            tools:layout_editor_absoluteX="198dp"
-            tools:layout_editor_absoluteY="374dp" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="20dp"
-            android:orientation="horizontal"
-            tools:ignore="DuplicateIds">
-
-           <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="0dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="8.3dp"
-                android:src="@drawable/ic_home"
-                tools:layout_conversion_absoluteHeight="31dp"
-                tools:layout_conversion_absoluteWidth="13dp"
-                tools:layout_editor_absoluteX="244dp"
-                tools:layout_editor_absoluteY="374dp" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:autoLink="web"
-                android:fontFamily="@font/roboto_regular"
-                android:textColor="@color/seoul_default_light"
-                android:linksClickable="true"
-                android:paddingLeft="0dp"
-                android:paddingTop="7.7dp"
-                android:paddingBottom="8.3dp"
-                android:text="url"
-                android:textSize="13sp"
-                tools:layout_conversion_absoluteHeight="34dp"
-                tools:layout_conversion_absoluteWidth="141dp"
-                tools:layout_editor_absoluteX="257dp"
-                tools:layout_editor_absoluteY="378dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginHorizontal="5dp"
-            android:background="@color/seoul_default_lightest"/>
-
-        <View
-            android:layout_marginHorizontal="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="12.3dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16.7dp"
-            android:fontFamily="@font/georgia"
-            android:paddingTop="13.3dp"
-            android:text="위치"
-            android:textColor="@color/seoul_default"
-            android:textSize="11.7sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:paddingLeft="0dp"
-                android:paddingTop="7.7dp"
-                android:paddingBottom="8.3dp"
-                android:textColor="#7a7f85"
-                android:textSize="13sp"
-                />
-
-            <ImageView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:src="@drawable/ic_place"
-                android:paddingBottom="8.3dp"
-                android:paddingLeft="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="0dp"
-                android:paddingTop="10dp"/>
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_weight="1"
-                android:fontFamily="@font/roboto_regular"
-                android:paddingBottom="8.3dp"
-                android:paddingLeft="0dp"
-                android:paddingTop="7.7dp"
-                android:textColor="#7a7f85"
-                android:textSize="13sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="66dp"
-                android:layout_height="32dp"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/button"
-                android:onClick="onButton3Clicked"
-                android:text="복사"
-                android:textColor="#ffffff" />
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="66dp"
-                android:layout_height="32dp"
-                android:background="@drawable/button"
-                android:onClick="onButton1Clicked"
-                android:text="길찾기"
-                android:textColor="#ffffff" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@drawable/shadow2"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="14dp"
-            android:orientation="horizontal">
-
-        </LinearLayout>
-
-        <RelativeLayout
-            android:id="@+id/map_view"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_gravity="center">
-
-        </RelativeLayout>
+                android:background="@android:color/white"
+                android:orientation="vertical"
+                android:layout_marginRight="0dp"
+                tools:context=".Main2Activity">
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="2dp"/>
+                <ViewFlipper
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:id="@+id/v_flipper"
+                    android:layout_centerHorizontal="true"
+                    >
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="12.3dp"/>
+                </ViewFlipper>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="12.3dp"/>
+
+                <TextView
+                    android:layout_marginHorizontal="20dp"
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:letterSpacing="0.03"
+                    android:textSize="30dp"
+                    android:textStyle="bold"
+                    android:text="title"
+                    android:gravity="center"
+                    android:textColor="@color/seoul_default"
+                    android:layout_marginLeft="14dp"/>
+
+
+                <LinearLayout
+                    android:id="@+id/linearlayout1"
+                    android:text="event_type"
+                    android:layout_gravity="right"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto_regular"
+                    android:paddingBottom="8.3dp"
+                    android:paddingLeft="16.7dp"
+                    android:paddingTop="7.7dp"
+                    android:textColor="#7a7f85"
+                    android:textSize="13sp"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"/>
+
+                <View
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="12.3dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16.7dp"
+                    android:fontFamily="@font/georgia"
+                    android:paddingTop="13.3dp"
+                    android:text="일정"
+                    android:textStyle="bold"
+                    android:textColor="@color/seoul_default"
+                    android:textSize="11.7sp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="39dp"
+                    android:layout_marginLeft="14dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="55dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_regular"
+                        android:letterSpacing="0.03"
+                        android:paddingLeft="16.7dp"
+                        android:paddingTop="7.7dp"
+                        android:paddingBottom="8.3dp"
+                        android:text="start_date"
+
+                        android:textColor="@color/seoul_default_light"
+                        android:textSize="13sp" />
+
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="41dp"
+                    android:layout_marginLeft="14dp"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/textView11"
+                        android:layout_width="55dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_regular"
+                        android:letterSpacing="0.03"
+                        android:paddingLeft="16.7dp"
+                        android:paddingTop="7.7dp"
+                        android:paddingBottom="8.3dp"
+                        android:text="end_date"
+                        android:textColor="@color/seoul_default_light"
+                        android:textSize="13sp" />
+
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:background="@color/seoul_default_lightest"/>
+
+                <View
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="12.3dp"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16.7dp"
+                    android:fontFamily="@font/georgia"
+                    android:paddingTop="13.3dp"
+                    android:text="소개"
+                    android:textStyle="bold"
+                    android:textColor="@color/seoul_default"
+                    android:textSize="11.7sp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:orientation="horizontal"
+                    android:id="@+id/linearLayout">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="0dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="8.3dp"
+                        android:src="@drawable/ic_info"
+                        tools:layout_conversion_absoluteHeight="31dp"
+                        tools:layout_editor_absoluteY="374dp"
+                        tools:layout_editor_absoluteX="28dp"
+                        tools:layout_conversion_absoluteWidth="13dp"/>
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:letterSpacing="0.03"
+                        android:paddingLeft="0dp"
+                        android:paddingTop="7.7dp"
+                        android:paddingBottom="8.3dp"
+                        android:text="설명"
+                        android:textColor="@color/seoul_default_light"
+                        android:textSize="13sp"
+                        tools:layout_conversion_absoluteHeight="95dp"
+                        tools:layout_conversion_absoluteWidth="140dp"
+                        tools:layout_editor_absoluteX="41dp"
+                        tools:layout_editor_absoluteY="378dp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16.7dp"
+                    android:fontFamily="@font/georgia"
+                    android:paddingTop="13.3dp"
+                    android:text="홈페이지"
+                    android:textColor="@color/seoul_default"
+                    android:textSize="11.7sp"
+                    android:textStyle="bold"
+                    tools:layout_conversion_absoluteHeight="29dp"
+                    tools:layout_conversion_absoluteWidth="46dp"
+                    tools:layout_editor_absoluteX="198dp"
+                    tools:layout_editor_absoluteY="374dp" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="20dp"
+                    android:orientation="horizontal"
+                    tools:ignore="DuplicateIds">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="0dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="8.3dp"
+                        android:src="@drawable/ic_home"
+                        tools:layout_conversion_absoluteHeight="31dp"
+                        tools:layout_conversion_absoluteWidth="13dp"
+                        tools:layout_editor_absoluteX="244dp"
+                        tools:layout_editor_absoluteY="374dp" />
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="360dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:paddingLeft="0dp"
+                        android:paddingTop="7.7dp"
+                        android:paddingBottom="8.3dp"
+                        android:textColor="@color/seoul_default_light"
+                        android:textSize="13sp"
+                        tools:layout_conversion_absoluteHeight="34dp"
+                        tools:layout_conversion_absoluteWidth="141dp"
+                        tools:layout_editor_absoluteX="257dp"
+                        tools:layout_editor_absoluteY="378dp"
+                        android:autoLink="web"
+                        android:linksClickable="true"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:background="@color/seoul_default_lightest"/>
+
+                <View
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="12.3dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16.7dp"
+                    android:fontFamily="@font/georgia"
+                    android:paddingTop="13.3dp"
+                    android:text="위치"
+                    android:textColor="@color/seoul_default"
+                    android:textSize="11.7sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:paddingLeft="0dp"
+                        android:paddingTop="7.7dp"
+                        android:paddingBottom="8.3dp"
+                        android:textColor="#7a7f85"
+                        android:textSize="13sp"
+                        />
+
+                    <ImageView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:src="@drawable/ic_place"
+                        android:paddingBottom="8.3dp"
+                        android:paddingLeft="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:paddingTop="10dp"/>
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_regular"
+                        android:paddingBottom="8.3dp"
+                        android:paddingLeft="0dp"
+                        android:paddingTop="7.7dp"
+                        android:textColor="#7a7f85"
+                        android:textSize="13sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+
+                    <Button
+                        android:id="@+id/button3"
+                        android:layout_width="66dp"
+                        android:layout_height="32dp"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/button"
+                        android:onClick="onButton3Clicked"
+                        android:text="복사"
+                        android:textColor="#ffffff" />
+
+                    <Button
+                        android:id="@+id/button"
+                        android:layout_width="66dp"
+                        android:layout_height="32dp"
+                        android:background="@drawable/button"
+                        android:onClick="onButton1Clicked"
+                        android:text="길찾기"
+                        android:textColor="#ffffff" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@drawable/shadow2"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="14dp"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/map_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center">
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="12.3dp"/>
+
+
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
-</ScrollView>
-
-</LinearLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button2"
         android:layout_width="wrap_content"
@@ -428,5 +398,5 @@
         app:srcCompat="@drawable/ic_launcher"
         app:backgroundTint="@color/seoul_default_light"
         android:contentDescription="hi"
-       />
+        />
 </FrameLayout>
