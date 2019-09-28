@@ -7,6 +7,7 @@ import android.hardware.Camera;
 import android.opengl.Matrix;
 import android.os.Build;
 import android.util.Log;
+import android.util.Size;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -209,7 +210,12 @@ public class ARCamera extends ViewGroup implements SurfaceHolder.Callback {
             this.cameraHeight = height;
 
             Camera.Parameters params = camera.getParameters();
+            List<Camera.Size> previewSizes = parameters.getSupportedPreviewSizes();
+
+            Camera.Size previewSize = previewSizes.get(0);
+
             params.setPreviewSize(previewSize.width, previewSize.height);
+            Log.i("ARCamera", String.valueOf(previewSize.width) + String.valueOf(previewSize.height));
             requestLayout();
 
             camera.setParameters(params);

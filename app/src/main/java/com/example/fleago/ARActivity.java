@@ -42,7 +42,7 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
     private TextView tvBearing;
 
     private SensorManager sensorManager;
-    private final static int REQUEST_CAMERA_PERMISSIONS_CODE = 11;
+    public static final int REQUEST_CAMERA_PERMISSIONS_CODE = 11;
     public static final int REQUEST_LOCATION_PERMISSIONS_CODE = 0;
 
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 1; // 10 meters

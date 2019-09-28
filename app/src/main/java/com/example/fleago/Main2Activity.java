@@ -62,8 +62,6 @@ public class Main2Activity extends AppCompatActivity {
             flipperImages(image);
         }
 
-
-        
         intent1 = getIntent();
         intent2 = getIntent();
         intent3 = getIntent();
@@ -79,10 +77,8 @@ public class Main2Activity extends AppCompatActivity {
         final TextView textView5 = (TextView) findViewById(R.id.textView5);//start_location
         LinearLayout linearlayout1 = (LinearLayout)findViewById(R.id.linearlayout1);//event_type
         TextView textView6 = (TextView) findViewById(R.id.textView6);//start_date
-//        TextView textView7 = (TextView) findViewById(R.id.textView7);//day
         TextView textView8 = (TextView) findViewById(R.id.textView8);//end_Date
         TextView textView9 = (TextView) findViewById(R.id.textView9);//end_time
-//      TextView textView10 = (TextView) findViewById(R.id.textView10);//month
         TextView textView11 = (TextView) findViewById(R.id.textView11);//start_time
         TextView textView12 = (TextView) findViewById(R.id.textView12);//월 test
 
@@ -90,26 +86,10 @@ public class Main2Activity extends AppCompatActivity {
         com.google.android.material.floatingactionbutton.FloatingActionButton button2 = (com.google.android.material.floatingactionbutton.FloatingActionButton)findViewById(R.id.button2);
         Button button3 = (Button)findViewById(R.id.button3);
         textView5.setText(intent1.getStringExtra("start_location"));
-
         String location= textView5.getText().toString();
 
 
 
-        //그래프//
-//        PieChartView pieChartView = findViewById(R.id.chart);
-//        List<SliceValue> pieData = new ArrayList<>();
-//
-//        pieData.add(new SliceValue(15, Color.BLUE));
-//        pieData.add(new SliceValue(25, Color.GRAY));
-//
-//        PieChartData pieChartData = new PieChartData(pieData);
-//        pieChartView.setPieChartData(pieChartData);
-//
-//        pieData.add(new SliceValue(15, Color.GREEN).setLabel("opening hour"));
-//        pieData.add(new SliceValue(25, Color.GRAY).setLabel("closing hour"));
-//
-//        pieChartData.setHasLabels(true);
-//        pieChartData.setHasLabels(true).setValueLabelTextSize(100);
 
 
         //*지도*//
@@ -133,30 +113,29 @@ public class Main2Activity extends AppCompatActivity {
         mapView.addPOIItem(marker);
 
 
+
         textView.setText(intent1.getStringExtra("name"));
         textView3.setText(intent1.getStringExtra("discription"));
+        textView4.setText(intent1.getStringExtra("url"));
         textView6.setText(intent1.getStringExtra("start_date"));
         textView8.setText(intent1.getStringExtra("end_date"));
         textView9.setText(intent1.getStringExtra("end_time"));
         textView11.setText(intent1.getStringExtra("start_time"));
-        textView4.setText(intent1.getStringExtra("url"));
 
 
-/*event_type 출력
-        List<String> event_type=(List<String>)intent1.getSerializableExtra("event_type");
-        linearlayout1.removeAllViews();
-        for(int i = 0; i < event_type.size(); i++){
-            TextView textView01 = new TextView(getApplicationContext());
-            textView01.setText(event_type.get(i));  //배열리스트 이용
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT);
 
-            linearlayout1.addView(textView01, params);  //linearLayout01 위에 생성
-        }
-*/
-
-        //textView4.setText(intent1.getStringExtra("page_url"));
+//
+//        List<String> event_type=(List<String>)intent1.getSerializableExtra("event_type");
+//        linearlayout1.removeAllViews();
+//        for(int i = 0; i < event_type.size(); i++){
+//            TextView textView01 = new TextView(getApplicationContext());
+//            textView01.setText(event_type.get(i));  //배열리스트 이용
+//            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+//                    LinearLayout.LayoutParams.MATCH_PARENT,
+//                    LinearLayout.LayoutParams.WRAP_CONTENT);
+//
+//            linearlayout1.addView(textView01, params);  //linearLayout01 위에 생성
+//        }
 
         //*길찾기 버튼*//
         button.setOnClickListener(new View.OnClickListener() {

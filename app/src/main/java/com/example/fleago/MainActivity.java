@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 import adapter.ListViewAdapter;
 
@@ -93,9 +94,6 @@ public class MainActivity extends AppCompatActivity {
         final DatabaseReference myRef = database.getReference(formatDate + "월");
         final DatabaseReference myRef2 = database.getReference(nMonth + "월");
 
-        // 임시 test. 거리순 정렬 보려고 gps 칼럼이 있는 10월로 테스트
-//        final DatabaseReference myRef = database.getReference("10월");
-
         list = new ArrayList<>();
 
         ValueEventListener evl = new ValueEventListener() {
@@ -114,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                         target.setLongitude(Double.parseDouble(gps.get(0)));    // 경도
                         target.setLatitude(Double.parseDouble(gps.get(1)));     // 위도
 
+                        Log.d("TEST current location", String.valueOf(currentLocation));
                         distance = (int) currentLocation.distanceTo(target);    // 소수점 버림
                         tmp.setDistance(distance);
                     } else {
@@ -146,6 +145,10 @@ public class MainActivity extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         // Toast.makeText(view.getContext(), "lv..setOnItemClick", Toast.LENGTH_SHORT).show();
                         ((SwipeLayout) (lv.getChildAt(position - lv.getFirstVisiblePosition()))).open(true);
+                        Log.d("TEST position", String.valueOf(position));
+                        Log.d("TEST getFirstPosition", String.valueOf(lv.getFirstVisiblePosition()));
+
+//                        ((SwipeLayout) (lv.getChildAt(position))).open(true);
 
                         mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
                     }
@@ -168,8 +171,9 @@ public class MainActivity extends AppCompatActivity {
 
         // 현재 달 Firebase reference
         myRef.addValueEventListener(evl);
-        // 다음 달 Firebase reference
+        // 다음 달 Firebase
         myRef2.addValueEventListener(evl);
+
     }
     // Menu method
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -236,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
     public void requestLocationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
                 this.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            this.requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSIONS_CODE);
+            this.requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CAMERA}, REQUEST_LOCATION_PERMISSIONS_CODE);
         } else {
             initLocationService();
         }
@@ -257,22 +261,11 @@ public class MainActivity extends AppCompatActivity {
 
             if (!isNetworkEnabled && !isGPSEnabled) {
                 // cannot get location
+                Log.e("TEST", "cannot get location");
                 this.locationServiceAvailable = false;
             }
 
             this.locationServiceAvailable = true;
-
-            if (isNetworkEnabled) {
-                Log.d("TEST provider", "network");
-                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-                        MIN_TIME_BW_UPDATES,
-                        MIN_DISTANCE_CHANGE_FOR_UPDATES,
-                        gpsLocationListener);
-                if (locationManager != null)   {
-                    currentLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-//                    updateLatestLocation();
-                }
-            }
 
             if (isGPSEnabled)  {
                 Log.d("TEST provider", "gps");
@@ -283,6 +276,18 @@ public class MainActivity extends AppCompatActivity {
 
                 if (locationManager != null)  {
                     currentLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//                    updateLatestLocation();
+                }
+            }
+
+            if (isNetworkEnabled) {
+                Log.d("TEST provider", "network");
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+                        MIN_TIME_BW_UPDATES,
+                        MIN_DISTANCE_CHANGE_FOR_UPDATES,
+                        gpsLocationListener);
+                if (locationManager != null)   {
+                    currentLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 //                    updateLatestLocation();
                 }
             }
@@ -308,28 +313,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-    // 권한 허가 요청에 대한 응답 처리
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_LOCATION_PERMISSIONS_CODE: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // permission was granted, yay! Do the contacts-related task you need to do.
-
-                } else {
-                    // permission denied, boo! Disable the functionality that depends on this permission.
-                    // 권한 요청이 거부되었으므로 프로그램 종료
-
-                }
-                return;
-            }
-
-            // other 'case' lines to check for other
-            // permissions this app might request.
-        }
-    }
 }
+
 
