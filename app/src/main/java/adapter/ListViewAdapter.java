@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,11 +32,16 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
-public class ListViewAdapter extends BaseSwipeAdapter {
+public class ListViewAdapter extends BaseSwipeAdapter implements Filterable {
 
     private Context mContext;
+
     private ArrayList<Market> list;
+    private ArrayList<Market> list2;
+
 
     //firebaseStorage 인스턴스 생성
     //하나의 Storage와 연동되어 있는 경우, getInstance()의 파라미터는 공백으로 두어도 됨
@@ -53,6 +60,8 @@ public class ListViewAdapter extends BaseSwipeAdapter {
     public ListViewAdapter(Context mContext, ArrayList list) {
         this.mContext = mContext;
         this.list = list;
+        list2 = new ArrayList<Market>();
+        list2.addAll(list);
     }
 
     @Override
@@ -151,5 +160,43 @@ public class ListViewAdapter extends BaseSwipeAdapter {
             }
         });
     }
+
+    @Override
+    public Filter getFilter() {
+        return myFilter;
+    }
+
+    Filter myFilter = new Filter () {
+
+        //Automatic on background thread
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+
+            List<Market> filteredList = new ArrayList<>();
+
+            if (charSequence == null || charSequence.length() == 0) {
+                filteredList.addAll(list2);
+            } else {
+                for (Market market: list2) {
+                    if (market.getName().contains(charSequence.toString().toLowerCase())) {
+                        filteredList.add(market);
+                    }
+                }
+            }
+
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredList;
+            return filterResults;
+        }
+
+        //Automatic on UI thread
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            list.clear();
+            list.addAll((Collection<? extends Market>) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
+
 
 }
