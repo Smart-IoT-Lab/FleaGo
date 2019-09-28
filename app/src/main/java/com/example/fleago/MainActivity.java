@@ -2,16 +2,10 @@ package com.example.fleago;
 
 import androidx.annotation.NonNull;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
-import android.app.ActionBar;
-import android.content.Intent;
 import android.Manifest;
-import android.Manifest.permission;
-import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -25,7 +19,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.util.Attributes;
@@ -36,9 +29,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Collections;
 import java.util.Comparator;
@@ -51,6 +46,7 @@ import static com.example.fleago.ARActivity.REQUEST_LOCATION_PERMISSIONS_CODE;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MarketListView";
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
 
     private SlidingUpPanelLayout mLayout;
     private ListViewAdapter mAdapter;
@@ -105,25 +101,29 @@ public class MainActivity extends AppCompatActivity {
                     int distance;
                     Markets tmp = d.getValue(Markets.class);
 
-                    // 각 Market 까지의 거리를 설정
-                    if (tmp.hasGps()) {
-                        Location target = new Location("Firebase");
-                        ArrayList<String> gps = tmp.getGps();
-                        target.setLongitude(Double.parseDouble(gps.get(0)));    // 경도
-                        target.setLatitude(Double.parseDouble(gps.get(1)));     // 위도
+                    // 2주 안에 있으면 list에 추가한다.
+                    Log.d("TEST start date", tmp.getStart_date());
+                    Log.d("TEST end date", tmp.getEnd_date());
 
-                        Log.d("TEST current location", String.valueOf(currentLocation));
-                        distance = (int) currentLocation.distanceTo(target);    // 소수점 버림
-                        tmp.setDistance(distance);
-                    } else {
-                        // GPS 정보가 없는 경우, 가까운 순으로 정렬을 위해 최대값으로 설정.
-                        distance = MAX_DISTANCE;
-                        tmp.setDistance(distance);
+                    if (isIn2Weeks(tmp.getStart_date()) || isIn2Weeks(tmp.getEnd_date())) {
+                        // 각 Market 까지의 거리를 설정
+                        if (tmp.hasGps()) {
+                            Location target = new Location("Firebase");
+                            ArrayList<String> gps = tmp.getGps();
+                            target.setLongitude(Double.parseDouble(gps.get(0)));    // 경도
+                            target.setLatitude(Double.parseDouble(gps.get(1)));     // 위도
+
+                            Log.d("TEST current location", String.valueOf(currentLocation));
+                            distance = (int) currentLocation.distanceTo(target);    // 소수점 버림
+                            tmp.setDistance(distance);
+                        } else {
+                            // GPS 정보가 없는 경우, 가까운 순으로 정렬을 위해 최대값으로 설정.
+                            distance = MAX_DISTANCE;
+                            tmp.setDistance(distance);
+                        }
+
+                        list.add(tmp);
                     }
-
-                    // TODO 현재 날짜를 기준으로 2주동안의 시장만 추가하기.
-
-                    list.add(tmp);
                 }
 
                 // 거리순 정렬
@@ -175,6 +175,49 @@ public class MainActivity extends AppCompatActivity {
         myRef2.addValueEventListener(evl);
 
     }
+
+    private boolean isIn2Weeks(String target) {
+        try {
+            // 문자열로 된 날짜(타겟)를 Calendar 객체로 만들기
+            Date targetDate = dateFormat.parse(target);
+            Calendar targetCal = Calendar.getInstance();
+            targetCal.setTime(targetDate);
+
+            Log.d("TEST target date", targetCal.getTime().toString());
+
+            Calendar cal = Calendar.getInstance();
+            cal.set(cal.get(cal.YEAR), cal.get(cal.MONTH), cal.get(cal.DAY_OF_MONTH), 0, 0, 0);
+
+            Log.d("TEST now", cal.getTime().toString());
+            Log.d("TEST testcal", targetCal.getTime().toString());
+
+            // 현재(cal)는 타겟보다 이후인가? > 즉, 타겟은 과거인가?
+            if (cal.after(targetCal)) {
+                return false;
+            } else {
+                // 14일 후의 시간
+                cal.add(Calendar.DATE, 14);
+                Log.d("TEST after 2weeks", cal.getTime().toString());
+
+                // 14일이 지난 시간(cal)은 타겟보다 이전인가? > 즉, 타겟은 미래인가?
+                if (cal.before(targetCal)) {
+                    return false;
+                } else {
+                    // 타겟은 2주 안에 포함하는 날짜이다.
+                    return true;
+                }
+            }
+
+        } catch(ParseException e) {
+            return false;
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
     // Menu method
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu) ;
