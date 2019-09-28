@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -71,21 +72,67 @@ public class Main2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        int img1;
+        int img2;
+        int img3;
+        intent1 = getIntent();
+        intent2 = getIntent();
+        intent3 = getIntent();
 
         ActionBar ab = getSupportActionBar() ;
         ab.hide();
 
+        pathReference = storageRef1.child(intent1.getStringExtra("name")+"/" + intent1.getStringExtra("name") + "_1.jpg");
+        if (pathReference == null)
+            storageRef2.child(intent1.getStringExtra("name")+"/" + intent1.getStringExtra("name") + "_1.jpg");
 
-        int images[]={R.drawable.blur_img,R.drawable.img1,R.drawable.ic_info};
-        v_flipper=findViewById(R.id.v_flipper);
+        final long BYTE = 1024*1024;
+        Log.d("pathref",pathReference.getPath());
 
-        for(int image:images){
-            flipperImages(image);
-        }
+        pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.with(
+                        Main2Activity.this).
+                        load(uri).
+                        fit().
+                        centerInside().
+                        into((ImageView)findViewById(R.id.v_flipper));
+            }
+        });
 
-        intent1 = getIntent();
-        intent2 = getIntent();
-        intent3 = getIntent();
+        /*try{
+        pathReference.getBytes(BYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            Integer[] imgs = new Integer[3];
+            StorageReference pathReference;
+            public void onSuccess(byte[] b) {
+                imgs[0] = (b[0] << 24) + ((b[1] & 0xFF) << 16) + ((b[2] & 0xFF) << 8) + (b[3] & 0xFF);
+                *//*pathReference = storageRef1.child(intent1.getStringExtra("name")+"/" + intent1.getStringExtra("name") + "_2.jpg");
+                imgs[1] = (b[0] << 24) + ((b[1] & 0xFF) << 16) + ((b[2] & 0xFF) << 8) + (b[3] & 0xFF);
+                pathReference = storageRef1.child(intent1.getStringExtra("name")+"/" + intent1.getStringExtra("name") + "_3.jpg");
+                imgs[2] = (b[0] << 24) + ((b[1] & 0xFF) << 16) + ((b[2] & 0xFF) << 8) + (b[3] & 0xFF);*//*
+
+                v_flipper=findViewById(R.id.v_flipper);
+                *//*for(int image:imgs){
+                    flipperImages(image);
+                }*//*
+                flipperImages(imgs[0]);
+            }
+        });
+        }catch (Exception e){
+            e.printStackTrace();
+        }*/
+            
+
+
+
+        //int images[]={R.drawable.blur_img,R.drawable.img1,R.drawable.ic_info};
+        //v_flipper=findViewById(R.id.v_flipper);
+
+        //for(int image:images){
+        //    flipperImages(image);
+        //}
+
 
         final ArrayList<String> gps=(ArrayList<String>)intent1.getSerializableExtra("gps");
         final double gps1;
@@ -305,6 +352,7 @@ public class Main2Activity extends AppCompatActivity {
     //*image slider*//
     private void flipperImages(int image) {
         ImageView imageView=new ImageView(this);
+        Log.d("image value : ",Integer.toString(image));
         imageView.setBackgroundResource(image);
         v_flipper.addView(imageView);
         v_flipper.setFlipInterval(2000);
