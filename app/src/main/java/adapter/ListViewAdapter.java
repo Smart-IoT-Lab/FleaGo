@@ -94,7 +94,14 @@ public class ListViewAdapter extends BaseSwipeAdapter implements Filterable {
         setImage(image, position);
 
         // 제목 출력
-        ((TextView) convertView.findViewById(R.id.text_data)).setText(list.get(position).getName());
+        // (건대입구역) 교체
+        if (list.get(position).getName().equals("(건대입구역)")) {
+            String name = "건대입구 플리마켓";
+            ((TextView) convertView.findViewById(R.id.text_data)).setText(name);
+        }
+        else{
+            ((TextView) convertView.findViewById(R.id.text_data)).setText(list.get(position).getName());
+        }
 
         // 카테고리 출력
         String eventsToString = "";
@@ -181,12 +188,11 @@ public class ListViewAdapter extends BaseSwipeAdapter implements Filterable {
 
     public void setImage(final ImageView image, final int position) {
         pathReference = storageRef1.child(list2.get(position).getName() + "/" + list2.get(position).getName() + "_1.jpg");
-        //pathReference = storageRef1.child("(건대입구역)/(건대입구역)_1.jpg");
+        // pathReference = storageRef1.child("(건대입구역)/(건대입구역)_1.jpg");
         Log.d("TEST position", "position : " + position + "  name : " +list2.get(position).getName());
 
         if (pathReference == null)
             storageRef2.child(list2.get(position).getName() + "/" + list2.get(position).getName() + "_1.jpg");
-
 
         pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
