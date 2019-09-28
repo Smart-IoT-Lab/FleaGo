@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -166,6 +168,24 @@ public class Main2Activity extends AppCompatActivity {
         v_flipper.setOutAnimation(this,android.R.anim.slide_out_right);
     }
 
+    // Search bar
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu) ;
+
+        return true ;
+    }
+    // Search bar
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_serach :
+                // TODO : process the click event for action_search item.
+                return true ;
+            // ...
+            // ...
+            default :
+                return super.onOptionsItemSelected(item) ;
+        }
+    }
 
 
 
