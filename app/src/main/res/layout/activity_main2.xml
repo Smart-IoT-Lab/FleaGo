@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-     android:layout_height="match_parent"
+<LinearLayout
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:orientation="vertical">
 
@@ -75,9 +74,10 @@
             android:paddingTop="7.7dp"
             android:textColor="#7a7f85"
             android:textSize="13sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
         </LinearLayout>
 
         <LinearLayout
@@ -117,17 +117,12 @@
                 android:paddingLeft="16.7dp"
                 android:paddingTop="7.7dp"
                 android:paddingBottom="8.3dp"
-                android:text="날짜"
                 android:id="@+id/textView6"
+                android:text="start_date"
+
                 android:textColor="@color/seoul_default_light"
                 android:textSize="13sp" />
-            <View
-                android:layout_width="0.5dp"
-                android:layout_height="80dp"
-                android:layout_centerInParent="true"
-                android:background="@color/seoul_default"/>
             <TextView
-                android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="90dp"
                 android:layout_marginTop="5dp"
@@ -138,13 +133,53 @@
                 android:paddingLeft="16.7dp"
                 android:paddingTop="7.7dp"
                 android:paddingBottom="8.3dp"
-                android:text="시간"
+                android:id="@+id/textView11"
+                android:text="start_time"
                 android:textColor="@color/seoul_default_light"
                 android:textSize="13sp" />
+
         </LinearLayout>
-        <!--        <AnalogClock-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content" />-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_regular"
+                android:letterSpacing="0.03"
+                android:paddingLeft="16.7dp"
+                android:paddingTop="7.7dp"
+                android:paddingBottom="8.3dp"
+                android:text="end_date"
+                android:textColor="@color/seoul_default_light"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_regular"
+                android:letterSpacing="0.03"
+                android:paddingLeft="16.7dp"
+                android:paddingTop="7.7dp"
+                android:paddingBottom="8.3dp"
+                android:text="end_time"
+                android:textColor="@color/seoul_default_light"
+                android:textSize="13sp" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -157,6 +192,10 @@
             android:layout_width="match_parent"
             android:layout_height="12.3dp"/>
 
+<!--        <lecho.lib.hellocharts.view.PieChartView-->
+<!--            android:id="@+id/chart"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent" />-->
 
         <TextView
             android:layout_width="wrap_content"
@@ -177,7 +216,7 @@
             android:orientation="horizontal"
             android:id="@+id/linearLayout">
 
-            <!--<ImageView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="0dp"
@@ -187,7 +226,7 @@
                 tools:layout_conversion_absoluteHeight="31dp"
                 tools:layout_editor_absoluteY="374dp"
                 tools:layout_editor_absoluteX="28dp"
-                tools:layout_conversion_absoluteWidth="13dp" />-->
+                tools:layout_conversion_absoluteWidth="13dp"/>
 
             <TextView
                 android:id="@+id/textView3"
@@ -198,13 +237,13 @@
                 android:paddingLeft="0dp"
                 android:paddingTop="7.7dp"
                 android:paddingBottom="8.3dp"
-                android:text="TextView"
+                android:text="설명"
                 android:textColor="@color/seoul_default_light"
                 android:textSize="13sp"
                 tools:layout_conversion_absoluteHeight="95dp"
-                tools:layout_editor_absoluteY="378dp"
+                tools:layout_conversion_absoluteWidth="140dp"
                 tools:layout_editor_absoluteX="41dp"
-                tools:layout_conversion_absoluteWidth="140dp" />
+                tools:layout_editor_absoluteY="378dp" />
 
         </LinearLayout>
 
@@ -231,7 +270,7 @@
             android:orientation="horizontal"
             tools:ignore="DuplicateIds">
 
-           <!-- <ImageView
+           <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="0dp"
@@ -241,7 +280,7 @@
                 tools:layout_conversion_absoluteHeight="31dp"
                 tools:layout_conversion_absoluteWidth="13dp"
                 tools:layout_editor_absoluteX="244dp"
-                tools:layout_editor_absoluteY="374dp" />-->
+                tools:layout_editor_absoluteY="374dp" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -262,6 +301,7 @@
                 tools:layout_editor_absoluteY="378dp" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
@@ -323,9 +363,19 @@
                 android:layout_height="wrap_content"
                 />
 
-
-
-        </LinearLayout>
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="복사"
+                android:onClick="onButton3Clicked"/>
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="길찾기"
+                android:onClick="onButton1Clicked" />
+             </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -340,22 +390,11 @@
 
         </LinearLayout>
 
-
-
         <RelativeLayout
             android:id="@+id/map_view"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_gravity="center">
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="길찾기"
-                android:textColor="#ffffff"
-                android:background="@color/seoul_default_light"
-                android:onClick="onButton1Clicked"/>
 
         </RelativeLayout>
 
@@ -372,18 +411,6 @@
     </LinearLayout>
 </ScrollView>
 
-    <!--<LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        >
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:text="AR View"
-        android:background="@color/seoul_default_light"
-        tools:context=".Main2Activity" />
-    </LinearLayout>-->
 </LinearLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button2"
@@ -394,5 +421,6 @@
         app:fabCustomSize="70dp"
         app:srcCompat="@drawable/ic_launcher"
         app:backgroundTint="@color/seoul_default_light"
-        android:contentDescription="hi" />
+        android:contentDescription="hi"
+       />
 </FrameLayout>
