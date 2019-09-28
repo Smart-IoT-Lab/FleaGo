@@ -426,15 +426,35 @@
         </ScrollView>
 
     </LinearLayout>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/button2"
+
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="end|bottom"-->
+    <!--        android:layout_margin="20dp"-->
+    <!--        app:fabCustomSize="70dp"-->
+    <!--        app:srcCompat="@drawable/AR"-->
+    <!--        app:backgroundTint="@color/seoul_default_light"-->
+    <!--        android:contentDescription="hi" />-->
+
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="20dp"
-        app:fabCustomSize="70dp"
-        app:srcCompat="@drawable/ic_launcher"
-        app:backgroundTint="@color/seoul_default_light"
-        android:contentDescription="hi"
-        />
+        android:layout_gravity="bottom|right">
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center|right"
+            android:layout_margin="20dp"
+            android:background="@drawable/round_button"
+            android:elevation="16dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="AR"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white"
+            android:textSize="30dp" />
+    </FrameLayout>
+
 </FrameLayout>

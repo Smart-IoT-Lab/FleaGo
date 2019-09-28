@@ -1,7 +1,6 @@
 package com.example.fleago;
-
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
+
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -27,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -74,6 +74,10 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        ActionBar ab = getSupportActionBar() ;
+        ab.hide();
+
+
         int images[]={R.drawable.blur_img,R.drawable.img1,R.drawable.ic_info};
         v_flipper=findViewById(R.id.v_flipper);
 
@@ -119,15 +123,19 @@ public class Main2Activity extends AppCompatActivity {
        // TextView textView9 = (TextView) findViewById(R.id.textView9);//end_time
         TextView textView11 = (TextView) findViewById(R.id.textView11);//start_time
         TextView textView12 = (TextView) findViewById(R.id.textView12);//월 test
-        ImageView  imageView1= (ImageView) findViewById(R.id.image1);
-        ImageView  imageView2= (ImageView) findViewById(R.id.image2);
-        ImageView  imageView3= (ImageView) findViewById(R.id.image3);
+//        ImageView  imageView1= (ImageView) findViewById(R.id.image1);
+//        ImageView  imageView2= (ImageView) findViewById(R.id.image2);
+//        ImageView  imageView3= (ImageView) findViewById(R.id.image3);
 
 
 
-        @SuppressLint("WrongViewCast") ImageButton button = (ImageButton) findViewById(R.id.button);
-        com.google.android.material.floatingactionbutton.FloatingActionButton button2 = (com.google.android.material.floatingactionbutton.FloatingActionButton)findViewById(R.id.button2);
+
+        ImageButton button = (ImageButton) findViewById(R.id.button);
         ImageButton button3 = (ImageButton)findViewById(R.id.button3);
+
+//        com.google.android.material.floatingactionbutton.FloatingActionButton button2 = (com.google.android.material.floatingactionbutton.FloatingActionButton)findViewById(R.id.button2);
+        TextView button2 = findViewById(R.id.button2);
+
         textView5.setText(intent1.getStringExtra("start_location"));
         String location= textView5.getText().toString();
 

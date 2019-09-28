@@ -127,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
                             tmp.setDistance(distance);
                         }
 
+
                         list.add(tmp);
                     }
                 }
@@ -196,6 +197,11 @@ public class MainActivity extends AppCompatActivity {
 
             Log.d("TEST now", cal.getTime().toString());
             Log.d("TEST testcal", targetCal.getTime().toString());
+
+            // 날짜가 같으면 true
+            if (cal.compareTo(targetCal) == 0) {
+                return true;
+            }
 
             // 현재(cal)는 타겟보다 이후인가? > 즉, 타겟은 과거인가?
             if (cal.after(targetCal)) {
@@ -353,12 +359,12 @@ public class MainActivity extends AppCompatActivity {
         Collections.sort(list, new Comparator<Markets>() {
             @Override
             public int compare(Markets m1, Markets m2) {
-                if (m1.getDistance() < m2.getDistance()) {
-                    return -1;
-                } else if (m1.getDistance() > m2.getDistance()) {
-                    return 1;
-                }
-                return 0;
+            if (m1.getDistance() < m2.getDistance()) {
+                return -1;
+            } else if (m1.getDistance() > m2.getDistance()) {
+                return 1;
+            }
+            return 0;
             }
         });
     }
