@@ -4,7 +4,7 @@
 		<name>taker_fusiontable_seoul.kml</name>
 		<Style id='Style2-point-1'>
 			<IconStyle>
-				<color>ffff0000</color>
+				<color>ff0000ff</color>
 				<scale>1.0</scale>
 				<Icon>
 					<href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href>
@@ -19,7 +19,7 @@
 		</Style>
 		<Style id='Style2-point-1-hover'>
 			<IconStyle>
-				<color>ffff0000</color>
+				<color>ff0000ff</color>
 				<scale>1.0</scale>
 				<Icon>
 					<href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href>
@@ -107,46 +107,7 @@
 				<styleUrl>#Style2-polygon-3-hover</styleUrl>
 			</Pair>
 		</StyleMap>
-
-		<Style id='Style2-polygon-4'>
-			<LabelStyle>
-				<scale>0.0</scale>
-			</LabelStyle>
-			<LineStyle>
-				<color>ff666666</color>
-				<width>3</width>
-			</LineStyle>
-			<PolyStyle>
-				<color>ffff0000</color>
-			</PolyStyle>
-			<BalloonStyle>
-				<text>$[description]</text>
-			</BalloonStyle>
-		</Style>
-		<Style id='Style2-polygon-4-hover'>
-			<LineStyle>
-				<color>ff666666</color>
-				<width>1</width>
-			</LineStyle>
-			<PolyStyle>
-				<color>bca57656</color>
-			</PolyStyle>
-			<BalloonStyle>
-				<text>$[description]</text>
-			</BalloonStyle>
-		</Style>
-		<StyleMap id='Style2-polygon-4-map'>
-			<Pair>
-				<key>normal</key>
-				<styleUrl>#Style2-polygon-4</styleUrl>
-			</Pair>
-			<Pair>
-				<key>highlight</key>
-				<styleUrl>#Style2-polygon-4-hover</styleUrl>
-			</Pair>
-		</StyleMap>
-
-
+		
 		
 		<Placemark>
 			<name>도봉구</name>
@@ -159,7 +120,7 @@
 <b>sd_cd:</b> 11<br>
 <b>sd_name:</b> 서울특별시
 </div>]]></description>
-			<styleUrl>#Style2-polygon-4-map</styleUrl>
+			<styleUrl>#Style2-polygon-3-map</styleUrl>
 			<ExtendedData>
 				<Data name='sgg_cd'>
 					<value>11100</value>

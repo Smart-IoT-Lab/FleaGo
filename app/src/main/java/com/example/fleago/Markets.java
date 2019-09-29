@@ -19,9 +19,6 @@ public class Markets {
     private int distance;
     private ArrayList<String> event_type;
 
-
-
-
     public void setEvent_type(ArrayList<String> event_type) { this.event_type = event_type; }
 
     public int getDistance() {

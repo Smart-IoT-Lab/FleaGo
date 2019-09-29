@@ -164,12 +164,13 @@ public class KmlDemoActivity extends BaseDemoActivity {
 
                 double lat = marker.latitude;
                 double lng = marker.longitude;
+                String title = "marker_";
                 //offset for example
                 for (int i = 0; i < 15; i++) {
                     double offset = 1 / 600d;
                     lat = (float) (lat - offset);
                     lng = (float) (lng + offset * (-1 ^ (i + 1)));
-                    MyItem offsetItem = new MyItem(lat, lng);
+                    MyItem offsetItem = new MyItem(lat, lng, title);
                     mClusterManager.addItem(offsetItem);
                 }
             }

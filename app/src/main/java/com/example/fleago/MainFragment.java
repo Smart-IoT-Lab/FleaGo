@@ -21,6 +21,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,9 +35,9 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -60,8 +61,8 @@ public class MainFragment extends Fragment {
 
     //DB
     FirebaseDatabase database = FirebaseDatabase.getInstance();
+    ChildEventListener mChildEventlistener;
     DatabaseReference ref = database.getReference("10월");
-
 
     public LatLngBounds get_bounds(float zoom_lv) {
         float e = (float) (Math.pow(2, 13 - zoom_lv) * 0.03);
@@ -115,7 +116,7 @@ public class MainFragment extends Fragment {
         }
     }
 
-    public ArrayList<Markets> loadFirebase(final DatabaseReference ref){
+    public void loadFirebase(final DatabaseReference ref){
 
         ref.addValueEventListener(new ValueEventListener() {
 
@@ -127,7 +128,6 @@ public class MainFragment extends Fragment {
                     marketList.add(markets);
                     Log.d("asdfasdf1",marketList.get(marketList.size()-1).getGps().get(0)+","+marketList.get(marketList.size()-1).getGps().get(1));
                 }
-                return marketList;
             }
 
             @Override
@@ -187,6 +187,8 @@ public class MainFragment extends Fragment {
                 gMap.animateCamera(CameraUpdateFactory.newCameraPosition(googlePlex), 10, null);
 
 
+                addMarkersToMap(gMap);
+
                 loadFirebase(ref);
                 Log.d("fdsafdsa",Integer.toString(marketList.size()));
 
@@ -199,19 +201,16 @@ public class MainFragment extends Fragment {
                     Log.d("asdfasdf1",marketList.get(i).getGps().get(0)+","+marketList.get(i).getGps().get(1));
                 }
 
-                gMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(37.543333,126.981111))
-                        .title("서울 중앙인데요")
-                        .snippet("I'm center marker"));
-
+                /*
                 gMap.addMarker(new MarkerOptions()
                         .position(new LatLng(37.443545, 126.981061))
                         .title("경기돈데요")
                         .snippet("서울인줄 알았죠?"));
-
+                */
                 mClusterManager = new ClusterManager<>(getContext(), gMap);
                 gMap.setOnCameraIdleListener(mClusterManager);
                 gMap.setOnMarkerClickListener(mClusterManager);
+                //addItems();
                 LatLng seoul_center = new LatLng(37.543545, 126.981061);//   +0.038ed          +0.03                      -0.04           -0.03
 
                 //ClusterManager의 item들인 마커들+클러스터 클릭리스너
@@ -223,9 +222,9 @@ public class MainFragment extends Fragment {
                         Log.d("cluster","clicked");
                         Log.d("cluster_position_lat", String.valueOf(position.latitude));
                         Log.d("cluster_position_lng", String.valueOf(position.longitude));
-                        seoul_bounds = get_bounds(11);
+                        seoul_bounds = get_bounds(12);
                         gMap.setLatLngBoundsForCameraTarget(seoul_bounds);
-                        gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(cluster_center, 11));
+                        gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(cluster_center, 12));
                         return true;
                     }
                 });
@@ -237,13 +236,12 @@ public class MainFragment extends Fragment {
                         Log.d("cluster item","clicked");
                         Log.d("item_position_lat", String.valueOf(position.latitude));
                         Log.d("item_position_lng", String.valueOf(position.longitude));
-                        seoul_bounds = get_bounds(12);
+                        seoul_bounds = get_bounds(13);
                         gMap.setLatLngBoundsForCameraTarget(seoul_bounds);
-                        gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(item_center, 12));
+                        gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(item_center, 13));
                         return true;
                     }
                 });
-
                 seoul_bounds = new LatLngBounds(new LatLng(sq_h_center - 0.00001, sq_w_center - 0.00001), new LatLng(sq_h_center + 0.00001, sq_w_center + 0.00001));
                 gMap.setLatLngBoundsForCameraTarget(seoul_bounds);
 
@@ -270,6 +268,61 @@ public class MainFragment extends Fragment {
         return rootView;
     }
 
+    private void addMarkersToMap(final GoogleMap gMap) {
+        mChildEventlistener = ref.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Markets marker = dataSnapshot.getValue(Markets.class);
+                String name = marker.getName();
+                String latitude = marker.getGps().get(0);
+                String longitude = marker.getGps().get(1);
+                double convert_lat = Double.parseDouble(latitude);
+                double convert_lng = Double.parseDouble(longitude);
+                LatLng location = new LatLng(convert_lng, convert_lat);
+                gMap.addMarker(new MarkerOptions().position(location).title(name));
+                Log.d("FB_marker_ADD-Location", String.valueOf(location));
+                Log.d("FB_marker_ADD-name", name);
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+    }
+
+    private void addItems() {
+        LatLng marker_LatLng = new LatLng(37.543333,126.981111);
+        double lat = marker_LatLng.latitude;
+        double lng = marker_LatLng.longitude;
+        String title;
+
+        //offset for example
+        for (int i = 0; i < 15; i++) {
+            double offset = 1 / 600d;
+            lat = lat - offset;
+            lng = lng + offset * (-1 ^ (i + 1));
+
+            String marker_front = "Marker #";
+            String marker_num = Integer.toString(i+1);
+            String marker_title = marker_front + marker_num;
+
+            MyItem offsetItem = new MyItem(lat, lng, marker_title);
+            mClusterManager.addItem(offsetItem);
+        }
+    }
 
 
     private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {
