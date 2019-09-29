@@ -38,7 +38,9 @@ import com.google.maps.android.data.kml.KmlLayer;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,8 +48,14 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 public class MainFragment extends Fragment implements GoogleMap.OnMarkerClickListener, GoogleMap.OnMyLocationButtonClickListener, OnMapReadyCallback{
-
     private ClusterManager<MyItem> mClusterManager;
+
+    long now = System.currentTimeMillis();
+    Date date= new Date(now);
+    SimpleDateFormat sdf= new SimpleDateFormat("M");
+    String formatDate = sdf.format(date);
+    int month = Integer.parseInt(formatDate)+1;
+    String nMonth=String.valueOf(month);
 
     float dblat= (float) 37.543333;
     float dblng= (float) 126.981111;
@@ -67,8 +75,8 @@ public class MainFragment extends Fragment implements GoogleMap.OnMarkerClickLis
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     ChildEventListener mChildEventlistener;
     ChildEventListener mChildEventlistener2;
-    DatabaseReference ref = database.getReference("9월");
-    DatabaseReference ref2 = database.getReference("10월");
+    DatabaseReference ref = database.getReference(formatDate + "월");
+    DatabaseReference ref2 = database.getReference(nMonth + "월");
 
     public LatLngBounds get_bounds(float zoom_lv) {
         float e = (float) (Math.pow(2, 13 - zoom_lv) * 0.03);
@@ -178,7 +186,7 @@ public class MainFragment extends Fragment implements GoogleMap.OnMarkerClickLis
             public void onMapReady(final GoogleMap gMap) {
 
                 gMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-                gMap.setMinZoomPreference(8);
+                gMap.setMinZoomPreference(10);
                 gMap.setMaxZoomPreference(13);
 
                 gMap.clear(); //clear old markers
@@ -197,17 +205,10 @@ public class MainFragment extends Fragment implements GoogleMap.OnMarkerClickLis
                 addMarkersToMap(gMap);
                 addMarkers2ToMap(gMap);
 
-
-                /*
-                gMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(37.443545, 126.981061))
-                        .title("경기돈데요")
-                        .snippet("서울인줄 알았죠?"));
-                */
                 mClusterManager = new ClusterManager<>(getContext(), gMap);
                 gMap.setOnCameraIdleListener(mClusterManager);
                 gMap.setOnMarkerClickListener(mClusterManager);
-                //addItems();
+
                 LatLng seoul_center = new LatLng(37.543545, 126.981061);//   +0.038ed          +0.03                      -0.04           -0.03
 
                 //ClusterManager의 item들인 마커들+클러스터 클릭리스너
@@ -286,6 +287,7 @@ public class MainFragment extends Fragment implements GoogleMap.OnMarkerClickLis
                     double convert_lat = Double.parseDouble(latitude);
                     double convert_lng = Double.parseDouble(longitude);
                     LatLng location = new LatLng(convert_lng, convert_lat);
+
                     gMap.addMarker(new MarkerOptions().position(location).title(name));
                     Log.d("FB_marker_ADD-Location", String.valueOf(location));
                     Log.d("FB_marker_ADD-name", name);
@@ -309,6 +311,7 @@ public class MainFragment extends Fragment implements GoogleMap.OnMarkerClickLis
             }
         });
     }
+
     private void addMarkers2ToMap(final GoogleMap gMap) {
         mChildEventlistener2 = ref2.addChildEventListener(new ChildEventListener() {
             @Override
