@@ -33,6 +33,7 @@ import com.google.maps.android.data.kml.KmlLayer;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
@@ -51,6 +52,7 @@ public class MainFragment extends Fragment {
     final float sq_w_center = (float) ((126.785582 + 127.183786) / 2);
     final float sq_h_center = (float) ((37.701397 + 37.428402) / 2);
 
+    ArrayList<Markets> marketList = new ArrayList<Markets>();
 
     protected int getLayoutId() {
         return R.layout.kml_demo;
@@ -112,6 +114,33 @@ public class MainFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
+    public ArrayList<Markets> loadFirebase(final DatabaseReference ref){
+
+        ref.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Markets markets = snapshot.getValue(Markets.class);
+                    Log.d("asdfasdf",markets.getGps().get(0)+","+markets.getGps().get(1));
+                    marketList.add(markets);
+                    Log.d("asdfasdf1",marketList.get(marketList.size()-1).getGps().get(0)+","+marketList.get(marketList.size()-1).getGps().get(1));
+                }
+                return marketList;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+
+
+
     public MainFragment() {
         // Required empty public constructor
     }
@@ -122,6 +151,7 @@ public class MainFragment extends Fragment {
 
 
     }
+
 
 
     //여기서 뷰가 만들어집니다!!!
@@ -143,6 +173,8 @@ public class MainFragment extends Fragment {
 
                 gMap.clear(); //clear old markers
 
+
+
                 retrieveFileFromResource(gMap);
 
                 CameraPosition googlePlex = CameraPosition.builder()
@@ -153,6 +185,19 @@ public class MainFragment extends Fragment {
                         .build();
 
                 gMap.animateCamera(CameraUpdateFactory.newCameraPosition(googlePlex), 10, null);
+
+
+                loadFirebase(ref);
+                Log.d("fdsafdsa",Integer.toString(marketList.size()));
+
+                for(int i=0; i<=marketList.size()-1; i++){
+                    gMap.addMarker(new MarkerOptions()
+                            .position(new LatLng(Double.parseDouble(marketList.get(i).getGps().get(0)), Double.parseDouble(marketList.get(i).getGps().get(1))))
+                            .title(marketList.get(i).getName())
+                            .snippet(marketList.get(i).getDiscription())
+                    );
+                    Log.d("asdfasdf1",marketList.get(i).getGps().get(0)+","+marketList.get(i).getGps().get(1));
+                }
 
                 gMap.addMarker(new MarkerOptions()
                         .position(new LatLng(37.543333,126.981111))
