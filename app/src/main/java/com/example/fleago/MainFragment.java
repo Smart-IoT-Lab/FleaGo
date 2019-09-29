@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.fleago.model.MyItem;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -184,10 +185,8 @@ public class MainFragment extends Fragment implements GoogleMap.OnMarkerClickLis
                         .build();
 
                 gMap.animateCamera(CameraUpdateFactory.newCameraPosition(googlePlex), 10, null);
-
                 //Firebase 연동으로 지도 위에 마커 추가하기
                 addMarkersToMap(gMap);
-
 
 
                 /*
@@ -250,6 +249,14 @@ public class MainFragment extends Fragment implements GoogleMap.OnMarkerClickLis
 
                 gMap.setLatLngBoundsForCameraTarget(seoul_bounds);
                 gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(seoul_center, 10));
+
+                gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener(){
+                    @Override
+                    public boolean onMarkerClick(Marker marker){
+                        gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 15), 1, null);
+                        return false;
+                    }
+                });
             }
         });
 
