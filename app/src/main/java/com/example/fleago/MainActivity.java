@@ -39,6 +39,8 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import adapter.ListViewAdapter;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import static com.example.fleago.ARActivity.REQUEST_LOCATION_PERMISSIONS_CODE;
 
@@ -79,6 +81,15 @@ public class MainActivity extends AppCompatActivity {
         //setSupportActionBar(toolbar);
 
 
+        MainFragment fragment = new MainFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, fragment).commit();
+        /*
+        MainFragment fragment  = new MainFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+        */
+        
         getSupportActionBar().setIcon(R.drawable.fleagologo);
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
