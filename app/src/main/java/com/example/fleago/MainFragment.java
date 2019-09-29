@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.fleago.model.MyItem;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -44,7 +45,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-public class MainFragment extends Fragment implements GoogleMap.OnMarkerClickListener {
+public class MainFragment extends Fragment implements GoogleMap.OnMarkerClickListener, GoogleMap.OnMyLocationButtonClickListener, OnMapReadyCallback{
 
     private ClusterManager<MyItem> mClusterManager;
 
@@ -177,7 +178,7 @@ public class MainFragment extends Fragment implements GoogleMap.OnMarkerClickLis
             public void onMapReady(final GoogleMap gMap) {
 
                 gMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-                gMap.setMinZoomPreference(10);
+                gMap.setMinZoomPreference(8);
                 gMap.setMaxZoomPreference(13);
 
                 gMap.clear(); //clear old markers
@@ -265,6 +266,8 @@ public class MainFragment extends Fragment implements GoogleMap.OnMarkerClickLis
                         return false;
                     }
                 });
+
+                gMap.setMyLocationEnabled(true);
             }
         });
         return rootView;
@@ -356,5 +359,15 @@ public class MainFragment extends Fragment implements GoogleMap.OnMarkerClickLis
     public boolean onMarkerClick(Marker marker) {
 
         return true;
+    }
+
+    @Override
+    public boolean onMyLocationButtonClick() {
+        return false;
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
     }
 }
