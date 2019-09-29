@@ -79,7 +79,7 @@
 				<width>3</width>
 			</LineStyle>
 			<PolyStyle>
-				<color>ff5a50da</color>
+				<color>ff8c9b6f</color>
 			</PolyStyle>
 			<BalloonStyle>
 				<text>$[description]</text>
@@ -87,11 +87,11 @@
 		</Style>
 		<Style id='Style2-polygon-3-hover'>
 			<LineStyle>
-				<color>ff666666</color>
+				<color>ff8c9b6f</color>
 				<width>1</width>
 			</LineStyle>
 			<PolyStyle>
-				<color>bca57656</color>
+				<color>ff8c9b6f</color>
 			</PolyStyle>
 			<BalloonStyle>
 				<text>$[description]</text>
