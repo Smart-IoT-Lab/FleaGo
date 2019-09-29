@@ -124,7 +124,7 @@ public class Main2Activity extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }*/
-            
+
 
 
 
@@ -286,81 +286,6 @@ public class Main2Activity extends AppCompatActivity {
         });
     }
 
-//
-//    public void setImage(final ImageView image1 , final ImageView image2, final ImageView image3) {
-//        pathReference = storageRef1.child(intent1.getStringExtra("name")+ "/" + intent1.getStringExtra("name") + "_1.jpg");
-//        pathReference2 = storageRef1.child(intent1.getStringExtra("name") + "/" + intent1.getStringExtra("name") + "_2.jpg");
-///       pathReference3= storageRef1.child(intent1.getStringExtra("name") + "/" + intent1.getStringExtra("name")+ "_3.jpg");
-////        pathReference4 = storageRef2.child(intent1.getStringExtra("name")+ "/" + intent1.getStringExtra("name") + "_1.jpg");
-////        pathReference5 = storageRef2.child(intent1.getStringExtra("name") + "/" + intent1.getStringExtra("name") + "_2.jpg");
-////        pathReference6= storageRef2.child(intent1.getStringExtra("name") + "/" + intent1.getStringExtra("name")+ "_3.jpg");
-//        //pathReference = storageRef1.child("(건대입구역)/(건대입구역)_1.jpg");
-//        if (pathReference == null)
-//            storageRef1.child(intent1.getStringExtra("name") + "/" + intent1.getStringExtra("name") + "_1.jpg");
-//
-//        if (pathReference2 == null)
-//            storageRef1.child(intent1.getStringExtra("name") + "/" + intent1.getStringExtra("name") + "_2.jpg");
-//
-//        if (pathReference3 == null)
-//            storageRef1.child(intent1.getStringExtra("name") + "/" + intent1.getStringExtra("name") + "_3.jpg");
-////
-////        if (pathReference4 == null)
-////            storageRef2.child(intent1.getStringExtra("name") + "/" + intent1.getStringExtra("name") + "_1.jpg");
-////
-////        if (pathReference5 == null)
-////            storageRef2.child(intent1.getStringExtra("name") + "/" + intent1.getStringExtra("name") + "_2.jpg");
-////
-////        if (pathReference6 == null)
-////            storageRef2.child(intent1.getStringExtra("name") + "/" + intent1.getStringExtra("name") + "_3.jpg");
-//
-//
-//        pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//            @Override
-//            public void onSuccess(Uri uri) {
-//                Picasso.with(
-//                        Main2Activity.this).
-//                        load(uri).
-//                        fit().
-//                        centerInside().
-//                        into(image1);
-//            }
-//        });
-//        pathReference2.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//            @Override
-//            public void onSuccess(Uri uri) {
-//                Picasso.with(
-//                        Main2Activity.this).
-//                        load(uri).
-//                        fit().
-//                        centerInside().
-//                        into(image2);
-//            }
-//        });
-//        pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//            @Override
-//            public void onSuccess(Uri uri) {
-//                Picasso.with(
-//                        Main2Activity.this).
-//                        load(uri).
-//                        fit().
-//                        centerInside().
-//                        into(image3);
-//            }
-//        });
-//        pathReference3.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//            @Override
-//            public void onSuccess(Uri uri) {
-//                Picasso.with(
-//                        Main2Activity.this).
-//                        load(uri).
-//                        fit().
-//                        centerInside().
-//                        into(image);
-//            }
-//        });
-//
-//
-//    }
 
     //*image slider*//
     private void flipperImages(int image) {
