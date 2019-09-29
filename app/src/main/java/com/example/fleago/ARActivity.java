@@ -1,5 +1,6 @@
 package com.example.fleago;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -65,6 +66,8 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ar);
+        ActionBar ab = getSupportActionBar() ;
+        ab.hide();
 
         intentAR = getIntent();
 
