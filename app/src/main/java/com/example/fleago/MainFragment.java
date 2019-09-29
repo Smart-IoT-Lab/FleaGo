@@ -67,6 +67,7 @@ public class MainFragment extends Fragment implements GoogleMap.OnMarkerClickLis
     ChildEventListener mChildEventlistener;
     ChildEventListener mChildEventlistener2;
     DatabaseReference ref = database.getReference("9월");
+    DatabaseReference ref2 = database.getReference("10월");
 
     public LatLngBounds get_bounds(float zoom_lv) {
         float e = (float) (Math.pow(2, 13 - zoom_lv) * 0.03);
@@ -193,6 +194,7 @@ public class MainFragment extends Fragment implements GoogleMap.OnMarkerClickLis
                 gMap.animateCamera(CameraUpdateFactory.newCameraPosition(googlePlex), 10, null);
                 //Firebase 연동으로 지도 위에 마커 추가하기
                 addMarkersToMap(gMap);
+                addMarkers2ToMap(gMap);
 
 
                 /*
@@ -285,6 +287,43 @@ public class MainFragment extends Fragment implements GoogleMap.OnMarkerClickLis
                     Log.d("FB_marker_ADD-Location", String.valueOf(location));
                     Log.d("FB_marker_ADD-name", name);
                 }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+    }
+    private void addMarkers2ToMap(final GoogleMap gMap) {
+        mChildEventlistener2 = ref2.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Markets marker = dataSnapshot.getValue(Markets.class);
+                String name = marker.getName();
+                String latitude = marker.getGps().get(0);
+                String longitude = marker.getGps().get(1);
+                double convert_lat = Double.parseDouble(latitude);
+                double convert_lng = Double.parseDouble(longitude);
+                LatLng location = new LatLng(convert_lng, convert_lat);
+                gMap.addMarker(new MarkerOptions()
+                        .position(location)
+                        .title(name)
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                );
+                Log.d("FB_marker_ADD-Location", String.valueOf(location));
+                Log.d("FB_marker_ADD-name", name);
             }
 
             @Override
