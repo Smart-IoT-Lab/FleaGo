@@ -314,7 +314,11 @@ public class MainFragment extends Fragment implements GoogleMap.OnMarkerClickLis
                 double convert_lat = Double.parseDouble(latitude);
                 double convert_lng = Double.parseDouble(longitude);
                 LatLng location = new LatLng(convert_lng, convert_lat);
-                gMap.addMarker(new MarkerOptions().position(location).title(name));
+                gMap.addMarker(new MarkerOptions()
+                        .position(location)
+                        .title(name)
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                );
                 Log.d("FB_marker_ADD-Location", String.valueOf(location));
                 Log.d("FB_marker_ADD-name", name);
             }
