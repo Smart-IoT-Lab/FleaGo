@@ -43,7 +43,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements GoogleMap.OnMarkerClickListener {
 
     private ClusterManager<MyItem> mClusterManager;
 
@@ -175,8 +175,6 @@ public class MainFragment extends Fragment {
 
                 gMap.clear(); //clear old markers
 
-
-
                 retrieveFileFromResource(gMap);
 
                 CameraPosition googlePlex = CameraPosition.builder()
@@ -187,8 +185,9 @@ public class MainFragment extends Fragment {
                         .build();
 
                 gMap.animateCamera(CameraUpdateFactory.newCameraPosition(googlePlex), 10, null);
-
+                //Firebase 연동으로 지도 위에 마커 추가하기
                 addMarkersToMap(gMap);
+
 
                 /*
                 gMap.addMarker(new MarkerOptions()
@@ -279,7 +278,6 @@ public class MainFragment extends Fragment {
                 gMap.addMarker(new MarkerOptions().position(location).title(name));
                 Log.d("FB_marker_ADD-Location", String.valueOf(location));
                 Log.d("FB_marker_ADD-name", name);
-
             }
 
             @Override
@@ -331,4 +329,9 @@ public class MainFragment extends Fragment {
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+
+        return true;
+    }
 }
