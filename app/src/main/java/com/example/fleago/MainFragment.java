@@ -41,6 +41,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -75,6 +76,7 @@ public class MainFragment extends Fragment implements GoogleMap.OnMarkerClickLis
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     ChildEventListener mChildEventlistener;
     ChildEventListener mChildEventlistener2;
+    DatabaseReference oneref = database.getReference();
     DatabaseReference ref = database.getReference(formatDate + "월");
     DatabaseReference ref2 = database.getReference(nMonth + "월");
 
@@ -275,27 +277,89 @@ public class MainFragment extends Fragment implements GoogleMap.OnMarkerClickLis
     }
 
     private void addMarkersToMap(final GoogleMap gMap) {
-        mChildEventlistener = ref.addChildEventListener(new ChildEventListener() {
+
+        mChildEventlistener = oneref.addChildEventListener(new ChildEventListener() {
+            ArrayList<Markets> list = new ArrayList<>();
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Markets marker = dataSnapshot.getValue(Markets.class);
-                if(!marker.getGps().get(0).equals("N")) {
+                if(dataSnapshot.getKey().equals("10월")){
+                    for(DataSnapshot d : dataSnapshot.getChildren()) {
 
-                    String name = marker.getName();
-                    String latitude = marker.getGps().get(0);
-                    String longitude = marker.getGps().get(1);
-                    double convert_lat = Double.parseDouble(latitude);
-                    double convert_lng = Double.parseDouble(longitude);
-                    LatLng location = new LatLng(convert_lng, convert_lat);
+                        Log.d("marker#", d.toString());
 
-                    gMap.addMarker(new MarkerOptions().position(location).title(name));
-                    Log.d("FB_marker_ADD-Location", String.valueOf(location));
-                    Log.d("FB_marker_ADD-name", name);
+                        Markets m = d.getValue(Markets.class);
+
+                        if (list.size() != 0) {
+                            boolean dup = false;
+
+                            for (Markets tmp : list) {
+                                if (tmp.getName().equals(m.getName())) {
+                                    dup = true;
+                                    break;
+                                }
+                            }
+                            if (dup)
+                                continue;
+                        }
+
+                        list.add(m);
+                    }
                 }
+//                Iterator<DataSnapshot> mchild = dataSnapshot.getChildren().iterator();
+//
+//                while(mchild.hasNext()){
+//                    Iterator<DataSnapshot> mchild2 = mchild.next().getChildren().iterator();
+//
+//                    while(mchild2.hasNext()){
+//                        DataSnapshot next = mchild2.next();
+//                        Markets m = next.getValue(Markets.class);
+//
+//                        if(list.size() != 0) {
+//                            boolean dup = false;
+//
+//                            for (Markets tmp : list) {
+//                                if(tmp.getName().equals(m.getName())) {
+//                                    dup = true;
+//                                    break;
+//                                }
+//                            }
+//                            if (dup)
+//                                continue;
+//                        }
+//
+//                        Log.d("marker#", next.toString());
+//
+//                        list.add(m);
+//                    }
+//                }
+                for (Markets a : list){
+                    Log.d("####",a.toString());
+                }
+
+                for( Markets tmp : list){
+                    Markets marker = tmp;
+                    if(!marker.getGps().get(0).equals("N")) {
+                        String name = marker.getName();
+                        String latitude = marker.getGps().get(0);
+                        String longitude = marker.getGps().get(1);
+                        double convert_lat = Double.parseDouble(latitude);
+                        double convert_lng = Double.parseDouble(longitude);
+                        LatLng location = new LatLng(convert_lng, convert_lat);
+                        gMap.addMarker(new MarkerOptions().position(location).title(name));
+                        Log.d("FB_marker_ADD-Location", String.valueOf(location));
+                        Log.d("FB_marker_ADD-name", name);
+                    }
+                }
+
+
+
+
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+
             }
 
             @Override
