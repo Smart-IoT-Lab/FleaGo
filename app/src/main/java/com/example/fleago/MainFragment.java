@@ -253,7 +253,7 @@ public class MainFragment extends Fragment implements GoogleMap.OnMarkerClickLis
                 gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener(){
                     @Override
                     public boolean onMarkerClick(Marker marker){
-                        gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 15), 1, null);
+                        gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 13), 2, null);
                         return false;
                     }
                 });
