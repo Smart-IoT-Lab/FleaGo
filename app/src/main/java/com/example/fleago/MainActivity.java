@@ -59,8 +59,7 @@ public class MainActivity extends AppCompatActivity {
     String formatDate = sdf.format(date);
     int month = Integer.parseInt(formatDate)+1;
     String nMonth=String.valueOf(month);
-
-    private Location currentLocation;
+    public Location currentLocation;
     private LocationManager locationManager;
     boolean isGPSEnabled;
     boolean isNetworkEnabled;

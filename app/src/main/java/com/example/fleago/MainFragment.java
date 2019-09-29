@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -66,7 +67,6 @@ public class MainFragment extends Fragment implements GoogleMap.OnMarkerClickLis
     ChildEventListener mChildEventlistener;
     ChildEventListener mChildEventlistener2;
     DatabaseReference ref = database.getReference("9월");
-    DatabaseReference ref2 = database.getReference("10월");
 
     public LatLngBounds get_bounds(float zoom_lv) {
         float e = (float) (Math.pow(2, 13 - zoom_lv) * 0.03);
@@ -138,6 +138,10 @@ public class MainFragment extends Fragment implements GoogleMap.OnMarkerClickLis
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
+
+            public void onLocationChanged(Location location, GoogleMap mMap)    {
+
+            }
         });
 
     }
@@ -189,7 +193,6 @@ public class MainFragment extends Fragment implements GoogleMap.OnMarkerClickLis
                 gMap.animateCamera(CameraUpdateFactory.newCameraPosition(googlePlex), 10, null);
                 //Firebase 연동으로 지도 위에 마커 추가하기
                 addMarkersToMap(gMap);
-                addMarkers2ToMap(gMap);
 
 
                 /*
@@ -262,8 +265,6 @@ public class MainFragment extends Fragment implements GoogleMap.OnMarkerClickLis
                 });
             }
         });
-
-
         return rootView;
     }
 
@@ -303,66 +304,6 @@ public class MainFragment extends Fragment implements GoogleMap.OnMarkerClickLis
             }
         });
     }
-    private void addMarkers2ToMap(final GoogleMap gMap) {
-        mChildEventlistener2 = ref2.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Markets marker = dataSnapshot.getValue(Markets.class);
-                String name = marker.getName();
-                String latitude = marker.getGps().get(0);
-                String longitude = marker.getGps().get(1);
-                double convert_lat = Double.parseDouble(latitude);
-                double convert_lng = Double.parseDouble(longitude);
-                LatLng location = new LatLng(convert_lng, convert_lat);
-                gMap.addMarker(new MarkerOptions()
-                        .position(location)
-                        .title(name)
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
-                );
-                Log.d("FB_marker_ADD-Location", String.valueOf(location));
-                Log.d("FB_marker_ADD-name", name);
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-    }
-
-    private void addItems() {
-        LatLng marker_LatLng = new LatLng(37.543333,126.981111);
-        double lat = marker_LatLng.latitude;
-        double lng = marker_LatLng.longitude;
-        String title;
-
-        //offset for example
-        for (int i = 0; i < 15; i++) {
-            double offset = 1 / 600d;
-            lat = lat - offset;
-            lng = lng + offset * (-1 ^ (i + 1));
-
-            String marker_front = "Marker #";
-            String marker_num = Integer.toString(i+1);
-            String marker_title = marker_front + marker_num;
-
-            MyItem offsetItem = new MyItem(lat, lng, marker_title);
-            mClusterManager.addItem(offsetItem);
-        }
-    }
-
-
     private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {
         Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
         vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
