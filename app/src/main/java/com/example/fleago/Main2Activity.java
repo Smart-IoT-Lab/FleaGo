@@ -29,6 +29,7 @@ import android.widget.ViewFlipper;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -57,7 +58,13 @@ public class Main2Activity extends AppCompatActivity {
     private Intent intent1;
     private Intent intent2;
     private Intent intent3;
-    ViewFlipper v_flipper;
+//    ViewFlipper v_flipper;
+
+    ImageView imageview1;
+
+
+    ViewPager viewPager;
+    ViewPagerAdapter adapter;
 
     FirebaseStorage storage = FirebaseStorage.getInstance("gs://fleago-8b03c.appspot.com");
     //생성된 FirebaseStorage를 참조하는 storage 생성
@@ -84,24 +91,40 @@ public class Main2Activity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar() ;
         ab.hide();
 
-        pathReference = storageRef1.child(intent1.getStringExtra("name")+"/" + intent1.getStringExtra("name") + "_1.jpg");
-        if (pathReference == null)
-            storageRef2.child(intent1.getStringExtra("name")+"/" + intent1.getStringExtra("name") + "_1.jpg");
+//        pathReference = storageRef1.child(intent1.getStringExtra("name")+"/" + intent1.getStringExtra("name") + "_1.jpg");
+//        if (pathReference == null)
+//            storageRef2.child(intent1.getStringExtra("name")+"/" + intent1.getStringExtra("name") + "_1.jpg");
+//
+//        final long BYTE = 1024*1024;
+//        Log.d("pathref",pathReference.getPath());
+//
+//        pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//            @Override
+//            public void onSuccess(Uri uri) {
+//                Picasso.with(
+//                        Main2Activity.this).
+//                        load(uri).
+//                        fit().
+//                        centerInside().
+//                        into((ImageView)findViewById(R.id.v_flipper));
+//            }
+//        });
 
-        final long BYTE = 1024*1024;
-        Log.d("pathref",pathReference.getPath());
+        ArrayList<String> photoPath = new ArrayList<>();
+        for (int i = 1; i < 4; i++) {
+            photoPath.add("10월/" + intent1.getStringExtra("name") + "/" + intent1.getStringExtra("name") + "_" + i + ".jpg");
+        }
 
-        pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Picasso.with(
-                        Main2Activity.this).
-                        load(uri).
-                        fit().
-                        centerInside().
-                        into((ImageView)findViewById(R.id.v_flipper));
-            }
-        });
+        imageview1 = (ImageView)findViewById(R.id.imageView);
+        viewPager = (ViewPager)findViewById(R.id.viewPager);
+        adapter = new ViewPagerAdapter(this, photoPath);
+
+        List<String> banner1 = new ArrayList<>();
+        for(String path : photoPath){
+            banner1.add(path);
+        }
+        adapter.add(banner1);
+        viewPager.setAdapter(adapter);
 
         /*try{
         pathReference.getBytes(BYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
@@ -124,7 +147,7 @@ public class Main2Activity extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }*/
-            
+
 
 
 
@@ -286,93 +309,18 @@ public class Main2Activity extends AppCompatActivity {
         });
     }
 
-//
-//    public void setImage(final ImageView image1 , final ImageView image2, final ImageView image3) {
-//        pathReference = storageRef1.child(intent1.getStringExtra("name")+ "/" + intent1.getStringExtra("name") + "_1.jpg");
-//        pathReference2 = storageRef1.child(intent1.getStringExtra("name") + "/" + intent1.getStringExtra("name") + "_2.jpg");
-///       pathReference3= storageRef1.child(intent1.getStringExtra("name") + "/" + intent1.getStringExtra("name")+ "_3.jpg");
-////        pathReference4 = storageRef2.child(intent1.getStringExtra("name")+ "/" + intent1.getStringExtra("name") + "_1.jpg");
-////        pathReference5 = storageRef2.child(intent1.getStringExtra("name") + "/" + intent1.getStringExtra("name") + "_2.jpg");
-////        pathReference6= storageRef2.child(intent1.getStringExtra("name") + "/" + intent1.getStringExtra("name")+ "_3.jpg");
-//        //pathReference = storageRef1.child("(건대입구역)/(건대입구역)_1.jpg");
-//        if (pathReference == null)
-//            storageRef1.child(intent1.getStringExtra("name") + "/" + intent1.getStringExtra("name") + "_1.jpg");
-//
-//        if (pathReference2 == null)
-//            storageRef1.child(intent1.getStringExtra("name") + "/" + intent1.getStringExtra("name") + "_2.jpg");
-//
-//        if (pathReference3 == null)
-//            storageRef1.child(intent1.getStringExtra("name") + "/" + intent1.getStringExtra("name") + "_3.jpg");
-////
-////        if (pathReference4 == null)
-////            storageRef2.child(intent1.getStringExtra("name") + "/" + intent1.getStringExtra("name") + "_1.jpg");
-////
-////        if (pathReference5 == null)
-////            storageRef2.child(intent1.getStringExtra("name") + "/" + intent1.getStringExtra("name") + "_2.jpg");
-////
-////        if (pathReference6 == null)
-////            storageRef2.child(intent1.getStringExtra("name") + "/" + intent1.getStringExtra("name") + "_3.jpg");
-//
-//
-//        pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//            @Override
-//            public void onSuccess(Uri uri) {
-//                Picasso.with(
-//                        Main2Activity.this).
-//                        load(uri).
-//                        fit().
-//                        centerInside().
-//                        into(image1);
-//            }
-//        });
-//        pathReference2.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//            @Override
-//            public void onSuccess(Uri uri) {
-//                Picasso.with(
-//                        Main2Activity.this).
-//                        load(uri).
-//                        fit().
-//                        centerInside().
-//                        into(image2);
-//            }
-//        });
-//        pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//            @Override
-//            public void onSuccess(Uri uri) {
-//                Picasso.with(
-//                        Main2Activity.this).
-//                        load(uri).
-//                        fit().
-//                        centerInside().
-//                        into(image3);
-//            }
-//        });
-//        pathReference3.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//            @Override
-//            public void onSuccess(Uri uri) {
-//                Picasso.with(
-//                        Main2Activity.this).
-//                        load(uri).
-//                        fit().
-//                        centerInside().
-//                        into(image);
-//            }
-//        });
-//
-//
-//    }
 
-    //*image slider*//
-    private void flipperImages(int image) {
-        ImageView imageView=new ImageView(this);
-        Log.d("image value : ",Integer.toString(image));
-        imageView.setBackgroundResource(image);
-        v_flipper.addView(imageView);
-        v_flipper.setFlipInterval(2000);
-        v_flipper.setAutoStart(true);
-        v_flipper.setInAnimation(this,android.R.anim.slide_in_left);
-        v_flipper.setOutAnimation(this,android.R.anim.slide_out_right);
-    }
+//    //*image slider*//
+//    private void flipperImages(int image) {
+//        ImageView imageView=new ImageView(this);
+//        Log.d("image value : ",Integer.toString(image));
+//        imageView.setBackgroundResource(image);
+//        v_flipper.addView(imageView);
+//        v_flipper.setFlipInterval(2000);
+//        v_flipper.setAutoStart(true);
+//        v_flipper.setInAnimation(this,android.R.anim.slide_in_left);
+//        v_flipper.setOutAnimation(this,android.R.anim.slide_out_right);
+//    }
 
     //* Search bar*//
     public boolean onCreateOptionsMenu(Menu menu) {
