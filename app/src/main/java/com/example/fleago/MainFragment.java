@@ -20,6 +20,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -41,7 +42,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements GoogleMap.OnMarkerClickListener {
 
     private ClusterManager<MyItem> mClusterManager;
 
@@ -173,8 +174,6 @@ public class MainFragment extends Fragment {
 
                 gMap.clear(); //clear old markers
 
-
-
                 retrieveFileFromResource(gMap);
 
                 CameraPosition googlePlex = CameraPosition.builder()
@@ -186,20 +185,10 @@ public class MainFragment extends Fragment {
 
                 gMap.animateCamera(CameraUpdateFactory.newCameraPosition(googlePlex), 10, null);
 
-
+                //Firebase 연동으로 지도 위에 마커 추가하기
                 addMarkersToMap(gMap);
 
-                loadFirebase(ref);
-                Log.d("fdsafdsa",Integer.toString(marketList.size()));
 
-                for(int i=0; i<=marketList.size()-1; i++){
-                    gMap.addMarker(new MarkerOptions()
-                            .position(new LatLng(Double.parseDouble(marketList.get(i).getGps().get(0)), Double.parseDouble(marketList.get(i).getGps().get(1))))
-                            .title(marketList.get(i).getName())
-                            .snippet(marketList.get(i).getDiscription())
-                    );
-                    Log.d("asdfasdf1",marketList.get(i).getGps().get(0)+","+marketList.get(i).getGps().get(1));
-                }
 
                 /*
                 gMap.addMarker(new MarkerOptions()
@@ -282,7 +271,6 @@ public class MainFragment extends Fragment {
                 gMap.addMarker(new MarkerOptions().position(location).title(name));
                 Log.d("FB_marker_ADD-Location", String.valueOf(location));
                 Log.d("FB_marker_ADD-name", name);
-
             }
 
             @Override
@@ -334,4 +322,9 @@ public class MainFragment extends Fragment {
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+
+        return true;
+    }
 }
