@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.fleago.model.MyItem;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -20,6 +21,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -186,20 +188,7 @@ public class MainFragment extends Fragment {
 
                 gMap.animateCamera(CameraUpdateFactory.newCameraPosition(googlePlex), 10, null);
 
-
                 addMarkersToMap(gMap);
-
-                loadFirebase(ref);
-                Log.d("fdsafdsa",Integer.toString(marketList.size()));
-
-                for(int i=0; i<=marketList.size()-1; i++){
-                    gMap.addMarker(new MarkerOptions()
-                            .position(new LatLng(Double.parseDouble(marketList.get(i).getGps().get(0)), Double.parseDouble(marketList.get(i).getGps().get(1))))
-                            .title(marketList.get(i).getName())
-                            .snippet(marketList.get(i).getDiscription())
-                    );
-                    Log.d("asdfasdf1",marketList.get(i).getGps().get(0)+","+marketList.get(i).getGps().get(1));
-                }
 
                 /*
                 gMap.addMarker(new MarkerOptions()
@@ -261,6 +250,14 @@ public class MainFragment extends Fragment {
 
                 gMap.setLatLngBoundsForCameraTarget(seoul_bounds);
                 gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(seoul_center, 10));
+
+                gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener(){
+                    @Override
+                    public boolean onMarkerClick(Marker marker){
+                        gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 15), 1, null);
+                        return false;
+                    }
+                });
             }
         });
 
