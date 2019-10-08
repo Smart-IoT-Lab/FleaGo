@@ -38,7 +38,7 @@ public class AROverlayView extends View {
 
         //Demo points
         arPoints = new ArrayList<ARPoint>() {{
-            add(new ARPoint(name, latitude, longitude, 0));
+            add(new ARPoint(name, latitude, longitude, 76));
         }};
     }
 

@@ -1,5 +1,6 @@
 package com.example.fleago;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -65,14 +66,16 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ar);
+        ActionBar ab = getSupportActionBar() ;
+        ab.hide();
 
         intentAR = getIntent();
 
         sensorManager = (SensorManager) this.getSystemService(SENSOR_SERVICE);
         cameraContainerLayout = findViewById(R.id.camera_container_layout);
         surfaceView = findViewById(R.id.surface_view);
-        tvCurrentLocation = findViewById(R.id.tv_current_location);
-        tvBearing = findViewById(R.id.tv_bearing);
+//        tvCurrentLocation = findViewById(R.id.tv_current_location);
+//        tvBearing = findViewById(R.id.tv_bearing);
 
 
         final ArrayList<String> gps=(ArrayList<String>)intentAR.getSerializableExtra("gps");
@@ -221,7 +224,7 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
             float[] orientation = new float[3];
             getOrientation(rotatedProjectionMatrix, orientation);
             double bearing = Math.toDegrees(orientation[0]) + declination;
-            tvBearing.setText(String.format("Bearing: %s", bearing));
+            //tvBearing.setText(String.format("Bearing: %s", bearing));
         }
     }
 
@@ -283,8 +286,7 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
 
             if (arOverlayView != null && location != null) {
                 arOverlayView.updateCurrentLocation(location);
-                tvCurrentLocation.setText(String.format("lat: %s \nlon: %s \naltitude: %s \n",
-                        location.getLatitude(), location.getLongitude(), location.getAltitude()));
+                //tvCurrentLocation.setText(String.format("lat: %s \nlon: %s \naltitude: %s \n",location.getLatitude(), location.getLongitude(), location.getAltitude()));
                 System.out.println("updateLatestLocation LAT : "+ location.getLatitude()+"LONG : " + location.getLongitude()+"ALTI : " + location.getAltitude());
             }
 

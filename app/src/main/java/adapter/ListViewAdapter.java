@@ -207,8 +207,8 @@ public class ListViewAdapter extends BaseSwipeAdapter implements Filterable {
         pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                Picasso.with(
-                        mContext).
+                Picasso.get(
+                        ).
                         load(uri).
                         fit().
                         centerInside().
